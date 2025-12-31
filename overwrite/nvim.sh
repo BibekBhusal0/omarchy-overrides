@@ -1,13 +1,23 @@
 #!/bin/bash
 # Remove the default configuration for neovim and add my custom config instead
 
+configDir="$HOME/.config/nvim" 
+configBackupDir="$HOME/.config/nvim.backup"
+neovimCacheDir="$HOME/.local/share/nvim"
 
-configDir="~/.config/nvim" 
-configBackupDir="~/.config/nvim.backup"
-mv $configDir $configBackupDir
-echo "Overweriting neovim configuration orignal config backed up at $configBackupDir"
+echo "Overweriting neovim configuration"
+if [ -d "$configDir" ]; then
+  mv $configDir $configBackupDir
+  echo "config backed up at $configBackupDir"
+else 
+  echo "No existing neovim config"
+  exit 1
+fi
 
-mkdir configDir
-cd configDir
+if [ -d "$neovimCacheDir" ]; then
+    rm -rf "$neovimCacheDir"
+    echo "Removed existing Neovim cache at $neovimCacheDir"
+fi
 
-git clone "https://github.com/BibekBhusal0/neovim-kickstart-config-config"
+git clone "https://github.com/BibekBhusal0/neovim-kickstart-config-config" "$configDir"
+echo "Config replaced sucessfully"
