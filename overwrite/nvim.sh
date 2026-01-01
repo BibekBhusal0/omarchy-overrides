@@ -21,3 +21,7 @@ fi
 
 git clone "https://github.com/BibekBhusal0/neovim-kickstart-config-config" "$configDir"
 echo "Config replaced sucessfully"
+
+# Other packages required for my neovim config 
+pacman -S sqlite
+pacman -S silicon
