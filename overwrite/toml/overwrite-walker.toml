@@ -1,0 +1,36 @@
+debug=false
+
+[keybinds]
+quick_activate = []
+close = ["Escape", "ctrl q"]
+next = ["Down", "ctrl j"]
+previous = ["Up", "ctrl k"]
+
+[providers]
+max_results = 100
+default = [
+  "desktopapplications",
+  "websearch",
+]
+
+[[providers.prefixes]]
+prefix = "!"
+provider = "todo"
+
+[[providers.prefixes]]
+prefix = ">"
+provider = "runner"
+
+[providers.actions]
+runner = [
+  { action = "runterminal", default = true, bind = "Return" },
+  { action = "run", label = "run", bind = "shift Return" },
+]
+todo = [
+  { action = "save", default = true, bind = "Return", after = "ClearReload" },
+  { action = "delete", bind = "ctrl d", after = "ClearReload" },
+  { action = "active", bind = "Return", after = "ClearReload" },
+  { action = "inactive", bind = "Return", after = "ClearReload" },
+  { action = "done", bind = "ctrl f", after = "ClearReload" },
+  { action = "clear", bind = "ctrl x", after = "ClearReload", global = true },
+]
