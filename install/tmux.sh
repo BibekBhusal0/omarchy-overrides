@@ -1,5 +1,5 @@
 #!/bin/bash
-# file copied from https://github.com/typecraft-dev/omarchy-supplement/blob/main/install-tmux.sh
+# file inspired from https://github.com/typecraft-dev/omarchy-supplement/blob/main/install-tmux.sh
 
 set -e
 
@@ -23,3 +23,12 @@ else
 fi
 
 echo "TPM installed successfully!"
+
+TMUXIFIER_DIR="$HOME/.tmuxifier"
+# Check if tmuxifier is already installed
+if [ -d "$TMUXIFIER_DIR" ]; then
+  echo "Tmuxifier is already installed in $TMUXIFIER_DIR"
+else 
+  echo "Installing Tmuxifier ..."
+  git clone https://github.com/jimeh/tmuxifier.git $TMUXIFIER_DIR
+fi

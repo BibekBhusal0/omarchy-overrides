@@ -7,3 +7,6 @@ alias eixt='exit'
 alias obd='xdg-open obsidian://daily;omarchy-launch-or-focus obsidian'
 
 export PATH=$PATH:~/.spicetify
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+
+eval "$(tmuxifier init -)"
