@@ -1,0 +1,8 @@
+alias nvimfzf='nvim $(fzf --preview="bat --color=always {}")'
+alias nvimfzfm='nvim $(fzf -m --preview="bat --color=always {}")'
+alias gcb='git branch | fzf --preview "git show --color=always {-1}" |
+             cut -c 3- | xargs git checkout'
+alias :q='exit'
+alias eixt='exit'
+
+export PATH=$PATH:~/.spicetify

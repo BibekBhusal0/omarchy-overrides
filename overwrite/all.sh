@@ -1,5 +1,5 @@
 #!/bin/bash
 
 ./overwrite-toml.sh
-./install-hyprland-overwrite.sh
+./source-overwrites.sh
 ./nvim.sh
