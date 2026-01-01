@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./brave.sh
+./others.sh
 ./tmux.sh
 ./webapp.sh
 ./zen-browser.sh
