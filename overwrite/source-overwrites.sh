@@ -60,7 +60,7 @@ add_source_to_config "$HOME/.bashrc" "$SCRIPT_DIR/bashrc" "source $SCRIPT_DIR/ba
 # Setup tmux overrides
 echo "Setting up tmux overrides..."
 add_source_to_config "$HOME/.tmux.conf" "$SCRIPT_DIR/tmux.conf" "source $SCRIPT_DIR/tmux.conf"
-tmux source ~./tmux.conf
+tmux source ~/.tmux.conf
 
 echo ""
 echo "Setup complete!"
