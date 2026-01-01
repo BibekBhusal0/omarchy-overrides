@@ -55,7 +55,7 @@ echo ""
 
 # Setup bashrc overrides
 echo "Setting up bashrc overrides..."
-add_source_to_config "$HOME/.bashrc" "$SCRIPT_DIR/.bashrc.overwrite" "source $SCRIPT_DIR/.bashrc.overwrite"
+add_source_to_config "$HOME/.bashrc" "$SCRIPT_DIR/bashrc" "source $SCRIPT_DIR/bashrc"
 
 # Setup tmux overrides
 echo "Setting up tmux overrides..."
