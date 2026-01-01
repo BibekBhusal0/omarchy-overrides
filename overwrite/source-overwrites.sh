@@ -8,12 +8,21 @@ add_source_to_config() {
     local source_file="$2"
     local source_line="$3"
     
-    # Check if config file exists
+    # Create config file if it doesn't exist
     if [ ! -f "$config_file" ]; then
         echo "Config file not found at $config_file"
-        echo "Please ensure config file exists first"
+        echo "Creating config file..."
+        mkdir -p "$(dirname "$config_file")"
+        touch "$config_file"
+        echo "Config file created at $config_file"
+    fi
+    
+    # Check if source file exists
+    if [ ! -f "$source_file" ]; then
+        echo "Source file not found at $source_file"
         return 1
     fi
+
     
     # Check if source file exists
     if [ ! -f "$source_file" ]; then
@@ -47,6 +56,11 @@ echo ""
 # Setup bashrc overrides
 echo "Setting up bashrc overrides..."
 add_source_to_config "$HOME/.bashrc" "$SCRIPT_DIR/.bashrc.overwrite" "source $SCRIPT_DIR/.bashrc.overwrite"
+
+# Setup tmux overrides
+echo "Setting up tmux overrides..."
+add_source_to_config "$HOME/.tmux.conf" "$SCRIPT_DIR/tmux.conf" "source $SCRIPT_DIR/tmux.conf"
+tmux source ~./tmux.conf
 
 echo ""
 echo "Setup complete!"

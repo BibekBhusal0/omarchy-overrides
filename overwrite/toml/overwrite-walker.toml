@@ -1,4 +1,4 @@
-debug=false
+hide_action_hints = true
 
 [keybinds]
 quick_activate = []
