@@ -8,3 +8,5 @@ curl -L -o sine https://github.com/CosmoCreeper/Sine/releases/latest/download/si
 chmod +x ./sine
 
 echo "Sine has ben downloaded to ~/Downloads/sine make sure to run it"
+# Command required for sine to work
+sudo chown $(whoami):$(whoami) -R ~/.zen/*/
