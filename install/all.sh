@@ -4,3 +4,4 @@
 ./tmux.sh
 ./webapp.sh
 ./zen-browser.sh
+./cursor-theme.sh
