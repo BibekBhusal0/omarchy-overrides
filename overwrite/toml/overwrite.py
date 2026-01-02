@@ -74,6 +74,8 @@ def main():
          Path.home() / ".config/alacritty/alacritty.toml"),
         (script_dir / "overwrite-walker.toml", 
          Path.home() / ".config/walker/config.toml"),
+        (script_dir / "overwrite-elephant-search.toml", 
+         Path.home() / ".config/elephant/websearch.toml"),
     ]
     
     # Process each file pair
