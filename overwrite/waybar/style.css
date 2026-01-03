@@ -69,12 +69,17 @@ window#waybar.empty #window {
   border-radius: 5px;
 }
 
-#workspaces button:hover{
-  background-color:transparent;
-}
-
 #workspaces button.active {
   background-color: #ff9b71;
+  color: #000;
+}
+
+#workspaces button.empty {
+  opacity: 0.45;
+}
+
+#workspaces button.empty.active {
+  background-color: #e6d8ba;
   color: #000;
 }
 
