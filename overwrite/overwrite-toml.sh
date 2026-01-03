@@ -31,4 +31,6 @@ fi
 echo "Merging TOML files..."
 python3 "$SCRIPT_DIR/toml/overwrite.py"
 
+omarchy-restart-walker
+
 echo "Configuration complete!"
