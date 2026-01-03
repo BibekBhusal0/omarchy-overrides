@@ -121,15 +121,22 @@
     "on-click": "omarchy-launch-wifi"
   },
   "pulseaudio": {
-    "format": "{icon}",
     "on-click": "omarchy-launch-or-focus-tui wiremix",
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
     "scroll-step": 2,
-    "format-muted": " ",
+    "format": "{icon} {volume: >3}%",
+    "format-bluetooth": "{icon} {volume: >3}%",
     "format-icons": {
-      "default": [" ", " ", " "]
-    }
+      "headphones": "",
+      "handsfree": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", ""]
+    },
+    "format-muted": "  M"
   },
   "cpu": {
     "interval": 5,

@@ -4,6 +4,10 @@ backupDir="$HOME/.config/waybar.backup"
 currentDir=$(pwd)
 newConfigDir="$currentDir/waybar"
 
+if [ -d "$backupDir" ]; then
+    rm -rf "$backupDir"
+fi
+
 mv "$configDir" "$backupDir"
 cp -R "$newConfigDir" "$configDir"
 
