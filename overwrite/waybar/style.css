@@ -1,0 +1,151 @@
+@import "../omarchy/current/theme/waybar.css";
+
+#waybar {
+  border: none;
+  border-radius: 10px;
+  margin: 0;
+  min-height: 0;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+  background-color: @background;
+  color: @foreground;
+}
+
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
+* {
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 5px;
+  min-height: 0;
+}
+
+tooltip {
+  opacity: 1;
+}
+
+#custom-omarchy,
+#workspaces,
+#mpris,
+#clock,
+#custom-update,
+#custom-screenrecording-indicator,
+#custom-expand-icon,
+#power-profiles-daemon, #bluetooth, #tray,
+#network,
+#pulseaudio,
+#cpu,
+#memory,
+#battery
+{
+  font-size: 13px;
+  margin: 5px;
+  padding: 0 5px;
+  border-radius: 5px;
+  background-color: #27272a;
+}
+
+window#waybar.empty #window {
+  background: transparent;
+  color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  box-shadow: inset 0 -3px transparent;
+  border: none;
+  border-radius: 0;
+}
+
+#workspaces {
+  margin: 5px;
+  padding-top: 0px;
+  padding-bottom: 3px;
+  background-color: #27272a;
+  margin-left: 0px;
+}
+
+#workspaces button {
+  padding: 0 5px;
+  background-color: transparent;
+  color: #e6d8ba;
+  border-radius: 5px;
+}
+
+#workspaces button:hover {
+  background: #3f3f46;
+  color: #000;
+}
+
+#workspaces button.active {
+  background-color: #ff9b71;
+  color: #000;
+}
+
+#workspaces button.empty {
+  color: alpha(#e6d8ba, 0.4);
+  opacity: 0.45;
+}
+
+#workspaces button.empty.active {
+  background-color: #e6d8ba;
+  color: #000;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #e6d8ba;
+  background-color: #27272a;
+}
+
+#battery.critical:not(.charging) {
+  background-color: #f53c3c;
+  color: #e6d8ba;
+}
+
+#power-profiles-daemon.performance {
+  background-color: #ff9b71;
+  color: #000;
+}
+
+#bluetooth.disabled {
+  background-color: #ff9b71;
+  color: #000;
+}
+
+#pulseaudio.muted {
+  background-color: #ff9b71;
+  color: #000;
+}
+
+tooltip {
+  padding: 4px;
+  background: #27272a;
+  border: 1px solid alpha(#e6d8ba, 0.8);
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 1px #131313;
+  font-size: 12px;
+}
+
+tooltip label {
+  color: #e6d8ba;
+  font-weight: normal;
+}
+
+#custom-screenrecording-indicator.active {
+  color: #eb7087;
+}
+
+#mpris {
+  padding: 1px 6px;
+  margin-left: 18px;
+}
+
