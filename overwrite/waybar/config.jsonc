@@ -58,6 +58,7 @@
       "5": []
     }
   },
+
   "mpris": {
     "format": "{player_icon} {title}",
     "format-paused": "<span>{status_icon} {title}</span>",
@@ -68,7 +69,10 @@
     },
     "status-icons": {
       "paused": ""
-    }
+    },
+    "on-click-right": "playerctl next",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
   },
 
   // center 
