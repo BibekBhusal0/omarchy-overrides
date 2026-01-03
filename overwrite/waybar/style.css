@@ -80,11 +80,6 @@ button {
   border-radius: 5px;
 }
 
-#workspaces button:hover {
-  background: #3f3f46;
-  color: #000;
-}
-
 #workspaces button.active {
   background-color: #ff9b71;
   color: #000;
