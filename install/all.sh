@@ -1,7 +1,8 @@
 #!/bin/bash
 
+./cursor-theme.sh
 ./others.sh
+./spicetify.sh
 ./tmux.sh
 ./webapp.sh
 ./zen-browser.sh
-./cursor-theme.sh
