@@ -1,8 +1,8 @@
 #!/bin/bash
 configDir="$HOME/.config/waybar/"
 backupDir="$HOME/.config/waybar.backup"
-currentDir=$(pwd)
-newConfigDir="$currentDir/waybar"
+scriptDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+newConfigDir="$scriptDir/waybar"
 
 if [ -d "$backupDir" ]; then
     rm -rf "$backupDir"

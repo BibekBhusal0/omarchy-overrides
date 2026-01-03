@@ -140,11 +140,11 @@
       "car": "",
       "default": ["", ""]
     },
-    "format-muted": "  M"
+    "format-muted": " "
   },
   "cpu": {
     "interval": 5,
-    "format": "󰍛 {usage}%",
+    "format": "  {usage}%",
     "on-click": "omarchy-launch-or-focus-tui btop"
   },
   "memory": {
