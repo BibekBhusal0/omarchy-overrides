@@ -51,6 +51,9 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "Setting up Hyprland overrides..."
 add_source_to_config "$HOME/.config/hypr/hyprland.conf" "$SCRIPT_DIR/hyprland.overwrite.conf" "source = $SCRIPT_DIR/hyprland.overwrite.conf"
 
+echo "Setting up Hyprland overrides..."
+add_source_to_config "$HOME/.config/hypr/hyprlock.conf" "$SCRIPT_DIR/hyprlock.overwrite.conf" "source = $SCRIPT_DIR/hyprlock.overwrite.conf"
+
 echo ""
 
 # Setup bashrc overrides
