@@ -6,3 +6,4 @@
 ./tmux.sh
 ./webapp.sh
 ./zen-browser.sh
+./tui.sh
