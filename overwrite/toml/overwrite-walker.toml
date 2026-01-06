@@ -9,17 +9,19 @@ previous = ["Up", "ctrl k"]
 [providers]
 max_results = 100
 default = [
-  "desktopapplications",
-  "websearch",
+    "desktopapplications",
+    "websearch",
 ]
-
-[[providers.prefixes]]
-prefix = "!"
-provider = "todo"
-
-[[providers.prefixes]]
-prefix = ">"
-provider = "runner"
+prefixes = [
+    { prefix = "!", provider = "todo" },
+    { prefix = ">", provider = "runner" },
+    { prefix = "/", provider = "providerList" },
+    { prefix = ".", provider = "files" },
+    { prefix = ":", provider = "symbols" },
+    { prefix = "=", provider = "calc" },
+    { prefix = "@", provider = "websearch" },
+    { prefix = "$", provider = "clipboard" },
+]
 
 [providers.actions]
 runner = [
