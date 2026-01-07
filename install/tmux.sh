@@ -19,7 +19,7 @@ if [ -d "$TPM_DIR" ]; then
   echo "TPM is already installed in $TPM_DIR"
 else
   echo "Installing Tmux Plugin Manager (TPM)..."
-  git clone https://github.com/tmux-plugins/tpm $TPM_DIR
+  git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
 fi
 
 echo "TPM installed successfully!"
@@ -30,5 +30,5 @@ if [ -d "$TMUXIFIER_DIR" ]; then
   echo "Tmuxifier is already installed in $TMUXIFIER_DIR"
 else 
   echo "Installing Tmuxifier ..."
-  git clone https://github.com/jimeh/tmuxifier.git $TMUXIFIER_DIR
+  git clone https://github.com/jimeh/tmuxifier.git "$TMUXIFIER_DIR"
 fi

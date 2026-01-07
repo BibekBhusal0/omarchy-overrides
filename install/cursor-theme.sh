@@ -17,7 +17,7 @@ if [ -d "$ICONS_DIR/$THEME_NAME" ]; then
 fi
 
 mkdir -p "$ICONS_DIR" "$TEMP_DIR"
-cd "$TEMP_DIR"
+cd "$TEMP_DIR" || exit
 
 # Extract repo name from URL
 REPO_NAME=$(basename "$REPO_URL")
@@ -27,7 +27,7 @@ echo "Downloading $THEME_NAME..."
 curl -L -o theme.zip "${REPO_URL}/archive/refs/heads/main.zip"
 unzip -q theme.zip
 
-cd "$EXTRACTED_DIR"
+cd "$EXTRACTED_DIR" || exit
 ./install.sh
 
 echo "Testing theme..."
@@ -39,5 +39,5 @@ else
     echo "Failed to apply theme"
 fi
 
-cd ~
+cd ~ || exit
 rm -rf "$TEMP_DIR"

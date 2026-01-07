@@ -7,7 +7,7 @@ neovimCacheDir="$HOME/.local/share/nvim"
 
 echo "Overweriting neovim configuration"
 if [ -d "$configDir" ]; then
-  mv $configDir $configBackupDir
+  mv "$configDir" "$configBackupDir"
   echo "config backed up at $configBackupDir"
 else 
   echo "No existing neovim config"
