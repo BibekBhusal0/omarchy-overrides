@@ -15,7 +15,7 @@ default = [
 prefixes = [
     { prefix = "!", provider = "todo" },
     { prefix = ">", provider = "runner" },
-    { prefix = "/", provider = "providerList" },
+    { prefix = "/", provider = "providerlist" },
     { prefix = ".", provider = "files" },
     { prefix = ":", provider = "symbols" },
     { prefix = "=", provider = "calc" },
