@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+VAULT="$(jq -r '.vaults | values[].path' ~/.config/obsidian/obsidian.json 2>/dev/null \
+  | while read -r p; do [ -d "$p/.obsidian" ] && echo "$p" && break; done)"
+
+[ -z "$VAULT" ] && exit 1
+cd "$VAULT" || exit 1
+
+rel=$(fd -e md --type f --strip-cwd-prefix | fzf --prompt="Vault search> ")
+[ -z "$rel" ] && exit 0
+
+nohup obsidian "obsidian://open?path=$VAULT/$rel" >/dev/null 2>&1 &

@@ -15,27 +15,13 @@ alias :q='exit'
 alias eixt='exit'
 alias exp='nautilus'
 alias obd='xdg-open obsidian://daily;omarchy-launch-or-focus obsidian'
+alias ov='obsidian-vault-search'
 
 gce () {
   emojified_text=$(devmoji --text "$1" | sed 's/"/\\"/g') 
   git commit -am "$emojified_text"
 }
 
-ov() {
-    VAULT="$HOME/Documents/obsidian.md"
-    cd "$VAULT" || return
-    default="$1"
-    relative_file=$(fd --extension md --type file --strip-cwd-prefix | fzf --prompt="Vault search> " --query="$default")
-    [[ -z "$relative_file" ]] && return
-    full_path="$VAULT/$relative_file"
-    nohup obsidian "obsidian://open?path=$full_path" >/dev/null 2>&1 &
-}
-
-# SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# BIN_DIR="$(readlink -f "$SCRIPT_DIR/../bin")"
-# if [ -d "$BIN_DIR" ]; then
-#     export PATH="$BIN_DIR:$PATH"
-# fi
 export PATH="$HOME/.tmuxifier/bin:$HOME/.local/bin:$HOME/.spicetify:$PATH"
 
 eval "$(tmuxifier init -)"
