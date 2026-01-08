@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Floating terminal helper
+# for some reason Floating terminal from omarchy was not workign i descided to write my own.
 width=900
 height=600
 

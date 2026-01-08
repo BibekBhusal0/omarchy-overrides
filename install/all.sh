@@ -7,3 +7,4 @@
 ./webapp.sh
 ./zen-browser.sh
 ./tui.sh
+./my-bins.sh
