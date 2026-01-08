@@ -19,7 +19,8 @@ alias obd='xdg-open obsidian://daily;omarchy-launch-or-focus obsidian'
 ov() {
     VAULT="$HOME/Documents/obsidian.md"
     cd "$VAULT" || return
-    relative_file=$(fd --extension md --type file --strip-cwd-prefix | fzf --prompt="Vault search> ")
+    default="$1"
+    relative_file=$(fd --extension md --type file --strip-cwd-prefix | fzf --prompt="Vault search> " --query="$default")
     [[ -z "$relative_file" ]] && return
     full_path="$VAULT/$relative_file"
     nohup obsidian "obsidian://open?path=$full_path" >/dev/null 2>&1 &
