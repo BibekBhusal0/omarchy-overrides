@@ -59,6 +59,8 @@ echo ""
 # Setup bashrc overrides
 echo "Setting up bashrc overrides..."
 add_source_to_config "$HOME/.bashrc" "$SCRIPT_DIR/bashrc" "source $SCRIPT_DIR/bashrc"
+# Making bin folder executable
+[ -d "$SCRIPT_DIR/../bin" ] && chmod +x "$SCRIPT_DIR/../bin"/*
 
 # Setup tmux overrides
 echo "Setting up tmux overrides..."

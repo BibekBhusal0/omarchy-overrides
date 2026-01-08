@@ -26,8 +26,11 @@ ov() {
     nohup obsidian "obsidian://open?path=$full_path" >/dev/null 2>&1 &
 }
 
-export PATH=$PATH:~/.spicetify
-export PATH="$HOME/.tmuxifier/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BIN_DIR="$(readlink -f "$SCRIPT_DIR/../bin")"
+if [ -d "$BIN_DIR" ]; then
+    export PATH="$BIN_DIR:$PATH"
+fi
+export PATH="$HOME/.tmuxifier/bin:$HOME/.local/bin:$HOME/.spicetify:$PATH"
 
 eval "$(tmuxifier init -)"
