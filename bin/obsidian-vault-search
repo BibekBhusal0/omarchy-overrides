@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
+# Obsidian vault search script, i will use this until i find way to intrigate it with walker
 
-VAULT="$(jq -r '.vaults | values[].path' ~/.config/obsidian/obsidian.json 2>/dev/null \
-  | while read -r p; do [ -d "$p/.obsidian" ] && echo "$p" && break; done)"
+vaultlist="$HOME/.config/obsidian/obsidian.json"
 
-[ -z "$VAULT" ] && exit 1
-cd "$VAULT" || exit 1
+if [[ -f "$vaultlist" ]]; then
+    # Extract the vault path from the JSON file
+    VAULT=$(jq -r '.vaults | to_entries | .[0].value.path' "$vaultlist")
+else
+    echo "No vault found" >&2
+    exit 1
+fi
 
-rel=$(fd -e md --type f --strip-cwd-prefix | fzf --prompt="Vault search> ")
-[ -z "$rel" ] && exit 0
+default="$1"
+relative_file=$(fd --extension md --type file --strip-cwd-prefix --base-directory="$VAULT" | fzf --prompt="Vault search> " --query="$default")
+[[ -z "$relative_file" ]] && exit 0
+full_path="$VAULT/$relative_file"
 
-nohup obsidian "obsidian://open?path=$VAULT/$rel" >/dev/null 2>&1 &
+setsid obsidian "obsidian://open?path=$full_path" >/dev/null 2>&1 &
+sleep 1
