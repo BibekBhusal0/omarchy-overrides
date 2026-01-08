@@ -16,6 +16,11 @@ alias eixt='exit'
 alias exp='nautilus'
 alias obd='xdg-open obsidian://daily;omarchy-launch-or-focus obsidian'
 
+gce () {
+  emojified_text=$(devmoji --text "$1" | sed 's/"/\\"/g') 
+  git commit -am "$emojified_text"
+}
+
 ov() {
     VAULT="$HOME/Documents/obsidian.md"
     cd "$VAULT" || return
