@@ -17,8 +17,23 @@ alias exp='nautilus'
 alias obd='xdg-open obsidian://daily;omarchy-launch-or-focus obsidian'
 alias ov='obsidian-vault-search'
 
+# Useful when just after pushing formatting is runing in gh actions
+pull () {
+  local count=${1:-1}
+  for i in $(seq 1 "$count"); do
+    output=$(git pull)
+    echo "$output"
+    if [[ ! "$output" == *"up to date."* ]]; then
+      break
+    fi
+    if [ "$i" -lt "$count" ]; then
+      sleep 1  # Not sleeping in last iteration
+    fi
+  done
+}
+
 gce () {
-  emojified_text=$(devmoji --text "$1" | sed 's/"/\\"/g') 
+  emojified_text=$(devmoji --text "$1" | sed 's/"/\\"/g')
   git commit -am "$emojified_text"
 }
 
