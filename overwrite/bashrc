@@ -17,6 +17,11 @@ alias exp='nautilus'
 alias obd='xdg-open obsidian://daily;omarchy-launch-or-focus obsidian'
 alias ov='obsidian-vault-search'
 
+src (){
+  local file=${1:-~/.bashrc}
+  source "$file"
+}
+
 # Useful when just after pushing formatting is runing in gh actions
 pull () {
   local count=${1:-1}
