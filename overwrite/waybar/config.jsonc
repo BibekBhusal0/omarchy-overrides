@@ -3,10 +3,10 @@
   "layer": "top",
   "position": "top",
   "spacing": 0,
-  "margin-right": 5,
-  "margin-left": 5,
-  "margin-top": 4,
-  "height": 24,
+  // "margin-right": 5,
+  // "margin-left": 5,
+  // "margin-top": 4,
+  "height": 20,
 
   "modules-left": [
     "custom/omarchy",
