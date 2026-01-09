@@ -16,6 +16,7 @@
   "modules-center": [
     "clock",
     "custom/update",
+    "custom/voxtype",
     "custom/screenrecording-indicator"
   ],
   "modules-right": [
@@ -95,6 +96,19 @@
     "exec": "$OMARCHY_PATH/default/waybar/indicators/screen-recording.sh",
     "signal": 8,
     "return-type": "json"
+  },
+  "custom/voxtype": {
+    "exec": "omarchy-voxtype-status",
+    "return-type": "json",
+    "format": "{icon}",
+    "format-icons": {
+      "idle": "",
+      "recording": "󰍬",
+      "transcribing": "󰔟"
+    },
+    "tooltip": true,
+    "on-click-right": "omarchy-voxtype-config",
+    "on-click": "omarchy-voxtype-model"
   },
 
   // right
@@ -198,19 +212,6 @@
     "on-click": "floating-terminal bluetui"
   },
 
-  "custom/voxtype": {
-    "exec": "omarchy-voxtype-status",
-    "return-type": "json",
-    "format": "{icon}",
-    "format-icons": {
-      "idle": "",
-      "recording": "󰍬",
-      "transcribing": "󰔟"
-    },
-    "tooltip": true,
-    "on-click-right": "omarchy-voxtype-config",
-    "on-click": "omarchy-voxtype-model"
-  },
   "tray": {
     "icon-size": 12,
     "spacing": 17

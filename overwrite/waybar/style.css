@@ -127,6 +127,10 @@ tooltip label {
   color: #eb7087;
 }
 
+#custom-screenrecording-indicator{
+  padding: 0 7px;
+}
+
 #mpris {
   padding: 1px 6px;
   margin-left: 18px;
