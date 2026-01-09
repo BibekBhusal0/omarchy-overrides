@@ -14,8 +14,7 @@ alias gcb='git branch | fzf --preview "git show --color=always {-1}" |
 alias :q='exit'
 alias eixt='exit'
 alias exp='nautilus'
-alias obd='xdg-open obsidian://daily;omarchy-launch-or-focus obsidian'
-alias ov='obsidian-vault-search'
+alias obd='xdg-open obsidian://daily'
 
 src (){
   local file=${1:-~/.bashrc}
