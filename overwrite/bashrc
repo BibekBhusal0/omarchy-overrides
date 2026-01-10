@@ -15,10 +15,21 @@ alias :q='exit'
 alias eixt='exit'
 alias exp='nautilus'
 alias obd='xdg-open obsidian://daily'
+alias gip='gitInitPush'
 
 src (){
   local file=${1:-~/.bashrc}
   source "$file"
+}
+
+function gitInitPush() {
+  REPO_NAME=${1:-$(basename "$(pwd)")}
+  if [ ! -d ".git" ]; then
+    git init
+  fi
+  git add .
+  git commit -m "Initial commit"
+  gh repo create "$REPO_NAME" --push --source . "${@:2}"
 }
 
 # Useful when just after pushing formatting is runing in gh actions
