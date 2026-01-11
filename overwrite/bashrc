@@ -37,7 +37,6 @@ pull () {
   local count=${1:-1}
   for i in $(seq 1 "$count"); do
     output=$(git -c color.ui=always pull 2>&1)
-    printf "%s\n" "$output"
     echo "$output"
     if [[ ! "$output" == *"up to date."* ]]; then
       break
