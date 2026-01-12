@@ -3,9 +3,15 @@ NamePretty = "Obsidian"
 Icon = "obsidian"
 Placeholder = "Search Notes..."
 Match = "Fuzzy"
-Cache = "True"
+Cache = true
 
 Action = "obsidian '%VALUE%'"
+
+local home = os.getenv("HOME")
+local icon_dir = home .. "/.config/elephant/icons/"
+local icon_note = icon_dir .. "obsidian-note.svg"
+local icon_canvas = icon_dir .. "obsidian-canvas.svg"
+local icon_base = icon_dir .. "obsidian-base.svg"
 
 local function url_encode(str)
 	if not str then
@@ -21,7 +27,6 @@ end
 
 function GetEntries()
 	local entries = {}
-	local home = os.getenv("HOME")
 	local vault_config = home .. "/.config/obsidian/obsidian.json"
 
 	-- Check config existence
@@ -46,22 +51,39 @@ function GetEntries()
 	local vault_name = vault_path:match("([^/]+)$")
 	local encoded_vault_name = url_encode(vault_name)
 
-	-- Use fd to get relative paths for cleaner display and URI compatibility
-	local fd_cmd = "fd --extension md --type file --strip-cwd-prefix --base-directory='" .. vault_path .. "'"
+	-- FD: Search for md, canvas, and base
+	local fd_cmd = "fd -e md -e canvas -e base --type file --strip-cwd-prefix --base-directory='" .. vault_path .. "'"
 	local handle_fd = io.popen(fd_cmd)
 
 	for relative_path in handle_fd:lines() do
-		-- Construct the specific URI: obsidian://open?vault=NAME&file=FILE
-		-- This prevents vault ambiguity compared to using absolute paths
-		local encoded_file = url_encode(relative_path)
-		local uri = "obsidian://open?vault=" .. encoded_vault_name .. "&file=" .. encoded_file
+		local path_lower = relative_path:lower()
 
-		table.insert(entries, {
-			Text = relative_path:gsub("%.md$", ""),
-			Subtext = "Obsidian Note",
-			Value = uri,
-			Icon = "obsidian",
-		})
+		-- Filter: Ignore daily notes
+		if not path_lower:find("daily") then
+			local encoded_file = url_encode(relative_path)
+			local uri = "obsidian://open?vault=" .. encoded_vault_name .. "&file=" .. encoded_file
+
+			-- Defaults (Markdown Note)
+			local current_icon = icon_note
+			local subtext = "Note"
+			local clean_name = relative_path:gsub("%.md$", ""):gsub("%.canvas$", ""):gsub("%.base$", "")
+
+			-- Specific Icon Logic
+			if relative_path:match("%.canvas$") then
+				current_icon = icon_canvas
+				subtext = "Canvas"
+			elseif relative_path:match("%.base$") then
+				current_icon = icon_base
+				subtext = "Base"
+			end
+
+			table.insert(entries, {
+				Text = clean_name,
+				Subtext = subtext,
+				Value = uri,
+				Icon = current_icon,
+			})
+		end
 	end
 	handle_fd:close()
 
