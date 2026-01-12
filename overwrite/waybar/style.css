@@ -36,13 +36,15 @@ tooltip {
 #custom-update,
 #custom-screenrecording-indicator,
 #custom-expand-icon,
-#power-profiles-daemon, #bluetooth, #tray,
+#power-profiles-daemon,
+#bluetooth,
+#tray,
 #network,
 #pulseaudio,
 #cpu,
 #memory,
-#battery
-{
+#battery,
+#custom-tomat {
   font-size: 13px;
   margin: 5px;
   padding: 0 5px;
@@ -58,9 +60,10 @@ window#waybar.empty #window {
   margin: 0;
 }
 
-#workspaces{
-  padding:0;
+#workspaces {
+  padding: 0;
 }
+
 #workspaces button {
   padding: 0 3px;
   margin: 0 2px;
@@ -94,44 +97,44 @@ window#waybar.empty #window {
   color: #e6d8ba;
 }
 
-#power-profiles-daemon.performance {
-  background-color: #ff9b71;
-  color: #000;
-}
-
-#bluetooth.disabled {
-  background-color: #ff9b71;
-  color: #000;
-}
-
+#power-profiles-daemon.performance,
+#bluetooth.disabled,
 #pulseaudio.muted {
   background-color: #ff9b71;
   color: #000;
-}
-
-tooltip {
-  padding: 4px;
-  background: #27272a;
-  border: 1px solid alpha(#e6d8ba, 0.8);
-  border-radius: 8px;
-  box-shadow: 1px 1px 3px 1px #131313;
-  font-size: 12px;
-}
-
-tooltip label {
-  color: #e6d8ba;
-  font-weight: normal;
 }
 
 #custom-screenrecording-indicator.active {
   color: #eb7087;
 }
 
-#custom-screenrecording-indicator{
+#custom-screenrecording-indicator {
   padding: 0 7px;
 }
 
 #mpris {
   padding: 1px 6px;
   margin-left: 18px;
+}
+
+#custom-tomat {
+  color: #e6d8ba;
+}
+
+#custom-tomat.work,
+#custom-tomat.work-paused {
+  color: #ff9b71;
+}
+
+#custom-tomat.break,
+#custom-tomat.break-paused,
+#custom-tomat.long-break,
+#custom-tomat.long-break-paused {
+  color: #94d487;
+}
+
+#custom-tomat.work-paused,
+#custom-tomat.break-paused,
+#custom-tomat.long-break-paused {
+  opacity: 0.6;
 }

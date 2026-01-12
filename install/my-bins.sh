@@ -4,7 +4,7 @@ set -e
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SRC_BIN="$REPO_ROOT/bin"
-DST_BIN="/usr/bin"
+DST_BIN="$HOME/.local/bin"
 
 mkdir -p "$DST_BIN"
 
