@@ -1,0 +1,32 @@
+#!/bin/bash
+
+is_running() {
+  hyprctl clients | grep -q "class: $1"
+}
+
+move_to_workspace() {
+  local class=$1
+  local workspace=$2
+
+  if is_running "$class"; then
+    local address=$(hyprctl clients -j | jq -r ".[] | select(.class == \"$class\") | .address")
+    hyprctl dispatch movetoworkspacesilent "$workspace,address:$address"
+  fi
+}
+
+launch_on_workspace() {
+  local app=$1
+  local workspace=$2
+  local class=$3
+
+  if is_running "$class"; then
+    move_to_workspace "$class" "$workspace"
+  else
+    hyprctl dispatch exec "[workspace $workspace silent] $app"
+  fi
+}
+
+launch_on_workspace "xdg-terminal-exec" 1 "Alacritty"
+launch_on_workspace "zen-browser" 2 "zen"
+launch_on_workspace "obsidian" 4 "obsidian"
+launch_on_workspace "spotify" 5 "spotify"
