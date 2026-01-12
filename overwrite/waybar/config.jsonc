@@ -17,6 +17,7 @@
     "clock",
     "custom/update",
     "custom/voxtype",
+    "custom/tomat",
     "custom/screenrecording-indicator"
   ],
   "modules-right": [
@@ -211,7 +212,14 @@
     "tooltip-format": "Devices connected: {num_connections}",
     "on-click": "floating-terminal bluetui"
   },
-
+  "custom/tomat": {
+    "exec": "tomat status",
+    "interval": 1,
+    "return-type": "json",
+    "format": "{}",
+    "on-click": "tomat toggle",
+    "on-click-right": "tomat skip"
+  },
   "tray": {
     "icon-size": 12,
     "spacing": 17

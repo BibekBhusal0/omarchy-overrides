@@ -52,6 +52,6 @@ gce () {
   git commit -am "$emojified_text"
 }
 
-export PATH="$HOME/.tmuxifier/bin:$HOME/.local/bin:$HOME/.spicetify:$PATH"
+export PATH="$HOME/.tmuxifier/bin:$HOME/.local/bin:$HOME/.spicetify:$HOME/.cargo/bin:$PATH"
 
 eval "$(tmuxifier init -)"
