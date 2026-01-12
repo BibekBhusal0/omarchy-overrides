@@ -213,7 +213,7 @@
     "on-click": "floating-terminal bluetui"
   },
   "custom/tomat": {
-    "exec": "tomat status",
+    "exec": "tomat status | sed 's/[🍅🏖️☕⏸▶]//g'", // workaround changing config.toml file did not work
     "interval": 1,
     "return-type": "json",
     "format": "{}",

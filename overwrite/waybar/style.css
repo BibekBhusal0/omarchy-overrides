@@ -119,6 +119,7 @@ window#waybar.empty #window {
 
 #custom-tomat {
   color: #e6d8ba;
+  padding: 0;
 }
 
 #custom-tomat.work,
