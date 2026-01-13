@@ -3,7 +3,7 @@ NamePretty = "Obsidian"
 Icon = "obsidian"
 Placeholder = "Search Notes..."
 Match = "Fuzzy"
-Cache = true
+Cache = false
 
 Action = "obsidian '%VALUE%'"
 
@@ -12,6 +12,7 @@ local icon_dir = home .. "/.config/elephant/icons/"
 local icon_note = icon_dir .. "obsidian-note.svg"
 local icon_canvas = icon_dir .. "obsidian-canvas.svg"
 local icon_base = icon_dir .. "obsidian-base.svg"
+local icon_add = icon_dir .. "obsidian-add.svg"
 
 local function url_encode(str)
 	if not str then
@@ -25,11 +26,12 @@ local function url_encode(str)
 	return str:gsub(" ", "%%20")
 end
 
-function GetEntries()
+function GetEntries(input)
 	local entries = {}
 	local vault_config = home .. "/.config/obsidian/obsidian.json"
 
-	-- Check config existence
+	local query = input or ""
+
 	local f = io.open(vault_config, "r")
 	if f ~= nil then
 		io.close(f)
@@ -51,15 +53,25 @@ function GetEntries()
 	local vault_name = vault_path:match("([^/]+)$")
 	local encoded_vault_name = url_encode(vault_name)
 
-	-- FD: Search for md, canvas, and base
+	if query ~= "" then
+		local encoded_query = url_encode(query)
+		table.insert(entries, {
+			Text = "Create new note - " .. query,
+			Subtext = "Create '" .. query .. ".md' in " .. vault_name,
+			Value = "obsidian://new?vault=" .. encoded_vault_name .. "&name=" .. encoded_query,
+			Icon = icon_add,
+			Score = 0,
+		})
+	end
+
 	local fd_cmd = "fd -e md -e canvas -e base --type file --strip-cwd-prefix --base-directory='" .. vault_path .. "'"
 	local handle_fd = io.popen(fd_cmd)
 
 	for relative_path in handle_fd:lines() do
 		local path_lower = relative_path:lower()
 
-		-- Filter: Ignore daily notes
-		if not path_lower:find("daily") then
+		-- Filter: Ignore "daily" AND "template"
+		if not path_lower:find("daily") and not path_lower:find("template") then
 			local encoded_file = url_encode(relative_path)
 			local uri = "obsidian://open?vault=" .. encoded_vault_name .. "&file=" .. encoded_file
 
