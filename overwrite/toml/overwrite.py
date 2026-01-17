@@ -84,10 +84,6 @@ def main():
             script_dir / "overwrite-elephant-search.toml",
             Path.home() / ".config/elephant/websearch.toml",
         ),
-        (
-            script_dir / "overwrite-tomat.toml",
-            Path.home() / ".config/tomat/config.toml",
-        ),
     ]
 
     # Process each file pair

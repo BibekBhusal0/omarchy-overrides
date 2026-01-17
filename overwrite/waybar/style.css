@@ -27,6 +27,17 @@
 
 tooltip {
   opacity: 1;
+  padding: 0px;
+  margin: 0px;
+  background: #27272a;
+  border: 1px solid alpha(#e6d8ba, 0.8);
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+tooltip label {
+  color: #e6d8ba;
+  font-weight: normal;
 }
 
 #custom-omarchy,
@@ -44,7 +55,7 @@ tooltip {
 #cpu,
 #memory,
 #battery,
-#custom-tomat {
+#custom-timer {
   font-size: 13px;
   margin: 5px;
   padding: 0 5px;
@@ -117,24 +128,76 @@ window#waybar.empty #window {
   margin-left: 18px;
 }
 
-#custom-tomat {
+#custom-timer {
+  background-color: #27272a;
+  color: #e6d8ba;
+  transition: all 0.2s ease;
+}
+
+#custom-timer.disabled {
+  background-color: transparent;
+  color: #e6d8ba;
+  opacity: 0.6;
+}
+
+#custom-timer.idle {
+  background-color: transparent;
   color: #e6d8ba;
 }
 
-#custom-tomat.work,
-#custom-tomat.work-paused {
+#custom-timer.select {
+  background-color: #27272a;
   color: #ff9b71;
 }
 
-#custom-tomat.break,
-#custom-tomat.break-paused,
-#custom-tomat.long-break,
-#custom-tomat.long-break-paused {
+#custom-timer.running {
+  background-color: transparent;
+  color: #e6d8ba;
+}
+
+#custom-timer.pomo_break {
+  background-color: transparent;
   color: #94d487;
 }
 
-#custom-tomat.work-paused,
-#custom-tomat.break-paused,
-#custom-tomat.long-break-paused {
+#custom-timer.pomo_msg {
+  background-color: transparent;
+  color: #ff9b71;
+}
+
+#custom-timer.paused {
+  background-color: #27272a;
+  color: #e6d8ba;
   opacity: 0.6;
+}
+
+#custom-timer.warning {
+  background-color: transparent;
+  animation-name: red-alert;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#custom-timer.done {
+  background-color: #e6d8ba;
+  color: #000;
+}
+
+#custom-timer.reset {
+  color: #f53c3c;
+  background-color: transparent;
+}
+
+@keyframes red-alert {
+  0% {
+    color: #f53c3c;
+    opacity: 1;
+  }
+  100% {
+    color: #f53c3c;
+    opacity: 0.4;
+    text-shadow: none;
+  }
 }

@@ -16,6 +16,8 @@ alias eixt='exit'
 alias exp='nautilus'
 alias obd='xdg-open obsidian://daily'
 alias gip='gitInitPush'
+alias timer='~/.config/waybar/scripts/timer.sh'
+alias pomo='~/.config/waybar/scripts/timer.sh pomo'
 
 src (){
   local file=${1:-~/.bashrc}

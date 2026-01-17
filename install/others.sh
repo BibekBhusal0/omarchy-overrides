@@ -10,6 +10,3 @@ npm install -g devmoji
 npm install -g yarn
 
 git config --global alias.logg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate --date=short"
-
-cargo install tomat
-tomat daemon install
