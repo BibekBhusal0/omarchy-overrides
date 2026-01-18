@@ -18,6 +18,7 @@ alias obd='xdg-open obsidian://daily'
 alias gip='gitInitPush'
 alias timer='~/.config/waybar/scripts/timer.sh'
 alias pomo='~/.config/waybar/scripts/timer.sh pomo'
+alias pushpull='git push && pull 20'
 
 src (){
   local file=${1:-~/.bashrc}
