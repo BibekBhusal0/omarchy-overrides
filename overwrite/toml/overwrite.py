@@ -84,6 +84,10 @@ def main():
             script_dir / "overwrite-elephant-search.toml",
             Path.home() / ".config/elephant/websearch.toml",
         ),
+        (
+            script_dir / "yazi/yazi.toml",
+            Path.home() / ".config/yazi/yazi.toml",
+        ),
     ]
 
     # Process each file pair
