@@ -3,11 +3,11 @@
 echo "Using Bash Shell"
 
 fzf-command() {
-    local cmd=$(compgen -c | fzf)
-    if [[ -n $cmd ]]; then
-        READLINE_LINE="$cmd"
-        READLINE_POINT=${#READLINE_LINE}
-    fi
+  local cmd=$(compgen -c | fzf)
+  if [[ -n $cmd ]]; then
+    READLINE_LINE="$cmd"
+    READLINE_POINT=${#READLINE_LINE}
+  fi
 }
 bind -x '"\C-f": fzf-command'
 

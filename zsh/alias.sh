@@ -20,6 +20,21 @@ alias pomo='~/.config/waybar/scripts/timer.sh pomo'
 alias pushpull='git push && pull 20'
 alias a='asciinema'
 
+## Open file directly in it's editor super super handy (but gives error in bash)
+if [ -n "$ZSH_VERSION" ]; then
+    alias -s lua=nvim
+    alias -s js=nvim
+    alias -s ts=nvim
+    alias -s mjs=nvim
+    alias -s tsx=nvim
+    alias -s json=nvim
+    alias -s toml=nvim
+    alias -s md=nvim
+    alias -s html=nvim
+    alias -s conf=nvim
+    alias -s mp4=mpv
+fi
+
 # Sometimes I might run neovim commands
 alias :q='exit'
 alias :e='nvim'
