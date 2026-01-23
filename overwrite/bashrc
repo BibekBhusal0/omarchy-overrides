@@ -51,6 +51,15 @@ pull () {
   done
 }
 
+fzf-command() {
+  local cmd=$(compgen -c | fzf)
+  if [[ -n $cmd ]]; then
+    READLINE_LINE="$cmd"
+    READLINE_POINT=${#READLINE_LINE}
+  fi
+}
+bind -x '"\C-f": fzf-command'
+
 clone() {
   local url="$1"
   shift
