@@ -4,7 +4,9 @@
 
 # All the default Omarchy aliases and functions
 # (don't mess with these directly, just overwrite them here!)
-source ~/.local/share/omarchy/default/bash/rc
+if [[ -f /home/bibek/.local/share/omarchy/default/bash/rc ]]; then
+  source /home/bibek/.local/share/omarchy/default/bash/rc
+fi
 
 # Overwriting some behaviours for default alias
 if command -v eza &> /dev/null; then
@@ -31,7 +33,9 @@ alias a='asciinema'
 
 src (){
   local file=${1:-~/.bashrc}
-  source "$file"
+  if [[ -f $file ]]; then
+    source "$file"
+  fi
 }
 
 function gitInitPush() {
