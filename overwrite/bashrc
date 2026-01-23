@@ -1,10 +1,6 @@
 # Overwriting some behaviours for default alias
 
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 echo "Using Bash Shell"
-
-source "$SCRIPT_DIR/../zsh/alias.sh"
-source "$SCRIPT_DIR/../zsh/shell.sh"
 
 fzf-command() {
     local cmd=$(compgen -c | fzf)
