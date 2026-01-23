@@ -1,3 +1,3 @@
-export PATH="$HOME/.tmuxifier/bin:$HOME/.local/bin:$HOME/.spicetify:$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.tmuxifier/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 
 eval "$(tmuxifier init -)"

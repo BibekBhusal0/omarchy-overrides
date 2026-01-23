@@ -1,6 +1,6 @@
 # Overwriting some behaviours for default alias
 if command -v eza &> /dev/null; then
-  alias ls='eza -lh --group-directories-first --icons=auto --oneline --no-quotes'
+  alias ls='eza --group-directories-first --icons=auto --no-quotes'
   alias lsa='ls -a'
   alias lt='eza --tree --level=2 --icons --no-quotes'
   alias lta='lt -a'
