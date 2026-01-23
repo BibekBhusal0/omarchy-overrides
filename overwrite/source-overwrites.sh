@@ -43,8 +43,8 @@ add_source_to_config "$HOME/.config/hypr/hyprlock.conf" "source = $SCRIPT_DIR/hy
 echo ""
 
 # Setup bashrc overrides
-echo "Setting up bashrc overrides..."
-add_source_to_config "$HOME/.bashrc" "source $SCRIPT_DIR/bashrc"
+echo "Setting up zsh overrides..."
+add_source_to_config "$HOME/.zshrc" "source $SCRIPT_DIR/bashrc"
 # Making bin folder executable
 [ -d "$SCRIPT_DIR/../bin" ] && chmod +x "$SCRIPT_DIR/../bin"/*
 
