@@ -19,6 +19,7 @@ alias gip='gitInitPush'
 alias timer='~/.config/waybar/scripts/timer.sh'
 alias pomo='~/.config/waybar/scripts/timer.sh pomo'
 alias pushpull='git push && pull 20'
+alias a='asciinema'
 
 src (){
   local file=${1:-~/.bashrc}
