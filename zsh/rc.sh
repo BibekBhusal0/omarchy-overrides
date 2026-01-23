@@ -13,5 +13,7 @@ source "$SCRIPT_DIR/shell.sh"
 source "$SCRIPT_DIR/input.sh"
 source "$SCRIPT_DIR/binds.sh"
 
+source "$SCRIPT_DIR/plugins.sh"
+
 # This file contains default contents which oh my zsh added to my zshrc
 source "$SCRIPT_DIR/oh-my-zsh"
