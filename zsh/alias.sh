@@ -19,6 +19,7 @@ alias timer='~/.config/waybar/scripts/timer.sh'
 alias pomo='~/.config/waybar/scripts/timer.sh pomo'
 alias pushpull='git push && pull 20'
 alias a='asciinema'
+alias rick-roll='curl ascii.live/rick'
 
 ## Open file directly in it's editor super super handy (but gives error in bash)
 if [ -n "$ZSH_VERSION" ]; then
