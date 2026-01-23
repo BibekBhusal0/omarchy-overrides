@@ -1,7 +1,6 @@
 #!/bin/bash
 # https://github.com/typecraft-dev/omarchy-supplement/blob/main/set-shell.sh 
 
-
 # Install Zsh
 if ! command -v zsh &>/dev/null; then
     yay -S --noconfirm --needed zsh
@@ -31,3 +30,9 @@ fi
 chsh -s "$ZSH_PATH"
 
 echo "Default shell changed to zsh. Please log out and log back in for the change to take effect."
+
+echo "Installing Oh My Zsh"
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+./zsh-plugins.sh
