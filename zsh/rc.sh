@@ -14,7 +14,6 @@ SCRIPT_DIR="${0:A:h}"
 
 source "$SCRIPT_DIR/alias.sh"
 source "$SCRIPT_DIR/binds.sh"
-source "$SCRIPT_DIR/init.sh"
 source "$SCRIPT_DIR/plugins.sh"
 source "$SCRIPT_DIR/shell.sh"
 source "$SCRIPT_DIR/oh-my-zsh"
