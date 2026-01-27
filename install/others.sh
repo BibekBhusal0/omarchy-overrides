@@ -13,3 +13,5 @@ git config --global alias.logg "log --graph --pretty=format:'%Cred%h%Creset -%C(
 
 sudo pacman -S --noconfirm asciinema
 yay -Sy --noconfirm --needed asciinema-agg-bin
+
+curl -sSL https://usegitai.com/install.sh | bash
