@@ -34,4 +34,5 @@ launch_on_workspace() {
 launch_on_workspace "xdg-terminal-exec" 1 "Alacritty"
 launch_on_workspace "zen-browser" 2 "zen"
 launch_on_workspace "obsidian" 4 "obsidian"
-launch_on_workspace "spotify" 5 "spotify" 20
+# launch_on_workspace "spotify" 5 "spotify" 20
+omarchy-launch-webapp "https://open.spotify.com"
