@@ -11,6 +11,7 @@ max_results = 100
 default = [
     "desktopapplications",
     "websearch",
+    "calc"
 ]
 prefixes = [
     { prefix = "!", provider = "todo" },
