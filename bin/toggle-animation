@@ -6,7 +6,7 @@ current_line="$(grep -nE '^[[:space:]]*animations[[:space:]]*\{' "$HYPR" | cut -
 
 if [ -z "$current_line" ]; then
   printf '\nanimations {\n  enabled = 1\n}\n' >> "$HYPR"
-  echo "Animation enabled"
+  notify-send -u low -t 5000 "Animation enabled"
 else
   start=$current_line
   rel_end="$(tail -n +"$start" "$HYPR" | grep -nE '^[[:space:]]*\}' | head -n1 | cut -d: -f1)"
@@ -21,7 +21,7 @@ else
     msg="Animation enabled"
   fi
   awk -v s="$start" -v e="$end" -v r="$repl" 'NR<s{print} NR==s{printf "%s\n", r} NR>e{print}' "$HYPR" > "${HYPR}.tmp" && mv "${HYPR}.tmp" "$HYPR"
-  echo "$msg"
+  notify-send -u low -t 5000 "$msg"
 fi
 
 exit 0
