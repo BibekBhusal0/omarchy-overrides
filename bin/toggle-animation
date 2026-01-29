@@ -1,0 +1,27 @@
+#!/bin/bash
+
+HYPR="$HOME/.config/hypr/hyprland.conf"
+
+current_line="$(grep -nE '^[[:space:]]*animations[[:space:]]*\{' "$HYPR" | cut -d: -f1 | head -n1 || true)"
+
+if [ -z "$current_line" ]; then
+  printf '\nanimations {\n  enabled = 1\n}\n' >> "$HYPR"
+  echo "Animation enabled"
+else
+  start=$current_line
+  rel_end="$(tail -n +"$start" "$HYPR" | grep -nE '^[[:space:]]*\}' | head -n1 | cut -d: -f1)"
+  end=$((start + rel_end - 1))
+  block="$(sed -n "${start},${end}p" "$HYPR")"
+  val="$(echo "$block" | grep -E '^[[:space:]]*enabled[[:space:]]*=' | sed -E 's/.*=[[:space:]]*([01]).*/\1/' || true)"
+  if [ "$val" = "1" ]; then
+    repl="$(printf 'animations {\n  enabled = 0\n}')"
+    msg="Animation disabled"
+  else
+    repl="$(printf 'animations {\n  enabled = 1\n}')"
+    msg="Animation enabled"
+  fi
+  awk -v s="$start" -v e="$end" -v r="$repl" 'NR<s{print} NR==s{printf "%s\n", r} NR>e{print}' "$HYPR" > "${HYPR}.tmp" && mv "${HYPR}.tmp" "$HYPR"
+  echo "$msg"
+fi
+
+exit 0
