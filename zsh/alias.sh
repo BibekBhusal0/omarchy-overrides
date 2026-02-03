@@ -18,6 +18,7 @@ alias gip='gitInitPush'
 alias timer='~/.config/waybar/scripts/timer.sh'
 alias pomo='~/.config/waybar/scripts/timer.sh pomo'
 alias pushpull='git push && pull 20'
+alias push='git push'
 alias a='asciinema'
 alias rick-roll='curl ascii.live/rick'
 
