@@ -21,6 +21,8 @@ alias pushpull='git push && pull 20'
 alias push='git push'
 alias a='asciinema'
 alias rick-roll='curl ascii.live/rick'
+alias hack='rick-roll'
+alias start-hacking='rick-roll'
 
 ## Open file directly in it's editor super super handy (but gives error in bash)
 if [ -n "$ZSH_VERSION" ]; then
