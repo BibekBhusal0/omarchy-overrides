@@ -19,6 +19,6 @@ source "$SCRIPT_DIR/shell.sh"
 source "$SCRIPT_DIR/oh-my-zsh"
 
 # Attach to latest tmux session or create new if it don't exist
-if [ -z "$TMUX" ] && [[ "$TERM" != "screen" ]] ; then
-  tmux attach-session -t "$(tmux list-sessions | tail -n 1 | cut -d: -f1)" || tmux new-session main
+if [[ -z "$TMUX" && -z "$NO_TMUX" && "$TERM" != "screen" ]]; then
+  tmux new-session -A -s main
 fi
