@@ -12,7 +12,7 @@ if [[ "$1" =~ ^[0-9]+$ && "$2" =~ ^[0-9]+$ ]]; then
 fi
 
 if [ "$#" -eq 0 ]; then
-    hyprctl dispatch exec "[float; size $width $height; center] uwsm-app -- xdg-terminal-exec -- $SHELL -il"
+    hyprctl dispatch exec "[float; size $width $height; center] NO_TMUX=1 uwsm-app -- xdg-terminal-exec -- $SHELL -il"
 else
-    hyprctl dispatch exec "[float; size $width $height; center] uwsm-app -- xdg-terminal-exec -- $SHELL -ilc \"$*\""
+    hyprctl dispatch exec "[float; size $width $height; center] NO_TMUX=1 uwsm-app -- xdg-terminal-exec -- $SHELL -ilc \"$*\""
 fi
