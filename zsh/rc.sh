@@ -17,3 +17,8 @@ source "$SCRIPT_DIR/binds.sh"
 source "$SCRIPT_DIR/plugins.sh"
 source "$SCRIPT_DIR/shell.sh"
 source "$SCRIPT_DIR/oh-my-zsh"
+
+# Attach to latest tmux session or create new if it don't exist
+if [ -z "$TMUX" ]; then
+  tmux attach-session -t "$(tmux list-sessions | tail -n 1 | cut -d: -f1)" || tmux new-session main
+fi
