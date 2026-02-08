@@ -8,11 +8,11 @@ fi
 
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 
-alias nvimff='nvim $(ff --tmux)'
-alias gcb='git branch | fzf --tmux --preview "git show --color=always {-1}" \
-          --bind "enter:become(git checkout {-1})" \
-          --tmux --layout reverse'
-alias cheat='curl cheat.sh/:list | fzf --layout reverse --tmux --bind "enter:become(curl cheat.sh/{-1} | less)"'
+common_config="--height 40% --layout reverse --tmux"
+alias nvimff="ff --bind 'enter:become(nvim {-1})' $common_config "
+alias gcb="git branch | fzf $common_config --preview 'git show --color=always {-1}' --bind 'enter:become(git checkout {-1})'"
+alias cheat="curl cheat.sh/:list | fzf $common_config --bind 'enter:become(curl cheat.sh/{-1} | less)'"
+
 alias eixt='exit'
 alias exp='nautilus'
 alias obd='xdg-open obsidian://daily'
