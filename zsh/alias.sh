@@ -1,9 +1,9 @@
 # Overwriting some behaviours for default alias
 if command -v eza &> /dev/null; then
-  alias ls='eza --group-directories-first --icons=auto --no-quotes'
-  alias lsa='ls -a'
-  alias lt='eza --tree --level=2 --icons --no-quotes'
-  alias lta='lt -a'
+  alias ls="eza --group-directories-first --icons=auto --no-quotes"
+  alias lsa="ls -a"
+  alias lt="eza --tree --level=2 --icons --no-quotes"
+  alias lta="lt -a"
 fi
 
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
@@ -13,18 +13,18 @@ alias nvimff="ff --bind 'enter:become(nvim {-1})' $common_config "
 alias gcb="git branch | fzf $common_config --preview 'git show --color=always {-1}' --bind 'enter:become(git checkout {-1})'"
 alias cheat="curl cheat.sh/:list | fzf $common_config --bind 'enter:become(curl cheat.sh/{-1} | less)'"
 
-alias eixt='exit'
-alias exp='nautilus'
-alias obd='xdg-open obsidian://daily'
-alias gip='gitInitPush'
-alias timer='~/.config/waybar/scripts/timer.sh'
-alias pomo='~/.config/waybar/scripts/timer.sh pomo'
-alias pushpull='git push && pull 20'
-alias push='git push'
-alias a='asciinema'
-alias rick-roll='curl ascii.live/rick'
-alias hack='rick-roll'
-alias start-hacking='rick-roll'
+alias eixt="exit"
+alias exp="nautilus"
+alias obd="xdg-open obsidian://daily"
+alias gip="gitInitPush"
+alias timer="~/.config/waybar/scripts/timer.sh"
+alias pomo="~/.config/waybar/scripts/timer.sh pomo"
+alias pushpull="git push && pull 20"
+alias push="git push"
+alias a="asciinema"
+alias rick-roll="curl ascii.live/rick"
+alias hack="rick-roll"
+alias start-hacking="rick-roll"
 
 ## Open file directly in it's editor super super handy (but gives error in bash)
 if [ -n "$ZSH_VERSION" ]; then
@@ -42,8 +42,8 @@ if [ -n "$ZSH_VERSION" ]; then
 fi
 
 # Sometimes I might run neovim commands
-alias :q='exit'
-alias :e='nvim'
+alias :q="exit"
+alias :e="nvim"
 
 src (){
   local file=${1:-~/.zshrc}
