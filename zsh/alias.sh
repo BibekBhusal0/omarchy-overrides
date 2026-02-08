@@ -12,6 +12,7 @@ alias nvimff='nvim $(ff --tmux)'
 alias gcb='git branch | fzf --tmux --preview "git show --color=always {-1}" \
           --bind "enter:become(git checkout {-1})" \
           --tmux --layout reverse'
+alias cheat='curl cheat.sh/:list | fzf --layout reverse --tmux --bind "enter:become(curl cheat.sh/{-1} | less)"'
 alias eixt='exit'
 alias exp='nautilus'
 alias obd='xdg-open obsidian://daily'
