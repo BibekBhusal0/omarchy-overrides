@@ -2,7 +2,7 @@
 [[ $- != *i* ]] && return
 
 attach_tmux=0
-if [[ -z "$TMUX" && -z "$NO_TMUX" && "$TERM" != "screen" ]]; then
+if [[ -z "$TMUX" && -z "$NO_TMUX" && -z "$NVIM" && "$TERM" != "screen" ]]; then
   attach_tmux=1
 fi
 
