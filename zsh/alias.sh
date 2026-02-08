@@ -8,9 +8,10 @@ fi
 
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 
-alias nvimff='nvim $(ff)'
-alias gcb='git branch | fzf --preview "git show --color=always {-1}" |
-             cut -c 3- | xargs git checkout'
+alias nvimff='nvim $(ff --tmux)'
+alias gcb='git branch | fzf --tmux --preview "git show --color=always {-1}" \
+          --bind "enter:become(git checkout {-1})" \
+          --tmux --layout reverse'
 alias eixt='exit'
 alias exp='nautilus'
 alias obd='xdg-open obsidian://daily'
