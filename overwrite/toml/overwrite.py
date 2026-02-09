@@ -8,9 +8,7 @@ try:
 except ImportError:
     print("Error: Required TOML libraries not found.")
     print("Please install them using one of these commands:")
-    print("  sudo pacman -S python-tomli python-tomli-w  # Arch Linux")
-    print("  sudo apt install python3-tomli python3-tomli-w  # Debian/Ubuntu")
-    print("  pip3 install --user tomli tomli-w  # Using pip")
+    print("  sudo pacman -S python-tomli python-tomli-w")
     sys.exit(1)
 
 
