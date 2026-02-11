@@ -1,5 +1,5 @@
 fzf-command-widget() {
-  local cmd=$(print -rl -- ${(k)commands} | fzf)
+  local cmd=$(print -rl -- ${(k)commands} | fzf --tmux)
   if [[ -n $cmd ]]; then
     LBUFFER="$cmd"
     RBUFFER=""
