@@ -59,6 +59,7 @@ echo "Setting up tmux overrides..."
 add_source_to_config "$HOME/.tmux.conf" "source $SCRIPT_DIR/tmux.conf"
 tmux source ~/.tmux.conf
 
+add_source_to_config "$HOME/.XCompose" "include \"$SCRIPT_DIR/.XCompose\""
 
 echo ""
 echo "Setup complete!"
