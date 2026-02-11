@@ -8,24 +8,29 @@ fi
 
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 
+# FZF
 common_config="--height 40% --layout reverse --tmux"
 alias nvimff="ff --bind 'enter:become(nvim {-1})' $common_config "
 alias gcb="git branch | fzf $common_config --preview 'git show --color=always {-1}' --bind 'enter:become(git checkout {-1})'"
 alias cheat="curl cheat.sh/:list | fzf $common_config --bind 'enter:become(curl cheat.sh/{-1} | less)'"
 
+# Tmux
 alias mux="tmuxinator"
-alias eixt="exit"
-alias exp="nautilus"
-alias obd="xdg-open obsidian://daily"
-alias gip="gitInitPush"
+
+# Timer
 alias timer="~/.config/waybar/scripts/timer.sh"
 alias pomo="~/.config/waybar/scripts/timer.sh pomo"
-alias pushpull="git push && pull 20"
-alias push="git push"
-alias a="asciinema"
+
+# Rickrolling
 alias rick-roll="curl ascii.live/rick"
 alias hack="rick-roll"
 alias start-hacking="rick-roll"
+
+# misc
+alias a="asciinema"
+alias eixt="exit"
+alias exp="nautilus"
+alias obd="xdg-open obsidian://daily"
 
 ## Open file directly in it's editor super super handy (but gives error in bash)
 if [ -n "$ZSH_VERSION" ]; then
@@ -52,6 +57,11 @@ src (){
     source "$file"
   fi
 }
+
+# Git
+alias pushpull="git push && pull 20"
+alias push="git push"
+alias gip="gitInitPush"
 
 function gitInitPush() {
   REPO_NAME=${1:-$(basename "$(pwd)")}
