@@ -19,11 +19,12 @@ source ~/.local/share/omarchy/default/bash/envs
 
 SCRIPT_DIR="${0:A:h}"
 
-source "$SCRIPT_DIR/alias.sh"
-source "$SCRIPT_DIR/binds.sh"
 source "$SCRIPT_DIR/plugins.sh"
-source "$SCRIPT_DIR/shell.sh"
 source "$SCRIPT_DIR/oh-my-zsh"
+
+source "$SCRIPT_DIR/alias.sh"
+source "$SCRIPT_DIR/shell.sh"
+source "$SCRIPT_DIR/binds.sh"
 
 # Attach or create tmux session
 if (( attach_tmux )); then
