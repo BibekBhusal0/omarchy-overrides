@@ -35,17 +35,20 @@ alias obd="xdg-open obsidian://daily"
 
 ## Open file directly in it's editor super super handy (but gives error in bash)
 if [ -n "$ZSH_VERSION" ]; then
-    alias -s lua=nvim
-    alias -s js=nvim
-    alias -s ts=nvim
-    alias -s mjs=nvim
-    alias -s tsx=nvim
-    alias -s json=nvim
-    alias -s toml=nvim
-    alias -s md=nvim
-    alias -s html=nvim
     alias -s conf=nvim
+    alias -s css=nvim
+    alias -s html=nvim
+    alias -s js=nvim
+    alias -s json=nvim
+    alias -s jsonc=nvim
+    alias -s lua=nvim
+    alias -s md=nvim
+    alias -s mjs=nvim
     alias -s mp4=mpv
+    alias -s toml=nvim
+    alias -s ts=nvim
+    alias -s tsx=nvim
+    alias -s yml=nvim
 fi
 
 # Sometimes I might run neovim commands
