@@ -74,7 +74,7 @@ function gitInitPush() {
   fi
   git add .
   git commit -m "Initial commit"
-  gh repo create "$REPO_NAME" --push --source . "${@:2}"
+  gh repo create "$REPO_NAME" --public --push --source . "${@:2}"
 }
 
 # Useful when just after pushing formatting is runing in gh actions
