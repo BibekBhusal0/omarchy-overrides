@@ -1,15 +1,8 @@
 #!/bin/bash
 # file inspired from https://github.com/typecraft-dev/omarchy-supplement/blob/main/install-tmux.sh
 
-set -e
-
-# Install tmux
-yay -S --noconfirm --needed tmux
-
-# Check if tmux is installed
 if ! command -v tmux &>/dev/null; then
-  echo "tmux installation failed."
-  exit 1
+  yay -S --noconfirm --needed tmux
 fi
 
 TPM_DIR="$HOME/.tmux/plugins/tpm"
