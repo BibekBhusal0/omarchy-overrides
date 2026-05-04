@@ -54,8 +54,7 @@ tooltip label {
 #pulseaudio,
 #cpu,
 #memory,
-#battery,
-#custom-timer {
+#battery {
   font-size: 13px;
   margin: 5px;
   padding: 0 5px;
@@ -126,78 +125,4 @@ window#waybar.empty #window {
 #mpris {
   padding: 1px 6px;
   margin-left: 18px;
-}
-
-#custom-timer {
-  background-color: #27272a;
-  color: #e6d8ba;
-  transition: all 0.2s ease;
-}
-
-#custom-timer.disabled {
-  background-color: transparent;
-  color: #e6d8ba;
-  opacity: 0.6;
-}
-
-#custom-timer.idle {
-  background-color: transparent;
-  color: #e6d8ba;
-}
-
-#custom-timer.select {
-  background-color: #27272a;
-  color: #ff9b71;
-}
-
-#custom-timer.running {
-  background-color: transparent;
-  color: #e6d8ba;
-}
-
-#custom-timer.pomo_break {
-  background-color: transparent;
-  color: #94d487;
-}
-
-#custom-timer.pomo_msg {
-  background-color: transparent;
-  color: #ff9b71;
-}
-
-#custom-timer.paused {
-  background-color: #27272a;
-  color: #e6d8ba;
-  opacity: 0.6;
-}
-
-#custom-timer.warning {
-  background-color: transparent;
-  animation-name: red-alert;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-#custom-timer.done {
-  background-color: #e6d8ba;
-  color: #000;
-}
-
-#custom-timer.reset {
-  color: #f53c3c;
-  background-color: transparent;
-}
-
-@keyframes red-alert {
-  0% {
-    color: #f53c3c;
-    opacity: 1;
-  }
-  100% {
-    color: #f53c3c;
-    opacity: 0.4;
-    text-shadow: none;
-  }
 }

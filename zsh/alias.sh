@@ -18,10 +18,6 @@ alias manman="man -k . | fzf $common_config --bind 'enter:become(man {1})'"
 # Tmux
 alias mux="tmuxinator"
 
-# Timer
-alias timer="~/.config/waybar/scripts/timer.sh"
-alias pomo="~/.config/waybar/scripts/timer.sh pomo"
-
 # Rickrolling
 alias rick-roll="curl ascii.live/rick"
 alias hack="rick-roll"
