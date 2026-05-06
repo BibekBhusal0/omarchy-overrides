@@ -1,9 +1,10 @@
 #!/bin/bash
 # file inspired from https://github.com/typecraft-dev/omarchy-supplement/blob/main/install-tmux.sh
 
-if ! command -v tmux &>/dev/null; then
-  yay -S --noconfirm --needed tmux
-fi
+# Now omarchy has tmux preinstalled
+# if ! command -v tmux &>/dev/null; then
+#   yay -S --noconfirm --needed tmux
+# fi
 
 TPM_DIR="$HOME/.tmux/plugins/tpm"
 
