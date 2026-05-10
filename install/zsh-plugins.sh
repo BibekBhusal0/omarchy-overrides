@@ -36,4 +36,3 @@ add_theme() {
 
 add_plugin "zsh-syntax-highlighting"
 add_plugin "zsh-autosuggestions"
-add_theme "romkatv/powerlevel10k"
