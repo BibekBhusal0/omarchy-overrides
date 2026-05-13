@@ -1,6 +1,6 @@
 #!/bin/bash
-# Remove the default configuration for neovim and add my custom config instead
 
+# Remove the default configuration for neovim and add my custom config instead
 CONFIG_DIR="$HOME/.config/nvim" 
 CONFIG_BACKUP_DIR="$HOME/.config/nvim.backup"
 NEOVIM_CACHE_DIR="$HOME/.local/share/nvim"
@@ -29,9 +29,6 @@ fi
 
 git clone "https://github.com/$USERNAME/neovim-kickstart-config-config" "$CONFIG_DIR"
 echo "Config replaced sucessfully"
-
-# Other packages required for my neovim config 
-pacman -S sqlite
 
 # Cloning my other plugins different directory
 # Because I might need to edit them

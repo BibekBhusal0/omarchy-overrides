@@ -20,3 +20,6 @@ echo "TPM installed successfully!"
 
 # Install tmuxinator
 yay -Sy --noconfirm --needed tmuxinator
+
+# Installing plugins
+~/.tmux/plugins/tpm/bin/install_plugins || true
