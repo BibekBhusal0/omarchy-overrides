@@ -70,7 +70,13 @@ bind(modKey("SHIFT + R"), "hypruler", "Ruler")
 bind(modKey("SLASH"), "start", "Launch All Apps I Use")
 
 -- Toggling the animation
-bind(modKey("ALT + A"), "toggle-animation", "Toggle Animation")
+local function toggle_animations()
+	local enabled = hl.get_config("animations:enabled")
+	hl.config({ animations = { enabled = not enabled } })
+	local status = not enabled and "Enabled" or "Disabled"
+	hl.exec_cmd(string.format("notify-send 'Animations %s'", status))
+end
+bind(modKey("ALT + A"), toggle_animations, "Toggle Animation")
 
 -- Pop open window to fit in my screen
 bind(modKey("P"), "omarchy-hyprland-window-pop 1300 700", "Pop window out")
