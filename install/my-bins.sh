@@ -3,8 +3,11 @@
 set -e
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SRC_BIN="$REPO_ROOT/bin"
+SRC_BIN="$REPO_ROOT/files_to_copy/bin"
 DST_BIN="$HOME/.local/bin"
+
+# Making bin folder executable
+[ -d "$SRC_BIN" ] && chmod +x "$SRC_BIN"/*
 
 mkdir -p "$DST_BIN"
 

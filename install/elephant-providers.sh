@@ -1,7 +1,7 @@
 #!/bin/bash
 
 scriptDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-filePath="$scriptDir/files_to_copy/obsidian-elephant.lua"
+filePath="$scriptDir/../files_to_copy/obsidian-elephant.lua"
 
 iconDir="$HOME/.config/elephant/icons"
 mkdir -p "$iconDir"
@@ -15,5 +15,4 @@ THEME_COLOR="#BAA4E6"
 sed -i "s/fill=\"[^\"]*\"/fill=\"$THEME_COLOR\"/g" "$iconDir"/*.svg
 
 cp "$filePath" "$HOME"/.config/elephant/menus/obsidian.lua
-systemctl --user restart elephant
 omarchy-restart-walker

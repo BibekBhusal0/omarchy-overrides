@@ -22,9 +22,6 @@ source $SCRIPT_DIR/../zsh/shell.sh
 source $SCRIPT_DIR/../zsh/alias.sh
 EOF
 
-# Making bin folder executable
-[ -d "$SCRIPT_DIR/../bin" ] && chmod +x "$SCRIPT_DIR/../bin"/*
-
 # env for uwsm
 "$WRITE_TO_FILE" "$HOME/.config/uwsm/env" <<< "export PATH=$HOME/.cargo/bin:$HOME/.local/bin:\$PATH"
 

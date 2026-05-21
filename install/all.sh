@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ./cursor-theme.sh
-./obsidian-elephant.sh
+./elephant-providers.sh
 ./my-bins.sh
 ./others.sh
 ./spicetify.sh

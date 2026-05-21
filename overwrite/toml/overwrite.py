@@ -83,7 +83,7 @@ def main():
             Path.home() / ".config/elephant/websearch.toml",
         ),
         (
-            script_dir / "yazi/yazi.toml",
+            script_dir / "overwrite-yazi.toml",
             Path.home() / ".config/yazi/yazi.toml",
         ),
         (

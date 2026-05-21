@@ -20,4 +20,3 @@ done
 if [ "$success" = false ]; then
   echo "Warning: Neovim plugins failed to install after $max_retries attempts. Continuing setup..."
 fi
-
