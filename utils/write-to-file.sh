@@ -1,29 +1,32 @@
 #!/bin/bash
 
-file="$1"
-overwrite="${2:-false}"
+write_to_file() {
+  local file="$1"
+  local content="$2"
+  local overwrite="${3:-false}"
 
-mkdir -p "$(dirname "$file")"
+  [[ -z "$file" || -z "$content" ]] && return 1
 
-content_to_write=$(cat -)
+  mkdir -p "$(dirname "$file")"
 
-file_exists=false
-if [ -f "$file" ]; then
-  file_exists=true
-fi
-
-if "$file_exists"; then
-  existing_file_content=$(<"$file")
-  if [[ "$existing_file_content" == *"$content_to_write"* ]]; then
-    echo "Content already present in $file. Skipping ..."
-    exit 0
+  if [[ -f "$file" ]]; then
+    local existing_content=$(<"$file")
+    if [[ "$existing_content" == *"$content"* ]]; then
+      echo "Content already present in $file. Skipping..."
+      return 0
+    fi
   fi
-fi
 
-if [ "$overwrite" = "true" ]; then
-  echo "$content_to_write" > "$file"
-  echo "Overwritten $file"
-else
-  echo "$content_to_write" >> "$file"
-  echo "Appended to: $file"
+  if [[ "$overwrite" == "true" ]]; then
+    echo "$content" > "$file"
+    echo "Overwritten: $file"
+  else
+    echo "$content" >> "$file"
+    echo "Appended to: $file"
+  fi
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  content=$(cat -)
+  write_to_file "$1" "$content" "$2"
 fi
