@@ -1,4 +1,5 @@
 local exec = hl.dsp.exec_cmd
+
 ---Wrapper for setting keybinds
 ---@param key string  the key or the key combination
 ---@param cmd string|function  THe command to be executed when key is pressed
@@ -15,7 +16,7 @@ local function modKey(keys)
 	return ("SUPER + " .. keys)
 end
 
--- Unbind some keys which i will not need and which i will overwrite
+-- Unbind some keys which I will not need and which I will overwrite
 local unbinds = {
 	modKey("SHIFT + M"),
 	modKey("SHIFT + D"),
