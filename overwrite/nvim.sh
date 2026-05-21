@@ -4,7 +4,6 @@
 CONFIG_DIR="$HOME/.config/nvim" 
 CONFIG_BACKUP_DIR="$HOME/.config/nvim.backup"
 NEOVIM_CACHE_DIR="$HOME/.local/share/nvim"
-USERNAME="BibekBhusal0"
 MY_PLUGINS_DIR="${HOME}/Code/nvim-plugins"
 REPOS=(
   "bufstack.nvim"
@@ -27,7 +26,8 @@ if [ -d "$NEOVIM_CACHE_DIR" ]; then
     echo "Removed existing Neovim cache at $NEOVIM_CACHE_DIR"
 fi
 
-git clone "https://github.com/$USERNAME/neovim-kickstart-config-config" "$CONFIG_DIR"
+source "$(dirname "$0")/../utils/clone.sh"
+clone_repo "neovim-kickstart-config-config" "$CONFIG_DIR"
 echo "Config replaced sucessfully"
 
 # Cloning my other plugins different directory
@@ -35,24 +35,5 @@ echo "Config replaced sucessfully"
 mkdir -p -- "$MY_PLUGINS_DIR"
 
 for repo in "${REPOS[@]}"; do
-  dest="$MY_PLUGINS_DIR/$repo"
-  repo_url="https://github.com/${USERNAME}/${repo}.git"
-
-  if [ -d "$dest/.git" ]; then
-    printf '%s already cloned — skipping: %s\n' "$repo" "$dest"
-    continue
-  fi
-
-  if [ -e "$dest" ] && [ ! -d "$dest" ]; then
-    printf 'Path exists and is not a directory — skipping: %s\n' "$dest"
-    continue
-  fi
-
-  if [ -d "$dest" ] && [ ! -d "$dest/.git" ]; then
-    printf 'Directory exists but is not a git repo — creating backup and cloning: %s\n' "$dest"
-    mv -- "$dest" "${dest}.bak.$(date +%s)"
-  fi
-
-  printf 'Cloning %s into %s\n' "$repo_url" "$dest"
-  git clone --depth 1 "$repo_url" "$dest"
+  clone_repo "$repo" "$MY_PLUGINS_DIR/$repo"
 done

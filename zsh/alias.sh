@@ -89,20 +89,8 @@ pull () {
 }
 
 clone() {
-  local url="$1"
-  shift
-  url="${url#/}"
-  url="${url%/}"
-
-  if [[ "$url" =~ ^https?:// ]]; then
-    git clone "$url" "$@"
-  elif [[ "$url" =~ ^[a-zA-Z0-9_-]+/[a-zA-Z0-9._-]+$ ]]; then
-    git clone "https://github.com/$url" "$@"
-  elif [[ "$url" =~ / ]]; then
-    git clone "https://$url" "$@"
-  else
-    git clone "https://github.com/bibekbhusal0/$url" "$@"
-  fi
+  source "$SCRIPT_DIR/../utils/clone.sh"
+  clone_repo "$@"
 }
 
 gce () {

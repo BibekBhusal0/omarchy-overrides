@@ -6,15 +6,11 @@
 #   yay -S --noconfirm --needed tmux
 # fi
 
+source "$(dirname "$0")/../utils/clone.sh"
 TPM_DIR="$HOME/.tmux/plugins/tpm"
 
-# Check if TPM is already installed
-if [ -d "$TPM_DIR" ]; then
-  echo "TPM is already installed in $TPM_DIR"
-else
-  echo "Installing Tmux Plugin Manager (TPM)..."
-  git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
-fi
+echo "Installing Tmux Plugin Manager (TPM)..."
+clone_repo https://github.com/tmux-plugins/tpm "$TPM_DIR"
 
 echo "TPM installed successfully!"
 
