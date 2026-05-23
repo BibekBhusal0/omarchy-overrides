@@ -14,8 +14,9 @@ switch_to() {
 }
 
 # Pipe delimiter handles session names containing colons
-selected=$(tmux list-windows -a -F "#S|#I|#W" 2>/dev/null | fzf --reverse --header "Search Windows" \
+selected=$(tmux list-windows -a -F "#S|#I|#W" 2>/dev/null | fzf --reverse --header "Search Windows (Ctrl-d: Kill)" \
     --delimiter "|" \
+    --bind 'ctrl-d:execute(tmux kill-window -t {1}:{2})+reload(tmux list-windows -a -F "#S|#I|#W")' \
     --preview 'tmux capture-pane -e -pt {1}:{2} | head -100')
 
 if [ -n "$selected" ]; then

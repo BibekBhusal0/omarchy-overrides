@@ -13,8 +13,9 @@ switch_to() {
     fi
 }
 
-selected=$(tmux list-sessions -F "#S" 2>/dev/null | fzf --reverse --header "Search Sessions" \
-    --preview 'tmux list-windows -t {1} -F "#I: #W"; echo "--- Content ---"; tmux capture-pane -e -pt {1}: | head -50')
+selected=$(tmux list-sessions -F "#S" 2>/dev/null | fzf --reverse --header "Search Sessions (Ctrl-d: Kill)" \
+    --bind 'ctrl-d:execute(tmux kill-session -t {1})+reload(tmux list-sessions -F "#S")' \
+    --preview 'tmux capture-pane -e -pt {1}: | head -50')
 
 if [ -n "$selected" ]; then
     switch_to "$selected"
