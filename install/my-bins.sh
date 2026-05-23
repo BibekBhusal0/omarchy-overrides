@@ -1,19 +1,15 @@
 #!/usr/bin/env bash
-# Copying files from ../bin to ~/.local/bin
 set -e
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SRC_BIN="$REPO_ROOT/files_to_copy/bin"
+SRC_BIN="$REPO_ROOT/bin"
 DST_BIN="$HOME/.local/bin"
-
-# Making bin folder executable
-[ -d "$SRC_BIN" ] && chmod +x "$SRC_BIN"/*
 
 mkdir -p "$DST_BIN"
 
-for file in "$SRC_BIN"/*; do
-    ln -sf "$file" "$DST_BIN/$(basename "$file")"
-    chmod +x "$file"
-done
+if [ -d "$SRC_BIN" ] && [ -n "$(ls -A "$SRC_BIN" 2>/dev/null)" ]; then
+    chmod +x "$SRC_BIN"/*
+    ln -sf "$SRC_BIN"/* "$DST_BIN/"
+fi
 
-echo "Bins installed to $DST_BIN"
+echo "Bins symlinked to $DST_BIN"
