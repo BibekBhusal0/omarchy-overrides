@@ -15,3 +15,5 @@ source "$SCRIPT_DIR/oh-my-zsh"
 source "$SCRIPT_DIR/alias.sh"
 source "$SCRIPT_DIR/shell.sh"
 source "$SCRIPT_DIR/binds.sh"
+
+eval "$(starship init zsh)"
