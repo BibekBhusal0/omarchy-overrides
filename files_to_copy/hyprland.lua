@@ -9,48 +9,13 @@ local function bind(key, cmd, description)
 	if type(cmd) == "string" then
 		command = exec(cmd)
 	end
+  -- Unbind before binding new to avaoid conflicts.
+  hl.unbind(key)
 	hl.bind(key, command, { description = description })
 end
 
 local function modKey(keys)
 	return ("SUPER + " .. keys)
-end
-
--- Unbind some keys which I will not need and which I will overwrite
-local unbinds = {
-	modKey("SHIFT + M"),
-	modKey("SHIFT + D"),
-	modKey("SHIFT + G"),
-	modKey("SHIFT + W"),
-	modKey("SHIFT + SLASH"),
-	modKey("SHIFT + P"),
-	modKey("SHIFT + B"),
-	modKey("SHIFT + A"),
-	modKey("SHIFT + E"),
-	modKey("SHIFT + ALT + A"),
-	modKey("SHIFT + ALT + C"),
-	modKey("SHIFT + C"),
-	modKey("SHIFT + ALT + G"),
-	modKey("SHIFT + CTRL + G"),
-	modKey("SHIFT + SHIFT + X"),
-	modKey("SHIFT + ALT + X"),
-	modKey("SHIFT + T"),
-	modKey("SHIFT + N"),
-	modKey("O"),
-	modKey("CTRL + A"),
-	modKey("CTRL + B"),
-	modKey("CTRL + W"),
-	modKey("P"),
-	modKey("SHIFT + O"),
-	modKey("H"),
-	modKey("J"),
-	modKey("K"),
-	modKey("L"),
-	"ALT + CTRL + K",
-}
-
-for _, key in ipairs(unbinds) do
-	hl.unbind(key)
 end
 
 -- Bindings similar to windows
