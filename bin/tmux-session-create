@@ -18,9 +18,13 @@ selected=$(zoxide query -l | fzf --reverse --header "Create/Switch Session (Zoxi
 
 if [ -n "$selected" ]; then
     session_name=$(basename "$selected" | tr . _)
-    
-    if ! tmux has-session -t "$session_name" 2>/dev/null; then
-        tmux new-session -d -s "$session_name" -c "$selected"
+
+    if [ -f "$selected/.tmuxinator.yml" ] && command -v tmuxinator >/dev/null 2>&1; then
+        (cd "$selected" && tmuxinator start .)
+    else
+        if ! tmux has-session -t "$session_name" 2>/dev/null; then
+            tmux new-session -d -s "$session_name" -c "$selected"
+        fi
+        switch_to "$session_name"
     fi
-    switch_to "$session_name"
 fi
