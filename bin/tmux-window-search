@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# Function to check if we are in tmux
 in_tmux() {
     [ -n "$TMUX" ]
 }
 
-# Function to switch to a session/window
 switch_to() {
     local target=$1
     if in_tmux; then
@@ -15,14 +13,13 @@ switch_to() {
     fi
 }
 
-selected=$(tmux list-windows -a -F "#S:#I: #W" 2>/dev/null | fzf --reverse --header "Search Windows" --preview '
-    item={1}
-    session=${item%%:*}
-    window_idx=$(echo $item | cut -d: -f2)
-    tmux list-panes -t "$session:$window_idx" -F "#{pane_current_command} #{pane_title}" | head -20
-')
+# Pipe delimiter handles session names containing colons
+selected=$(tmux list-windows -a -F "#S|#I|#W" 2>/dev/null | fzf --reverse --header "Search Windows" \
+    --delimiter "|" \
+    --preview 'tmux capture-pane -e -pt {1}:{2} | head -100')
 
 if [ -n "$selected" ]; then
-    target=$(echo "$selected" | cut -d: -f1,2)
-    switch_to "$target"
+    session=$(echo "$selected" | cut -d'|' -f1)
+    window=$(echo "$selected" | cut -d'|' -f2)
+    switch_to "$session:$window"
 fi

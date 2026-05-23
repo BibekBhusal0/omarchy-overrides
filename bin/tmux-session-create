@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# Function to check if we are in tmux
 in_tmux() {
     [ -n "$TMUX" ]
 }
 
-# Function to switch to a session
 switch_to() {
     local target=$1
     if in_tmux; then
@@ -15,7 +13,8 @@ switch_to() {
     fi
 }
 
-selected=$(zoxide query -l | fzf --reverse --header "Create/Switch Session (Zoxide)" --preview 'eza --tree --level=2 --icons --color=always {} | head -20')
+selected=$(zoxide query -l | fzf --reverse --header "Create/Switch Session (Zoxide)" \
+    --preview 'eza --tree --level=2 --icons --color=always {} | head -20')
 
 if [ -n "$selected" ]; then
     session_name=$(basename "$selected" | tr . _)
