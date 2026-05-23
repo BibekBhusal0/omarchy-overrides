@@ -25,6 +25,7 @@ bind("CTRL + SHIFT + ESCAPE", "floating-terminal btop", "Activity")
 -- Ruler to measure screen
 bind(modKey("SHIFT + R"), "hypruler", "Ruler")
 
+-- -- :NOTE: This Should be removed keeping it here just in case
 -- -- Pomodoro timer
 -- bind(
 -- 	modKey("SHIFT + P"),
@@ -47,11 +48,13 @@ bind(modKey("ALT + A"), toggle_animations, "Toggle Animation")
 -- Pop open window to fit in my screen
 bind(modKey("P"), "omarchy-hyprland-window-pop 1300 700", "Pop window out")
 
--- Open things in floating terminal
-bind(modKey("CTRL + A"), "floating-terminal wiremix", "Audio controls")
-bind(modKey("CTRL + B"), "floating-terminal bluetui", "Bluetooth controls")
-bind(modKey("CTRL + W"), "floating-terminal impala", "Wifi controls")
+-- -- :TODO: This might not be needed in new version should test before uncommenting.
+-- -- Open things in floating terminal
+-- bind(modKey("CTRL + A"), "floating-terminal wiremix", "Audio controls")
+-- bind(modKey("CTRL + B"), "floating-terminal bluetui", "Bluetooth controls")
+-- bind(modKey("CTRL + W"), "floating-terminal impala", "Wifi controls")
 
+-- -- :NOTE: This Should be removed keeping it here just in case
 -- bind(
 -- 	modKey("SHIFT + RETURN"),
 -- 	'env NO_TMUX=1 uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)"',
@@ -74,7 +77,9 @@ bind(
 	'omarchy-launch-or-focus ^obsidian$ "uwsm-app -- obsidian -disable-gpu --enable-wayland-ime"',
 	"Obsidian"
 )
+-- -- :TODO: Migrate to obsidian CLI
 bind(modKey("SHIFT + O"), 'obsidian "obsidian://daily"', "Obsidian Daily")
+-- -- :FIX: Both keybinds will not work after omarchy is migrated to quickshell (walker and elephand will be uninstalled)
 bind(modKey("ALT + O"), "elephant m obsidian", "Obsidian Search")
 bind(
 	modKey("CTRL + SHIFT + O"),
@@ -85,6 +90,7 @@ bind(
 -- My custom web apps
 bind(modKey("A"), 'omarchy-launch-webapp "https://chatgpt.com"', "ChatGPT")
 bind(modKey("SHIFT + C"), 'omarchy-launch-webapp "https://chess.com"', "Chess.com")
+-- -- :TODO: use latest version of gemini
 bind(
 	modKey("SHIFT + A"),
 	'omarchy-launch-webapp "https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-preview"',
