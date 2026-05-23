@@ -17,6 +17,7 @@ alias manman="man -k . | fzf $common_config --bind 'enter:become(man {1})'"
 
 # Tmux
 alias mux="tmuxinator"
+alias t="tmux new-session -A -s main"
 
 # Rickrolling
 alias rick-roll="curl ascii.live/rick"
