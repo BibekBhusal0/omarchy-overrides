@@ -9,8 +9,8 @@ local function bind(key, cmd, description)
 	if type(cmd) == "string" then
 		command = exec(cmd)
 	end
-  -- Unbind before binding new to avaoid conflicts.
-  hl.unbind(key)
+	-- Unbind before binding new to avaoid conflicts.
+	hl.unbind(key)
 	hl.bind(key, command, { description = description })
 end
 
@@ -107,11 +107,10 @@ bind(modKey("L"), hl.dsp.focus({ direction = "r" }), "Focus right")
 bind(modKey("K"), hl.dsp.focus({ direction = "u" }), "Focus up")
 bind(modKey("J"), hl.dsp.focus({ direction = "d" }), "Focus down")
 
--- Search keyboard shortcuts with SUPER SHIT K
+-- Those are keybinds which omarchy has on super k, j, l which have been over written
 bind(modKey("SHIFT + K"), "omarchy-menu-keybindings", "Show Keybindings")
-
--- Toggle split with SUPER SHIFT J
 bind(modKey("SHIFT + J"), hl.dsp.togglesplit(), "Toggle window split")
+bind(modKey("Shift + L"), "omarchy-hyprland-workspace-layout-toggle", "Toggle workspace layout")
 
 -- Configuration
 hl.config({
