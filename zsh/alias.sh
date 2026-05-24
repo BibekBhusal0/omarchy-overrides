@@ -6,11 +6,11 @@ if command -v eza &> /dev/null; then
   alias lta="lt -a"
 fi
 
-alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
-
 # FZF
 common_config="--height 40% --layout reverse --tmux"
-alias nvimff="ff --bind 'enter:become(nvim {-1})' $common_config "
+alias ff="fzf --preview 'bat --style=numbers --color=always {}' $common_config"
+alias nvimff="ff --bind 'enter:become(nvim {-1})'"
+alias eff="nvimff"
 alias gcb="git branch | fzf $common_config --preview 'git show --color=always {-1}' --bind 'enter:become(git checkout {-1})'"
 alias cheat="curl cheat.sh/:list | fzf $common_config --bind 'enter:become(curl cheat.sh/{-1} | less)'"
 alias manman="man -k . | fzf $common_config --bind 'enter:become(man {1})'"
