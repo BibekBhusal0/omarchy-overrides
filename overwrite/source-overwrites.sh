@@ -7,7 +7,7 @@ source "$SCRIPT_DIR/../utils/write-to-file.sh"
 
 echo "Setting up Hyprland overrides..."
 write_to_file "$HOME/.config/hypr/hyprland.lua" "require(\"hypr.own_config\")" true
-write_to_file "$HOME/.config/hypr/lua/hypr/own_config.lua" "$(cat "$SCRIPT_DIR/../files_to_copy/hyprland.lua")" true
+ln -sfn "$SCRIPT_DIR/../files_to_copy/hyprland.lua" "$HOME/.config/hypr/lua/hypr/own_config.lua"
 write_to_file "$HOME/.config/hypr/hyprlock.conf" "source = $SCRIPT_DIR/hyprlock.overwrite.conf"
 
 echo ""
