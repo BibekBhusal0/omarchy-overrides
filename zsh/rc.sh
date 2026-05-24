@@ -10,10 +10,6 @@ source $OMARCHY_PATH/default/bash/envs
 SCRIPT_DIR="${0:A:h}"
 
 source "$SCRIPT_DIR/plugins.sh"
-source "$SCRIPT_DIR/oh-my-zsh"
-
 source "$SCRIPT_DIR/alias.sh"
 source "$SCRIPT_DIR/shell.sh"
 source "$SCRIPT_DIR/binds.sh"
-
-eval "$(starship init zsh)"
