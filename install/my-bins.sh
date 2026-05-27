@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SRC_BIN="$REPO_ROOT/bin"
 DST_BIN="$HOME/.local/bin"
 
