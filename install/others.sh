@@ -12,7 +12,4 @@ npm install -g devmoji
 npm install -g yarn
 npm install -g bun
 
-sudo pacman -S --noconfirm asciinema
-yay -Sy --noconfirm --needed asciinema-agg-bin
-
 curl -sSL https://usegitai.com/install.sh | bash

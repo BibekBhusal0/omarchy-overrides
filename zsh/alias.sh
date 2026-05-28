@@ -25,7 +25,6 @@ alias hack="rick-roll"
 alias start-hacking="rick-roll"
 
 # misc
-alias a="asciinema"
 alias eixt="exit"
 alias exp="nautilus"
 alias obd="xdg-open obsidian://daily"
