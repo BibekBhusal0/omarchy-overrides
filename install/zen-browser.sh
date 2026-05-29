@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yay -Sy --noconfirm --needed zen-browser-bin
+omarchy-pkg-aur-add zen-browser-bin
 
 # Also download sine it can't run automotically i will run it later
 cd ~/Downloads || exit 

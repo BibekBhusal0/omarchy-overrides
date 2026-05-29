@@ -2,8 +2,8 @@
 
 # Now omarchy has tmux preinstalled
 # if ! command -v tmux &>/dev/null; then
-#   yay -S --noconfirm --needed tmux
+#   omarchy-pkg-aur-add tmux
 # fi
 
 # Install tmuxinator
-yay -Sy --noconfirm --needed tmuxinator
+omarchy-pkg-aur-add tmuxinator

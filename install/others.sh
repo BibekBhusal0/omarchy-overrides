@@ -1,12 +1,12 @@
 #!/bin/bash
 
-yay -Sy --noconfirm --needed brave-bin
-yay -Sy --noconfirm --needed yazi
-yay -Sy --noconfirm --needed legcord-bin
-yay -Sy --noconfirm --needed hypruler-bin
-yay -Sy --noconfirm --needed losslesscut-bin
-yay -Sy --noconfirm --needed bitwarden
-yay -Sy --noconfirm --needed bitwarden-cli
+omarchy-pkg-aur-add brave-bin
+omarchy-pkg-aur-add yazi
+omarchy-pkg-aur-add legcord-bin
+omarchy-pkg-aur-add hypruler-bin
+omarchy-pkg-aur-add losslesscut-bin
+omarchy-pkg-aur-add bitwarden
+omarchy-pkg-aur-add bitwarden-cli
 omarchy-install-dev-env node
 omarchy-install-dev-env bun
 omarchy-install-dev-env python
