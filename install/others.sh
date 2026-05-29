@@ -3,13 +3,13 @@
 yay -Sy --noconfirm --needed brave-bin
 yay -Sy --noconfirm --needed yazi
 yay -Sy --noconfirm --needed legcord-bin
-yay -Sy --noconfirm --needed opencode-bin
 yay -Sy --noconfirm --needed hypruler-bin
 yay -Sy --noconfirm --needed losslesscut-bin
 omarchy-install-dev-env node
+omarchy-install-dev-env bun
+omarchy-install-dev-env python
 
 npm install -g devmoji
 npm install -g yarn
-npm install -g bun
 
 curl -sSL https://usegitai.com/install.sh | bash
