@@ -1,6 +1,6 @@
 #!/bin/bash
 
-omarchy-pkg-aur-add zen-browser-bin
+omarchy-install-browser zen
 
 # Also download sine it can't run automotically i will run it later
 cd ~/Downloads || exit 
