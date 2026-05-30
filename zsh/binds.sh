@@ -1,5 +1,6 @@
 fzf-command-widget() {
-  local cmd=$(print -rl -- ${(k)commands} ${(k)aliases} | sort -u | fzf --tmux)
+  local cmd=$(print -rl -- ${(k)commands} ${(k)aliases} | sort -u | fzf \
+    --height=40% --layout=reverse --margin=1 --prompt="")
   if [[ -n $cmd ]]; then
     LBUFFER="$cmd"
     RBUFFER=""
@@ -11,10 +12,12 @@ zle -N fzf-command-widget
 bindkey '^F' fzf-command-widget
 
 fzf-tab-command-widget() {
-  if [[ -z "$LBUFFER" || "$LBUFFER" == *[[:space:]]* ]]; then
+  if [[ "$LBUFFER" == *[[:space:]]* ]]; then
     zle fzf-completion
   else
-    local cmd=$(print -rl -- ${(k)commands} ${(k)aliases} | sort -u | fzf --tmux --query="$LBUFFER")
+    local cmd=$(print -rl -- ${(k)commands} ${(k)aliases} | sort -u | fzf \
+      --height=40% --layout=reverse --margin=1 --prompt="" \
+      --query="$LBUFFER")
     if [[ -n "$cmd" ]]; then
       LBUFFER="$cmd"
       RBUFFER=""
