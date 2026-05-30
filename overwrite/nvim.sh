@@ -27,7 +27,7 @@ if [ -d "$NEOVIM_CACHE_DIR" ]; then
 fi
 
 source "$(dirname "$0")/../utils/clone.sh"
-clone_repo "neovim-kickstart-config-config" "$CONFIG_DIR"
+clone "neovim-kickstart-config-config" "$CONFIG_DIR"
 echo "Config replaced sucessfully"
 
 # Cloning my other plugins different directory
@@ -35,5 +35,5 @@ echo "Config replaced sucessfully"
 mkdir -p -- "$MY_PLUGINS_DIR"
 
 for repo in "${REPOS[@]}"; do
-  clone_repo "$repo" "$MY_PLUGINS_DIR/$repo"
+  clone "$repo" "$MY_PLUGINS_DIR/$repo"
 done

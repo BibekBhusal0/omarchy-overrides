@@ -1,6 +1,6 @@
 #!/bin/bash
 
-clone_repo() {
+clone() {
   local target="$1"
   shift
 
@@ -48,5 +48,5 @@ clone_repo() {
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  clone_repo "$@"
+  clone "$@"
 fi

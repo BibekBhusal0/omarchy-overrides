@@ -88,10 +88,7 @@ pull () {
   done
 }
 
-clone() {
-  source "$SCRIPT_DIR/../utils/clone.sh"
-  clone_repo "$@"
-}
+source "$SCRIPT_DIR/../utils/clone.sh"
 
 gce () {
   emojified_text=$(devmoji --text "$1" | sed 's/"/\\"/g')
