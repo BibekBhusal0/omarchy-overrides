@@ -4,6 +4,7 @@ echo "Using Bash Shell"
 
 BASHRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ZSH_DIR="$BASHRC_DIR/../zsh"
+SCRIPT_DIR=$ZSH_DIR
 [ -f "$ZSH_DIR/shell.sh" ] && source "$ZSH_DIR/shell.sh"
 [ -f "$ZSH_DIR/alias.sh" ] && source "$ZSH_DIR/alias.sh"
 
