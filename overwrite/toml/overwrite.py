@@ -86,10 +86,6 @@ def main():
             script_dir / "overwrite-yazi.toml",
             Path.home() / ".config/yazi/yazi.toml",
         ),
-        (
-            script_dir / "overwrite-starship.tom",
-            Path.home() / ".config/starship.toml",
-        ),
     ]
 
     # Process each file pair
