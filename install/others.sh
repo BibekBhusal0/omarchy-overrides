@@ -18,5 +18,4 @@ omarchy-pkg-aur-add readest-git
 npm install -g devmoji
 npm install -g yarn
 
-bun add -g opencode-ai
 curl -sSL https://usegitai.com/install.sh | bash
