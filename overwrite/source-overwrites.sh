@@ -27,8 +27,8 @@ write_to_file "$HOME/.config/uwsm/env" "export PATH=$HOME/.cargo/bin:$HOME/.loca
 
 # Setup tmux overrides
 echo "Setting up tmux overrides..."
-write_to_file "$HOME/.tmux.conf" "source $SCRIPT_DIR/tmux.conf"
-tmux source ~/.tmux.conf
+write_to_file "$HOME/.config/tmux/tmux.conf" "source $SCRIPT_DIR/tmux.conf"
+tmux source $HOME/.config/tmux/tmux.conf
 
 write_to_file "$HOME/.XCompose" "include \"$SCRIPT_DIR/.XCompose\""
 
