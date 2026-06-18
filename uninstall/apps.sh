@@ -3,14 +3,16 @@
 packages=(
   "1password-beta"
   "1password-cli"
+  "chromium"
   "docker"
   "docker-buildx"
   "docker-compose"
   "lazydocker"
   "obs-studio"
+  "omarchy-chromium"
   "signal-desktop"
   "typora"
-  "omarchy-chromium"
+  "ufw-docker"
 )
 
 echo "Omarchy chromium is bing uninstalled make sure to change default browser"
