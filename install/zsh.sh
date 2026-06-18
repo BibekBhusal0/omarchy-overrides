@@ -31,4 +31,4 @@ chsh -s "$ZSH_PATH"
 
 echo "Default shell changed to zsh. Please log out and log back in for the change to take effect."
 
-./zsh-plugins.sh
+./install/zsh-plugins.sh

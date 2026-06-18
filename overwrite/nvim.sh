@@ -37,3 +37,5 @@ mkdir -p -- "$MY_PLUGINS_DIR"
 for repo in "${REPOS[@]}"; do
   clone "$repo" "$MY_PLUGINS_DIR/$repo"
 done
+
+./install/nvim-plugins.sh
