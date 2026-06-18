@@ -1,2 +1,1 @@
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.git-ai/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.git-ai/bin:/home/bibek/.cache/.bun/bin:$PATH"
