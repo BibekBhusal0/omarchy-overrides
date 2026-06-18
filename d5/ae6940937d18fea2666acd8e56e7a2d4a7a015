@@ -1,0 +1,19 @@
+overwrite/overwrite-toml.sh
+  s_5b35f97449c5a0::t_0bfaa885ef162c 9-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "d5ae6940937d18fea2666acd8e56e7a2d4a7a015",
+  "prompts": {},
+  "sessions": {
+    "s_5b35f97449c5a0": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_124041cc0ffecJSaXdiIiexAf9",
+        "model": "big-pickle"
+      },
+      "human_author": "Bibek Bhusal <bibekbhusal04@gmail.com>"
+    }
+  }
+}
