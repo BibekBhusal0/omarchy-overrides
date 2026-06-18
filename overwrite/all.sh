@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./nvim.sh
-./overwrite-toml.sh
-./source-overwrites.sh
-./waybar.sh
+./overwrite/nvim.sh
+./overwrite/overwrite-toml.sh
+./overwrite/source-overwrites.sh
+./overwrite/waybar.sh

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-./apps.sh
-./web-apps.sh
+./uninstall/apps.sh
+./uninstall/web-apps.sh
