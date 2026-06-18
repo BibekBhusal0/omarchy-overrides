@@ -20,18 +20,10 @@ end
 
 -- Bindings similar to windows
 bind(modKey("E"), "uwsm-app -- nautilus --new-window $(omarchy-cmd-terminal-cwd)", "File manager")
-bind("CTRL + SHIFT + ESCAPE", "floating-terminal btop", "Activity")
+bind("CTRL + SHIFT + ESCAPE", "omarchy-launch-tui btop", "Activity")
 
 -- Ruler to measure screen
 bind(modKey("SHIFT + R"), "hypruler", "Ruler")
-
--- -- :NOTE: This Should be removed keeping it here just in case
--- -- Pomodoro timer
--- bind(
--- 	modKey("SHIFT + P"),
--- 	"bash -c '[[ $(timeout 0.05s ~/.config/waybar/scripts/timer.sh | head -n1 | jq -r \".class\") =~ (idle|disabled) ]] && ~/.config/waybar/scripts/timer.sh pomo || ~/.config/waybar/scripts/timer.sh toggle'",
--- 	"Pomodoro Timer"
--- )
 
 -- Launch all apps i use
 bind(modKey("SLASH"), "start", "Launch All Apps I Use")
@@ -47,12 +39,6 @@ bind(modKey("ALT + A"), toggle_animations, "Toggle Animation")
 
 -- Pop open window to fit in my screen
 bind(modKey("P"), "omarchy-hyprland-window-pop 1300 700", "Pop window out")
-
--- -- :TODO: This might not be needed in new version should test before uncommenting.
--- -- Open things in floating terminal
--- bind(modKey("CTRL + A"), "floating-terminal wiremix", "Audio controls")
--- bind(modKey("CTRL + B"), "floating-terminal bluetui", "Bluetooth controls")
--- bind(modKey("CTRL + W"), "floating-terminal impala", "Wifi controls")
 
 -- -- :NOTE: This Should be removed keeping it here just in case
 -- bind(
@@ -90,10 +76,9 @@ bind(
 -- My custom web apps
 bind(modKey("A"), 'omarchy-launch-webapp "https://chatgpt.com"', "ChatGPT")
 bind(modKey("SHIFT + C"), 'omarchy-launch-webapp "https://chess.com"', "Chess.com")
--- -- :TODO: use latest version of gemini
 bind(
 	modKey("SHIFT + A"),
-	'omarchy-launch-webapp "https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-preview"',
+	'omarchy-launch-webapp "https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview"',
 	"AI Studio"
 )
 bind(modKey("SHIFT + M"), 'omarchy-launch-webapp "https://pocketcasts.com/podcasts"', "PocketCasts")

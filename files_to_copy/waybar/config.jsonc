@@ -79,12 +79,12 @@
     "format": "{:L%A %H:%M}",
     "format-alt": "{:L%d %B W%V %Y}",
     "tooltip": false,
-    "on-click-right": "floating-terminal omarchy-tz-select"
+    "on-click-right": "omarchy-launch-tui omarchy-tz-select"
   },
   "custom/update": {
     "format": "",
     "exec": "omarchy-update-available",
-    "on-click": "floating-terminal omarchy-update",
+    "on-click": "omarchy-launch-tui omarchy-update",
     "tooltip-format": "Omarchy update available",
     "signal": 7,
     "interval": 21600
@@ -139,10 +139,10 @@
     "tooltip-format-disconnected": "Disconnected",
     "interval": 8,
     "spacing": 1,
-    "on-click": "floating-terminal impala"
+    "on-click": "omarchy-launch-tui impala"
   },
   "pulseaudio": {
-    "on-click": "floating-terminal wiremix",
+    "on-click": "omarchy-launch-tui wiremix",
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
     "scroll-step": 2,
@@ -166,12 +166,12 @@
   "cpu": {
     "interval": 5,
     "format": "  {usage}%",
-    "on-click": "floating-terminal btop"
+    "on-click": "omarchy-launch-tui btop"
   },
   "memory": {
     "interval": 5,
     "format": " {percentage}%",
-    "on-click": "floating-terminal btop"
+    "on-click": "omarchy-launch-tui btop"
   },
   "battery": {
     "format": "{icon}% {capacity}",
@@ -236,7 +236,7 @@
     "format-connected": "󰂱",
     "format-no-controller": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "floating-terminal bluetui"
+    "on-click": "omarchy-launch-tui bluetui"
   },
   "tray": {
     "icon-size": 12,
