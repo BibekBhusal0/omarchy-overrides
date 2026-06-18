@@ -12,6 +12,8 @@ omarchy-pkg-aur-add yazi
 omarchy-install-dev-env bun
 omarchy-install-dev-env node
 omarchy-install-dev-env python
+omarchy-install-terminal ghostty
+omarchy-default-terminal ghostty
 
 omarchy-pkg-aur-add readest-git
 
