@@ -31,7 +31,7 @@ launch_on_workspace() {
   fi
 }
 
-launch_on_workspace "xdg-terminal-exec" 1 "Alacritty"
+launch_on_workspace "xdg-terminal-exec" 1 "com.mitchellh.ghostty"
 launch_on_workspace "zen-browser" 2 "zen"
 launch_on_workspace "obsidian" 4 "obsidian"
-launch_on_workspace "spotify" 5 "spotify" 20
+launch_on_workspace "spotify" 5 "spotify" 2
