@@ -5,7 +5,7 @@ omarchy-pkg-aur-add bitwarden-cli
 omarchy-pkg-aur-add brave-bin
 omarchy-pkg-aur-add helium-browser-bin
 omarchy-pkg-aur-add hypruler-bin
-omarchy-pkg-aur-add legcord-bin
+omarchy-pkg-aur-add vesktop-bin
 omarchy-pkg-aur-add losslesscut-bin
 omarchy-pkg-aur-add yazi
 
