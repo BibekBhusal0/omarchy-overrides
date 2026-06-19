@@ -41,3 +41,5 @@ fi
 
 cd ~ || exit
 rm -rf "$TEMP_DIR"
+gsettings set org.gnome.desktop.interface cursor-theme ArcDusk-cursors
+gsettings set org.gnome.desktop.interface cursor-size 24
