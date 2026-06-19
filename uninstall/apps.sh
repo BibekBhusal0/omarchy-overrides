@@ -21,3 +21,6 @@ for package in "${packages[@]}"; do
     echo "Removing $package..."
     yay -R "${package}" --noconfirm
 done
+
+rm $HOME/.local/share/applications/Docker.desktop
+rm $HOME/.local/share/applications/typora.desktop
