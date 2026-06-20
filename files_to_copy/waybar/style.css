@@ -91,6 +91,15 @@ window#waybar.empty #window {
   opacity: 0.45;
 }
 
+#custom-idle-indicator,
+#custom-notification-silencing-indicator {
+  min-width: 12px;
+  margin-left: 5px;
+  margin-right: 0;
+  font-size: 10px;
+  padding-bottom: 1px;
+}
+
 #workspaces button.empty.active {
   background-color: #e6d8ba;
   color: #000;
