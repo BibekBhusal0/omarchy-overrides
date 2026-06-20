@@ -15,3 +15,14 @@ fzf-tab-command-widget() {
 
 zle -N fzf-tab-command-widget
 bindkey '^I' fzf-tab-command-widget
+
+run_tmux_session_create() {
+  if [[ -n "$TMUX" ]]; then
+    tmux display-popup -E -w 80% -h 80% "tmux-session-create"
+  else
+    tmux-session-create
+  fi
+}
+
+zle -N run_tmux_session_create
+bindkey '^[t' run_tmux_session_create
