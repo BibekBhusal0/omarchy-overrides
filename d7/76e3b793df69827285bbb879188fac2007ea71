@@ -1,0 +1,30 @@
+uninstall/all.sh
+  s_cdb5373490a534::t_07f60284f3d925 3-5
+overwrite/all.sh
+  s_cdb5373490a534::t_4119fdcdb4515d 3-8
+overwrite/nvim.sh
+  s_cdb5373490a534::t_74b956aba33185 42
+  s_cdb5373490a534::t_aaa379b4a67e1e 29-30
+install/zsh.sh
+  s_cdb5373490a534::t_5ff3cf3c48f12a 34-35
+index.sh
+  s_cdb5373490a534::t_b3bbc4988dc7be 3-8
+install/all.sh
+  s_cdb5373490a534::t_0c920e541c5349 3-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "d776e3b793df69827285bbb879188fac2007ea71",
+  "prompts": {},
+  "sessions": {
+    "s_cdb5373490a534": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_115d76509ffePgVhNC1TdwMtet",
+        "model": "big-pickle"
+      },
+      "human_author": "Bibek Bhusal <bibekbhusal04@gmail.com>"
+    }
+  }
+}
