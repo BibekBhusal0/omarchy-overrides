@@ -1,0 +1,20 @@
+README.md
+  s_cdb5373490a534::t_83afa5e468082b 1-2,4-8,10-11
+  s_cdb5373490a534::t_b715c25eb0e637 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "3c971e48f3a29ba0b1fafc6a06bec68fb7504ebd",
+  "prompts": {},
+  "sessions": {
+    "s_cdb5373490a534": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_115d76509ffePgVhNC1TdwMtet",
+        "model": "big-pickle"
+      },
+      "human_author": "Bibek Bhusal <bibekbhusal04@gmail.com>"
+    }
+  }
+}
