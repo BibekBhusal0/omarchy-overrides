@@ -1,0 +1,19 @@
+install/nvim-plugins.sh
+  s_cdb5373490a534::t_f2902a2a2dfff3 2,15,21,23-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "d4a15e3f092685173a6fdd717d60eacec13cfa0e",
+  "prompts": {},
+  "sessions": {
+    "s_cdb5373490a534": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_115d76509ffePgVhNC1TdwMtet",
+        "model": "big-pickle"
+      },
+      "human_author": "Bibek Bhusal <bibekbhusal04@gmail.com>"
+    }
+  }
+}
