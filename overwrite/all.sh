@@ -1,6 +1,8 @@
 #!/bin/bash
 
-./overwrite/nvim.sh
-./overwrite/overwrite-toml.sh
-./overwrite/source-overwrites.sh
-./overwrite/waybar.sh
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+"$SCRIPT_DIR/nvim.sh"
+"$SCRIPT_DIR/overwrite-toml.sh"
+"$SCRIPT_DIR/source-overwrites.sh"
+"$SCRIPT_DIR/waybar.sh"

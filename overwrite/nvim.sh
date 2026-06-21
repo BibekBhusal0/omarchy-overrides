@@ -26,7 +26,8 @@ if [ -d "$NEOVIM_CACHE_DIR" ]; then
     echo "Removed existing Neovim cache at $NEOVIM_CACHE_DIR"
 fi
 
-source "$(dirname "$0")/../utils/clone.sh"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../utils/clone.sh"
 clone "neovim-kickstart-config-config" "$CONFIG_DIR"
 echo "Config replaced sucessfully"
 
@@ -38,4 +39,4 @@ for repo in "${REPOS[@]}"; do
   clone "$repo" "$MY_PLUGINS_DIR/$repo"
 done
 
-./install/nvim-plugins.sh
+"$SCRIPT_DIR/../install/nvim-plugins.sh"
