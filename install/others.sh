@@ -14,8 +14,6 @@ omarchy-install-dev-env python
 omarchy-install-terminal ghostty
 omarchy-default-terminal ghostty
 
-omarchy-pkg-aur-add readest-git
-
 bun install -g devmoji
 bun install -g yarn
 

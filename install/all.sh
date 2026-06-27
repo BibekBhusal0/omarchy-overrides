@@ -4,6 +4,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 "$SCRIPT_DIR/cursor-theme.sh"
 "$SCRIPT_DIR/elephant-providers.sh"
+"$SCRIPT_DIR/flatpak.sh"
 "$SCRIPT_DIR/my-bins.sh"
 "$SCRIPT_DIR/others.sh"
 "$SCRIPT_DIR/tmux.sh"
