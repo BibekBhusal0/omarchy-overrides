@@ -28,6 +28,8 @@ alias start-hacking="rick-roll"
 alias eixt="exit"
 alias exp="nautilus"
 alias obd="xdg-open obsidian://daily"
+alias clip="wl-copy"
+alias cppwd="pwd | clip"
 
 ## Open file directly in it's editor super super handy (but gives error in bash)
 if [ -n "$ZSH_VERSION" ]; then
