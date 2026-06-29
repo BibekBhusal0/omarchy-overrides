@@ -2,18 +2,35 @@
 
 source "$(dirname "$0")/../utils/tmux.sh"
 
+create_or_switch_session() {
+  local dir=$1
+  local session_name
+
+  session_name=$(basename "$dir" | tr . _)
+
+  if [ -f "$dir/.tmuxinator.yml" ] && command -v tmuxinator >/dev/null 2>&1; then
+    (cd "$dir" && tmuxinator start .)
+  else
+    if ! tmux has-session -t "$session_name" 2>/dev/null; then
+      tmux new-session -d -s "$session_name" -c "$dir"
+    fi
+    switch_to "$session_name"
+  fi
+}
+
+if [ -n "$1" ]; then
+  if [ -d "$1" ]; then
+    create_or_switch_session "$1"
+    exit 0
+  else
+    echo "Error: Directory '$1' does not exist." >&2
+    exit 1
+  fi
+fi
+
 selected=$(zoxide query -l | fzf --reverse --header "Create/Switch Session (Zoxide)" \
-    --preview 'eza --tree --level=2 --icons --color=always {} | head -20')
+  --preview 'eza --tree --level=2 --icons --color=always {} | head -20')
 
 if [ -n "$selected" ]; then
-    session_name=$(basename "$selected" | tr . _)
-
-    if [ -f "$selected/.tmuxinator.yml" ] && command -v tmuxinator >/dev/null 2>&1; then
-        (cd "$selected" && tmuxinator start .)
-    else
-        if ! tmux has-session -t "$session_name" 2>/dev/null; then
-            tmux new-session -d -s "$session_name" -c "$selected"
-        fi
-        switch_to "$session_name"
-    fi
+  create_or_switch_session "$selected"
 fi
