@@ -1,0 +1,20 @@
+bin/tmux-session-create
+  s_aebdeb20befc07::t_3e8699600678db 5-7,9,11-15,17-32
+  s_aebdeb20befc07::t_02b33e88a3bd35 33-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.4",
+  "base_commit_sha": "3059a4a47cb87ae7536907019c2ca416813045b9",
+  "prompts": {},
+  "sessions": {
+    "s_aebdeb20befc07": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0eb8e52abffen8P0NlvNN63Kfp",
+        "model": "big-pickle"
+      },
+      "human_author": "Bibek Bhusal <bibekbhusal04@gmail.com>"
+    }
+  }
+}
