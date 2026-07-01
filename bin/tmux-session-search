@@ -4,7 +4,7 @@ source "$(dirname "$0")/../utils/tmux.sh"
 
 selected=$(tmux list-sessions -F "#S" 2>/dev/null | fzf --reverse --header "Search Sessions (Ctrl-d: Kill)" \
   --bind 'ctrl-d:execute(tmux kill-session -t {1})+reload(tmux list-sessions -F "#S")' \
-  --preview 'tmux capture-pane -e -pt {1}: | head -50')
+  --preview 'tmux capture-pane -e -pt {1}: | head -80')
 
 if [ -n "$selected" ]; then
   switch_to "$selected"

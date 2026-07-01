@@ -28,8 +28,8 @@ if [ -n "$1" ]; then
   fi
 fi
 
-selected=$(zoxide query -l | fzf --reverse --header "Create/Switch Session (Zoxide)" \
-  --preview 'eza --tree --level=2 --icons --color=always {} | head -20')
+selected=$(zoxide query -l | fzf --reverse --header "Create/Switch Session" \
+  --preview 'eza --tree --level=2 --icons --color=always {} | head -80')
 
 if [ -n "$selected" ]; then
   create_or_switch_session "$selected"

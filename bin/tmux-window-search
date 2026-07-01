@@ -6,7 +6,7 @@ source "$(dirname "$0")/../utils/tmux.sh"
 selected=$(tmux list-windows -a -F "#S|#I|#W" 2>/dev/null | fzf --reverse --header "Search Windows (Ctrl-d: Kill)" \
   --delimiter "|" \
   --bind 'ctrl-d:execute(tmux kill-window -t {1}:{2})+reload(tmux list-windows -a -F "#S|#I|#W")' \
-  --preview 'tmux capture-pane -e -pt {1}:{2} | head -100')
+  --preview 'tmux capture-pane -e -pt {1}:{2} | head -80')
 
 if [ -n "$selected" ]; then
   session=$(echo "$selected" | cut -d'|' -f1)
