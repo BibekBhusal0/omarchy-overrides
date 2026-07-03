@@ -15,4 +15,5 @@ sed -i "s/fill=\"[^\"]*\"/fill=\"$THEME_COLOR\"/g" "$iconDir"/*.svg
 
 source "$scriptDir/../utils/symlink.sh"
 create_symlink "$scriptDir/../files_to_copy/obsidian-elephant.lua" "$HOME"/.config/elephant/menus/obsidian.lua
+create_symlink "$scriptDir/../files_to_copy/readest-elephant.lua" "$HOME"/.config/elephant/menus/readest.lua
 omarchy-restart-walker
