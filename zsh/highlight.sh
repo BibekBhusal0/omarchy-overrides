@@ -1,5 +1,3 @@
-autoload -Uz add-zle-hook-widget
-
 _minimal_highlight() {
   emulate -L zsh
 
@@ -17,4 +15,8 @@ _minimal_highlight() {
   fi
 }
 
-add-zle-hook-widget zle-line-pre-redraw _minimal_highlight
+function zle-line-pre-redraw {
+  _minimal_highlight
+}
+
+zle -N zle-line-pre-redraw
