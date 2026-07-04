@@ -25,4 +25,4 @@ setopt EXTENDED_HISTORY
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^[[1;5C' forward-word
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "$SCRIPT_DIR/highlight.sh"
