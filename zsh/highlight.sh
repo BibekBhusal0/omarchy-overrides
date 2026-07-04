@@ -7,7 +7,7 @@ _minimal_highlight() {
   region_highlight=( ${region_highlight:#*memo=minimal-highlight*} )
 
   if [[ -n $cmd ]]; then
-    if (( $+commands[$cmd] )); then
+    if (( $+commands[$cmd] )) || (( $+aliases[$cmd] )) || (( $+functions[$cmd] )); then
       region_highlight+=( "0 ${#cmd} fg=green,memo=minimal-highlight" )
     else
       region_highlight+=( "0 ${#cmd} fg=red,memo=minimal-highlight" )
