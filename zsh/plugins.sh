@@ -1,3 +1,5 @@
+[[ -o interactive ]] || return
+
 # Interigation of ZSH with other tools
 if (( $+commands[starship] )); then
   eval "$(starship init zsh)"
