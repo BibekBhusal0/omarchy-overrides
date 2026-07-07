@@ -28,8 +28,23 @@ if [ -n "$1" ]; then
   fi
 fi
 
-selected=$(zoxide query -l | fzf --reverse --header "Create/Switch Session" \
-  --preview 'eza --tree --level=2 --icons --color=always {} | head -80')
+dirs=$(zoxide query -l)
+selected=$(
+  {
+    echo "$dirs" | while IFS= read -r d; do
+      if [ -f "$d/.tmuxinator.yml" ]; then
+        name=$(grep -m1 '^name:' "$d/.tmuxinator.yml" 2>/dev/null | sed 's/^name:[[:space:]]*//')
+        display="${name:-$(basename "$d")}"
+        printf "\033[32m%s\033[0m\t%s\n" "$display" "$d"
+      fi
+    done
+    echo "$dirs" | while IFS= read -r d; do
+      [ ! -f "$d/.tmuxinator.yml" ] && printf "%s\t%s\n" "$d" "$d"
+    done
+  } | fzf --reverse --ansi --delimiter='\t' --with-nth=1 \
+    --preview='eza --tree --level=2 --icons --color=always {2} | head -80'
+)
+selected=$(echo "$selected" | cut -f2-)
 
 if [ -n "$selected" ]; then
   create_or_switch_session "$selected"
