@@ -2,22 +2,6 @@
 
 source "$(dirname "$0")/../utils/tmux.sh"
 
-create_or_switch_session() {
-  local dir=$1
-  local session_name
-
-  session_name=$(basename "$dir" | tr . _)
-
-  if [ -f "$dir/.tmuxinator.yml" ] && command -v tmuxinator >/dev/null 2>&1; then
-    (cd "$dir" && tmuxinator start .)
-  else
-    if ! tmux has-session -t "$session_name" 2>/dev/null; then
-      tmux new-session -d -s "$session_name" -c "$dir"
-    fi
-    switch_to "$session_name"
-  fi
-}
-
 if [ -n "$1" ]; then
   if [ -d "$1" ]; then
     create_or_switch_session "$1"
@@ -28,24 +12,44 @@ if [ -n "$1" ]; then
   fi
 fi
 
-dirs=$(zoxide query -l)
+dirs=$(zoxide query -l 2>/dev/null)
+active=$(tmux list-sessions -F "#S" 2>/dev/null)
+
+declare -A active_map
+while IFS= read -r s; do
+  active_map["$s"]=1
+done <<< "$active"
+
 selected=$(
   {
+    echo "$active" | while IFS= read -r s; do
+      [ -n "$s" ] && printf "\033[36m%s\033[0m\t%s\n" "$s" "$s"
+    done
     echo "$dirs" | while IFS= read -r d; do
       if [ -f "$d/.tmuxinator.yml" ]; then
         name=$(grep -m1 '^name:' "$d/.tmuxinator.yml" 2>/dev/null | sed 's/^name:[[:space:]]*//')
-        display="${name:-$(basename "$d")}"
+        display="${name:-${d##*/}}"
+        [ "${active_map[$display]}" ] && continue
         printf "\033[32m%s\033[0m\t%s\n" "$display" "$d"
       fi
     done
     echo "$dirs" | while IFS= read -r d; do
-      [ ! -f "$d/.tmuxinator.yml" ] && printf "%s\t%s\n" "$d" "$d"
+      if [ ! -f "$d/.tmuxinator.yml" ]; then
+        session_name="${d##*/}"
+        session_name="${session_name//./_}"
+        [ "${active_map[$session_name]}" ] && continue
+        printf "%s\t%s\n" "$d" "$d"
+      fi
     done
   } | fzf --reverse --ansi --delimiter='\t' --with-nth=1 \
-    --preview='eza --tree --level=2 --icons --color=always {2} | head -80'
+    --preview='out=$(tmux capture-pane -e -pt {2}: 2>/dev/null) && echo "$out" | head -80 || eza --tree --level=2 --icons --color=always {2} 2>/dev/null | head -80'
 )
 selected=$(echo "$selected" | cut -f2-)
 
 if [ -n "$selected" ]; then
-  create_or_switch_session "$selected"
+  if tmux has-session -t "$selected" 2>/dev/null; then
+    switch_to "$selected"
+  else
+    create_or_switch_session "$selected"
+  fi
 fi
