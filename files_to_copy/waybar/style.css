@@ -41,6 +41,7 @@ tooltip label {
 }
 
 #custom-omarchy,
+#custom-pomodoro,
 #workspaces,
 #mpris,
 #clock,
@@ -134,4 +135,20 @@ window#waybar.empty #window {
 #mpris {
   padding: 1px 6px;
   margin-left: 18px;
+}
+
+#custom-pomodoro.work {
+  color: #a6e3a1;
+}
+
+#custom-pomodoro.short-break {
+  color: #89b4fa;
+}
+
+#custom-pomodoro.long-break {
+  color: #cba6f7;
+}
+
+#custom-pomodoro.paused {
+  opacity: 0.6;
 }

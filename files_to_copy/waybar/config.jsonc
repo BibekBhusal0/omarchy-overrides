@@ -10,6 +10,7 @@
   "modules-left": [
     "custom/omarchy",
     "hyprland/workspaces",
+    "custom/pomodoro",
     "mpris"
   ],
   "modules-center": [
@@ -74,6 +75,24 @@
     "on-scroll-up": "playerctl previous",
     "on-scroll-down": "playerctl next",
     "on-click-middle": "playerctl -l | head -n1 | xargs -I {} hyprctl dispatch focuswindow 'class:{}'"
+  },
+  "custom/pomodoro": {
+    "return-type": "json",
+    "exec": "focusd status",
+    "interval": 1,
+    "format": "{icon} {text}",
+    "tooltip": true,
+    "format-icons": {
+      "work": "",
+      "work-paused": "",
+      "short-break": " ",
+      "short-break-paused": " ",
+      "long-break": "󰒲",
+      "long-break-paused": "󰒲"
+    },
+    "on-click": "focusd toggle",
+    "on-click-right": "focusd next",
+    "on-click-middle": "focusd reset"
   },
   // center 
   "clock": {
