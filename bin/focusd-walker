@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+choice=$(printf '%s\n' \
+  ' Start' \
+  ' Pause' \
+  ' Resume' \
+  ' Toggle' \
+  ' Reset' \
+  '󰒭 Next' \
+  ' Stats' \
+  ' History' \
+  '󰧨 TUI' \
+  | walker --dmenu -p "focusd:")
+
+case "$choice" in
+  ' Start') focusd start ;;
+  ' Pause') focusd pause ;;
+  ' Resume') focusd resume ;;
+  ' Toggle') focusd toggle ;;
+  ' Reset') focusd reset ;;
+  '󰒭 Next') focusd next ;;
+  ' Stats') xdg-terminal-exec focusd stats ;;
+  ' History') xdg-terminal-exec focusd history ;;
+  '󰧨 TUI') xdg-terminal-exec focusd ;;
+esac
