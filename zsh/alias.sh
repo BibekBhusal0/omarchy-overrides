@@ -6,6 +6,8 @@ if command -v eza &> /dev/null; then
   alias lta="lt -a"
 fi
 
+alias lofi='cliamp --shuffle --auto-play ~/Music/lofimusic/'
+
 # FZF
 common_config="--height 40% --layout reverse --tmux"
 alias ff="fzf --preview 'bat --style=numbers --color=always {}' $common_config"
