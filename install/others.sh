@@ -16,5 +16,3 @@ omarchy-default-terminal ghostty
 
 bun install -g devmoji
 bun install -g yarn
-
-curl -sSL https://usegitai.com/install.sh | bash
