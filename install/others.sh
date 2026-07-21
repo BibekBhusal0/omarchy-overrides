@@ -16,3 +16,12 @@ omarchy-default-terminal ghostty
 
 bun install -g devmoji
 bun install -g yarn
+
+source "$(dirname "${BASH_SOURCE[0]}")/../utils/clone.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../utils/symlink.sh"
+clone focusd ~/Code/focusd
+cargo clean --manifest-path ~/Code/focusd/Cargo.toml
+cargo build --release --manifest-path ~/Code/focusd/Cargo.toml
+cp ./target/release/focusd ~/.cargo/bin/focusd
+cargo build --no-default-features --features dev-build --manifest-path ~/Code/focusd/Cargo.toml
+create_symlink ~/Code/focusd/target/debug/focusd ~/.cargo/bin/focusd-dev
