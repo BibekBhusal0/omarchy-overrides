@@ -1,45 +1,14 @@
 #!/bin/bash
 
+source "$(dirname "${BASH_SOURCE[0]}")/../utils/clone.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../utils/symlink.sh"
+
 THEME_NAME="ArcDusk-cursors"
-REPO_URL="https://github.com/yeyushengfan258/ArcDusk-Cursors"
-ICONS_DIR="$HOME/.local/share/icons"
-TEMP_DIR="/tmp/cursor-install"
 
-# Check if theme already exists
-if [ -d "$ICONS_DIR/$THEME_NAME" ]; then
-    echo "Theme already installed at $ICONS_DIR/$THEME_NAME"
-    echo "Testing theme..."
-    hyprctl setcursor "$THEME_NAME" 24
-    if [ $? -eq 0 ]; then
-        echo "Theme works! "
-    fi
-    exit 0
-fi
+clone "yeyushengfan258/ArcDusk-Cursors" ~/.local/share/icons/ArcDusk-Cursors-git
 
-mkdir -p "$ICONS_DIR" "$TEMP_DIR"
-cd "$TEMP_DIR" || exit
+create_symlink ~/.local/share/icons/ArcDusk-Cursors-git/dist ~/.local/share/icons/$THEME_NAME
 
-# Extract repo name from URL
-REPO_NAME=$(basename "$REPO_URL")
-EXTRACTED_DIR="${REPO_NAME}-main"
-
-echo "Downloading $THEME_NAME..."
-curl -L -o theme.zip "${REPO_URL}/archive/refs/heads/main.zip"
-unzip -q theme.zip
-
-cd "$EXTRACTED_DIR" || exit
-./install.sh
-
-echo "Testing theme..."
 hyprctl setcursor "$THEME_NAME" 24
-
-if [ $? -eq 0 ]; then
-    echo "Success! Theme applied."
-else
-    echo "Failed to apply theme"
-fi
-
-cd ~ || exit
-rm -rf "$TEMP_DIR"
-gsettings set org.gnome.desktop.interface cursor-theme ArcDusk-cursors
+gsettings set org.gnome.desktop.interface cursor-theme "$THEME_NAME"
 gsettings set org.gnome.desktop.interface cursor-size 24
