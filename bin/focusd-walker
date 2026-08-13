@@ -2,6 +2,9 @@
 
 choice=$(printf '%s\n' \
   ' Start' \
+  ' Work' \
+  ' Short Break' \
+  '󰒲 Long Break' \
   ' Pause' \
   ' Resume' \
   ' Toggle' \
@@ -10,10 +13,14 @@ choice=$(printf '%s\n' \
   ' Stats' \
   ' History' \
   '󰧨 TUI' \
+  ' Settings' \
   | walker --dmenu -p "focusd:")
 
 case "$choice" in
   ' Start') focusd start ;;
+  ' Work') focusd work ;;
+  ' Short Break') focusd short-break ;;
+  '󰒲 Long Break') focusd long-break ;;
   ' Pause') focusd pause ;;
   ' Resume') focusd resume ;;
   ' Toggle') focusd toggle ;;
@@ -22,4 +29,5 @@ case "$choice" in
   ' Stats') xdg-terminal-exec focusd stats ;;
   ' History') xdg-terminal-exec focusd history ;;
   '󰧨 TUI') xdg-terminal-exec focusd ;;
+  ' Settings') xdg-terminal-exec focusd settings;;
 esac
