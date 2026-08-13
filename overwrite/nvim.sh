@@ -12,7 +12,7 @@ REPOS=(
   "tree-hierarchy.nvim"
 )
 
-echo "Overweriting neovim configuration"
+echo "Overwriting neovim configuration"
 if [ -d "$CONFIG_DIR" ]; then
   mv "$CONFIG_DIR" "$CONFIG_BACKUP_DIR"
   echo "config backed up at $CONFIG_BACKUP_DIR"
@@ -29,7 +29,7 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../utils/clone.sh"
 clone "neovim-kickstart-config-config" "$CONFIG_DIR"
-echo "Config replaced sucessfully"
+echo "Config replaced successfully"
 
 # Cloning my other plugins different directory
 # Because I might need to edit them

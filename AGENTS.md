@@ -27,7 +27,6 @@ Personal override/dotfiles repo layered on top of [Omarchy](https://github.com/b
 - `install/others.sh` builds the `focusd` pomodoro tool from `~/Code/focusd` via `cargo build`; the waybar pomodoro module and `focusd-walker` depend on it.
 - `bin/start` launches apps onto fixed workspaces matched by window class; `install/others.sh` and waybar depend on those class names.
 - `install/zen-browser.sh` and `install/lofi-music.sh` download binaries/zip into `~/Downloads` / `~/Music` — network + manual steps required.
-- Scripts have intentional typos in echo output ("Overweriting", "intall"); don't "fix" them.
 
 ## Commit style
 

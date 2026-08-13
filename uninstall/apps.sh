@@ -15,7 +15,7 @@ packages=(
   "ufw-docker"
 )
 
-echo "Omarchy chromium is bing uninstalled make sure to change default browser"
+echo "Omarchy chromium is being uninstalled make sure to change default browser"
 
 for package in "${packages[@]}"; do
     echo "Removing $package..."
