@@ -9,7 +9,7 @@ local function bind(key, cmd, description)
 	if type(cmd) == "string" then
 		command = exec(cmd)
 	end
-	-- Unbind before binding new to avaoid conflicts.
+	-- Unbind before binding new to avoid conflicts.
 	hl.unbind(key)
 	hl.bind(key, command, { description = description })
 end
@@ -27,35 +27,28 @@ bind(modKey("SHIFT + R"), "hypruler", "Ruler")
 
 -- Launch all apps i use
 bind(modKey("SLASH"), "start", "Launch All Apps I Use")
+bind(modKey("SHIFT + SLASH"), "uwsm-app -- bitwarden.desktop", "Passwords")
+bind(modKey("ALT + R"), "elephant m readest", "Readest search")
 
 -- Toggling the animation
-local function toggle_animations()
-	local enabled = hl.get_config("animations:enabled")
-	hl.config({ animations = { enabled = not enabled } })
-	local status = not enabled and "Enabled" or "Disabled"
-	hl.exec_cmd(string.format("notify-send 'Animations %s'", status))
-end
-bind(modKey("ALT + A"), toggle_animations, "Toggle Animation")
+bind(modKey("ALT + A"), "toggle-animation", "Toggle Animation")
 
--- Pop open window to fit in my screen
-bind(modKey("P"), "omarchy-hyprland-window-pop 1300 700", "Pop window out")
-
--- -- :NOTE: This Should be removed keeping it here just in case
--- bind(
--- 	modKey("SHIFT + RETURN"),
--- 	'env NO_TMUX=1 uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)"',
--- 	"Terminal (no tmux)"
--- )
+bind(
+	modKey("ALT + RETURN"),
+	[[uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)" bash -c "tmux new-session -A -s main"]],
+	"Tmux"
+)
 
 -- Lunching apps
 bind(modKey("B"), "omarchy-launch-browser", "Browser")
 bind(modKey("SHIFT + B"), "omarchy-launch-browser --private", "Browser (private)")
+bind(modKey("M"), "omarchy-launch-or-focus spotify", "Music")
 bind(modKey("Z"), "omarchy-launch-or-focus zen-browser", "Zen")
 bind(modKey("N"), "omarchy-launch-tui nvim", "Neovim")
 bind(modKey("SHIFT + N"), "omarchy-launch-tui nvim config", "Neovim Config")
 bind(modKey("SHIFT + T"), "walker -m todo", "To-Dos")
-bind(modKey("D"), "legcord --toggle", "Discord")
-bind(modKey("Y"), "omarchy-launch-or-focus-tui yazi $(omarchy-cmd-terminal-cwd)", "Yazi")
+bind(modKey("D"), "vesktop --toggle", "Discord")
+bind(modKey("Y"), "omarchy-launch-tui yazi $(omarchy-cmd-terminal-cwd)", "Yazi")
 
 -- Obsidian
 bind(
@@ -73,6 +66,11 @@ bind(
 	"Obsidian Capture daily"
 )
 
+-- Other system controls
+bind(modKey("bracketleft"), "playerctl previous", "Previous Media")
+bind(modKey("bracketright"), "playerctl next", "Next Media")
+bind(modKey("SHIFT + ESCAPE"), "systemctl suspend", "Suspend")
+
 -- My custom web apps
 bind(modKey("A"), 'omarchy-launch-webapp "https://chatgpt.com"', "ChatGPT")
 bind(modKey("SHIFT + C"), 'omarchy-launch-webapp "https://chess.com"', "Chess.com")
@@ -84,7 +82,12 @@ bind(
 bind(modKey("SHIFT + M"), 'omarchy-launch-webapp "https://pocketcasts.com/podcasts"', "PocketCasts")
 bind(modKey("SHIFT + G"), 'omarchy-launch-webapp "https://github.com/"', "Github")
 bind(modKey("R"), 'omarchy-launch-webapp "https://reddit.com/"', "Reddit")
-bind(modKey("M"), 'omarchy-launch-webapp "https://open.spotify.com"', "Music")
+bind(modKey("SHIFT + D"), 'omarchy-launch-webapp "https://duck.ai/"', "Duck.ai")
+
+-- Pomodoro (focusd)
+bind(modKey("P"), "focusd toggle", "Pomodoro toggle")
+bind(modKey("ALT + P"), "focusd-walker", "Pomodoro menu")
+hl.bind(modKey("SHIFT + P"), hl.dsp.window.pseudo(), { description = "Pseudo window" })
 
 -- Vim style Navigation
 bind(modKey("H"), hl.dsp.focus({ direction = "l" }), "Focus left")
@@ -92,15 +95,21 @@ bind(modKey("L"), hl.dsp.focus({ direction = "r" }), "Focus right")
 bind(modKey("K"), hl.dsp.focus({ direction = "u" }), "Focus up")
 bind(modKey("J"), hl.dsp.focus({ direction = "d" }), "Focus down")
 
--- Those are keybinds which omarchy has on super k, j, l which have been over written
+-- Overwritten keybinds
 bind(modKey("SHIFT + K"), "omarchy-menu-keybindings", "Show Keybindings")
-bind(modKey("SHIFT + J"), hl.dsp.togglesplit(), "Toggle window split")
-bind(modKey("Shift + L"), "omarchy-hyprland-workspace-layout-toggle", "Toggle workspace layout")
+bind(modKey("SHIFT + L"), "omarchy-hyprland-workspace-layout-toggle", "Toggle workspace layout")
+bind(modKey("SHIFT + J"), hl.dsp.layout("togglesplit"), "Toggle window split")
+
+-- Super + Alt + vim keys to resize window
+bind(modKey("ALT + H"), hl.dsp.window.resize({ x = -100, y = 0, relative = true }), "Resize window Left")
+bind(modKey("ALT + L"), hl.dsp.window.resize({ x = 100, y = 0, relative = true }), "Resize window Right")
+bind(modKey("ALT + K"), hl.dsp.window.resize({ x = 0, y = -100, relative = true }), "Resize window Up")
+bind(modKey("ALT + J"), hl.dsp.window.resize({ x = 0, y = 100, relative = true }), "Resize window Down")
 
 -- Configuration
 hl.config({
 	input = {
-		kb_options = "caps:escape,compose:rctrl",
+		kb_options = "caps:escape,compose:ralt",
 	},
 	general = {
 		gaps_in = 1,
@@ -122,8 +131,11 @@ hl.config({
 	},
 })
 
+-- Environment variables
+hl.env("XCURSOR_THEME", "ArcDusk-cursors")
+hl.env("XCURSOR_SIZE", "24")
+
 -- Exec once
 hl.on("hyprland.start", function()
-	hl.exec_cmd("hyprctl setcursor ArcDusk-cursors 24or-focus-")
 	hl.exec_cmd("hyprctl hyprsunset temperature 3800")
 end)
