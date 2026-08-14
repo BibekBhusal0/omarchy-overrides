@@ -1,8 +1,0 @@
-[font]
-size = 11
-
-[window]
-padding.x = 4
-padding.y = 4
-decorations = "None"
-opacity = 0.4
