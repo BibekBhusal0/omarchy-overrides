@@ -31,11 +31,32 @@ bind(modKey("SHIFT + SLASH"), "uwsm-app -- bitwarden.desktop", "Passwords")
 -- FIX: not implemented for new version of omarchy
 -- bind(modKey("ALT + R"), "elephant m readest", "Readest search")
 
+local animations_state_file = os.getenv("HOME") .. "/.config/hypr/animations.state"
+
+local function read_animations_state()
+	local file = io.open(animations_state_file, "r")
+	if not file then
+		return true
+	end
+	local value = file:read("*l")
+	file:close()
+	return value ~= "false"
+end
+
+local function write_animations_state(enabled)
+	local file = io.open(animations_state_file, "w")
+	if not file then
+		return
+	end
+	file:write(enabled and "true\n" or "false\n")
+	file:close()
+end
+
 local function toggle_animations()
-	local enabled = hl.get_config("animations:enabled")
-	hl.config({ animations = { enabled = not enabled } })
-	local status = not enabled and "Enabled" or "Disabled"
-	hl.exec_cmd(string.format("notify-send 'Animations %s'", status))
+	local enabled = not read_animations_state()
+	hl.config({ animations = { enabled = enabled } })
+	write_animations_state(enabled)
+	hl.exec_cmd(enabled and "notify-send 'Animations Enabled'" or "notify-send 'Animations Disabled'")
 end
 bind(modKey("ALT + A"), toggle_animations, "Toggle Animation")
 
@@ -132,6 +153,9 @@ hl.config({
 			contrast = 0.9,
 			brightness = 0.5,
 		},
+	},
+	animations = {
+		enabled = read_animations_state(),
 	},
 })
 
