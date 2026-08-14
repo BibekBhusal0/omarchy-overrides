@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# FIX: this don't work for latest version of omarchy
 
 choice=$(printf '%s\n' \
   ' Start' \

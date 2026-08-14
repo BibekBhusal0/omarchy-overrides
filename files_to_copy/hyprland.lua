@@ -28,10 +28,16 @@ bind(modKey("SHIFT + R"), "hypruler", "Ruler")
 -- Launch all apps i use
 bind(modKey("SLASH"), "start", "Launch All Apps I Use")
 bind(modKey("SHIFT + SLASH"), "uwsm-app -- bitwarden.desktop", "Passwords")
-bind(modKey("ALT + R"), "elephant m readest", "Readest search")
+-- FIX: not implemented for new version of omarchy
+-- bind(modKey("ALT + R"), "elephant m readest", "Readest search")
 
--- Toggling the animation
-bind(modKey("ALT + A"), "toggle-animation", "Toggle Animation")
+local function toggle_animations()
+	local enabled = hl.get_config("animations:enabled")
+	hl.config({ animations = { enabled = not enabled } })
+	local status = not enabled and "Enabled" or "Disabled"
+	hl.exec_cmd(string.format("notify-send 'Animations %s'", status))
+end
+bind(modKey("ALT + A"), toggle_animations, "Toggle Animation")
 
 bind(
 	modKey("ALT + RETURN"),
@@ -46,7 +52,6 @@ bind(modKey("M"), "omarchy-launch-or-focus spotify", "Music")
 bind(modKey("Z"), "omarchy-launch-or-focus zen-browser", "Zen")
 bind(modKey("N"), "omarchy-launch-tui nvim", "Neovim")
 bind(modKey("SHIFT + N"), "omarchy-launch-tui nvim config", "Neovim Config")
-bind(modKey("SHIFT + T"), "walker -m todo", "To-Dos")
 bind(modKey("D"), "vesktop --toggle", "Discord")
 bind(modKey("Y"), "omarchy-launch-tui yazi $(omarchy-cmd-terminal-cwd)", "Yazi")
 
@@ -59,16 +64,15 @@ bind(
 -- -- :TODO: Migrate to obsidian CLI
 bind(modKey("SHIFT + O"), 'obsidian "obsidian://daily"', "Obsidian Daily")
 -- -- :FIX: Both keybinds will not work after omarchy is migrated to quickshell (walker and elephand will be uninstalled)
-bind(modKey("ALT + O"), "elephant m obsidian", "Obsidian Search")
-bind(
-	modKey("CTRL + SHIFT + O"),
-	'bash -c \'v=$(walker -d -I -p "Capture something quickly") && [ -n "$v" ] && obsidian "obsidian://quickadd?choice=Capture%20Daily&value-entry=$(printf "%s" "$v" | sed "s/ /%20/g")"\'',
-	"Obsidian Capture daily"
-)
+-- bind(modKey("ALT + O"), "elephant m obsidian", "Obsidian Search")
+-- bind(
+-- 	modKey("CTRL + SHIFT + O"),
+-- 	'bash -c \'v=$(walker -d -I -p "Capture something quickly") && [ -n "$v" ] && obsidian "obsidian://quickadd?choice=Capture%20Daily&value-entry=$(printf "%s" "$v" | sed "s/ /%20/g")"\'',
+-- 	"Obsidian Capture daily"
+-- )
 
--- Other system controls
-bind(modKey("bracketleft"), "playerctl previous", "Previous Media")
-bind(modKey("bracketright"), "playerctl next", "Next Media")
+bind(modKey("bracketleft"), "omarchy-shell media previous", "Previous Media")
+bind(modKey("bracketright"), "omarchy-shell media next", "Next Media")
 bind(modKey("SHIFT + ESCAPE"), "systemctl suspend", "Suspend")
 
 -- My custom web apps
@@ -86,8 +90,8 @@ bind(modKey("SHIFT + D"), 'omarchy-launch-webapp "https://duck.ai/"', "Duck.ai")
 
 -- Pomodoro (focusd)
 bind(modKey("P"), "focusd toggle", "Pomodoro toggle")
-bind(modKey("ALT + P"), "focusd-walker", "Pomodoro menu")
-hl.bind(modKey("SHIFT + P"), hl.dsp.window.pseudo(), { description = "Pseudo window" })
+-- bind(modKey("ALT + P"), "focusd-walker", "Pomodoro menu")
+bind(modKey("SHIFT + P"), hl.dsp.window.pseudo(), "Pseudo window")
 
 -- Vim style Navigation
 bind(modKey("H"), hl.dsp.focus({ direction = "l" }), "Focus left")
