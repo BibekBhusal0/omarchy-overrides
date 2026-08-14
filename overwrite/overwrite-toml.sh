@@ -16,6 +16,4 @@ python3 "$SCRIPT_DIR/toml/overwrite.py"
 source "$SCRIPT_DIR/../utils/symlink.sh"
 create_symlink "$SCRIPT_DIR/toml/overwrite-starship.toml" "$HOME/.config/starship.toml"
 
-omarchy-restart-walker
-
 echo "Configuration complete!"

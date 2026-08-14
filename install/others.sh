@@ -1,12 +1,13 @@
 #!/bin/bash
 
-omarchy-pkg-aur-add bitwarden
-omarchy-pkg-aur-add bitwarden-cli
-omarchy-pkg-aur-add helium-browser-bin
-omarchy-pkg-aur-add hypruler-bin
-omarchy-pkg-aur-add vesktop-bin
-omarchy-pkg-aur-add losslesscut-bin
-omarchy-pkg-aur-add yazi
+omarchy-pkg-aur-add \
+  bitwarden \
+  bitwarden-cli \
+  helium-browser-bin \
+  hypruler-bin \
+  vesktop-bin \
+  losslesscut-bin \
+  yazi
 
 omarchy-install-dev-env node
 omarchy-install-dev-env bun
@@ -19,6 +20,7 @@ bun install -g yarn
 
 source "$(dirname "${BASH_SOURCE[0]}")/../utils/clone.sh"
 source "$(dirname "${BASH_SOURCE[0]}")/../utils/symlink.sh"
+
 clone focusd ~/Code/focusd
 cargo clean --manifest-path ~/Code/focusd/Cargo.toml
 cargo build --release --manifest-path ~/Code/focusd/Cargo.toml

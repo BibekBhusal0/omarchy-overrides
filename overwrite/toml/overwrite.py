@@ -49,8 +49,12 @@ def merge_toml_files(src_path, dest_path):
         return True
 
     # Read destination file
-    with open(dest_path, "rb") as f:
-        dest_data = tomli.load(f)
+    try:
+        with open(dest_path, "rb") as f:
+            dest_data = tomli.load(f)
+    except tomli.TOMLDecodeError as e:
+        print(f"Warning: Skipping {dest_path}: invalid TOML ({e})")
+        return False
 
     # Merge the files
     merged_data = merge_toml(dest_data, overwrite_data)
@@ -68,18 +72,18 @@ def main():
 
     # Define file pairs
     files = [
-        (
-            script_dir / "overwrite-alacritty.toml",
-            Path.home() / ".config/alacritty/alacritty.toml",
-        ),
-        (
-            script_dir / "overwrite-walker.toml",
-            Path.home() / ".config/walker/config.toml",
-        ),
-        (
-            script_dir / "overwrite-elephant-search.toml",
-            Path.home() / ".config/elephant/websearch.toml",
-        ),
+        # (
+        #     script_dir / "overwrite-alacritty.toml",
+        #     Path.home() / ".config/alacritty/alacritty.toml",
+        # ),
+        # (
+        #     script_dir / "overwrite-walker.toml",
+        #     Path.home() / ".config/walker/config.toml",
+        # ),
+        # (
+        #     script_dir / "overwrite-elephant-search.toml",
+        #     Path.home() / ".config/elephant/websearch.toml",
+        # ),
         (
             script_dir / "overwrite-yazi.toml",
             Path.home() / ".config/yazi/yazi.toml",
