@@ -28,8 +28,7 @@ bind(modKey("SHIFT + R"), "hypruler", "Ruler")
 -- Launch all apps i use
 bind(modKey("SLASH"), "start", "Launch All Apps I Use")
 bind(modKey("SHIFT + SLASH"), "uwsm-app -- bitwarden.desktop", "Passwords")
--- FIX: not implemented for new version of omarchy
--- bind(modKey("ALT + R"), "elephant m readest", "Readest search")
+bind(modKey("ALT + R"), "omarchy-shell shell summon readest", "Readest search")
 
 local animations_state_file = os.getenv("HOME") .. "/.config/hypr/animations.state"
 
@@ -85,7 +84,7 @@ bind(
 -- -- :TODO: Migrate to obsidian CLI
 bind(modKey("SHIFT + O"), 'obsidian "obsidian://daily"', "Obsidian Daily")
 -- -- :FIX: Both keybinds will not work after omarchy is migrated to quickshell (walker and elephand will be uninstalled)
--- bind(modKey("ALT + O"), "elephant m obsidian", "Obsidian Search")
+bind(modKey("ALT + O"), "omarchy-shell shell summon obsidian-search", "Obsidian Search")
 -- bind(
 -- 	modKey("CTRL + SHIFT + O"),
 -- 	'bash -c \'v=$(walker -d -I -p "Capture something quickly") && [ -n "$v" ] && obsidian "obsidian://quickadd?choice=Capture%20Daily&value-entry=$(printf "%s" "$v" | sed "s/ /%20/g")"\'',
@@ -111,6 +110,7 @@ bind(modKey("SHIFT + D"), 'omarchy-launch-webapp "https://duck.ai/"', "Duck.ai")
 
 -- Pomodoro (focusd)
 bind(modKey("P"), "focusd toggle", "Pomodoro toggle")
+bind("CTRL + SUPER + T", "omarchy-shell shell summon focusd", "Pomodoro popup")
 -- bind(modKey("ALT + P"), "focusd-walker", "Pomodoro menu")
 bind(modKey("SHIFT + P"), hl.dsp.window.pseudo(), "Pseudo window")
 
