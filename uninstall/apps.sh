@@ -1,21 +1,26 @@
 #!/bin/bash
 
-packages=(
-  "1password-beta"
-  "1password-cli"
-  "docker"
-  "docker-buildx"
-  "docker-compose"
-  "lazydocker"
-  "obs-studio"
-  "signal-desktop"
-  "typora"
-  "omarchy-chromium"
-)
+omarchy-pkg-drop \
+  libreoffice-fresh \
+  xournalpp \
+  pinta \
+  obs-studio \
+  kdenlive \
+  moonlight-qt \
+  omarchy-chromium \
+  chromium \
+  typora \
+  1password-beta \
+  1password-cli \
+  docker \
+  docker-buildx \
+  docker-compose \
+  signal-desktop \
+  ufw-docker \
+  lazydocker
 
-echo "Omarchy chromium is bing uninstalled make sure to change default browser"
+echo "Omarchy chromium is being uninstalled make sure to change default browser"
 
-for package in "${packages[@]}"; do
-    echo "Removing $package..."
-    yay -R "${package}" --noconfirm
-done
+rm $HOME/.local/share/applications/Docker.desktop
+rm $HOME/.local/share/applications/typora.desktop
+rm $HOME/.local/share/applications/Alacritty.desktop

@@ -1,18 +1,29 @@
 #!/bin/bash
 
-yay -Sy --noconfirm --needed brave-bin
-yay -Sy --noconfirm --needed yazi
-yay -Sy --noconfirm --needed legcord-bin
-yay -Sy --noconfirm --needed opencode-bin
-yay -Sy --noconfirm --needed hypruler-bin
-yay -Sy --noconfirm --needed losslesscut-bin
+omarchy-pkg-aur-add \
+  bitwarden \
+  bitwarden-cli \
+  helium-browser-bin \
+  hypruler-bin \
+  vesktop-bin \
+  losslesscut-bin \
+  yazi
+
 omarchy-install-dev-env node
+omarchy-install-dev-env bun
+omarchy-install-dev-env python
+omarchy-install-terminal ghostty
+omarchy-default-terminal ghostty
 
-npm install -g devmoji
-npm install -g yarn
-npm install -g bun
+bun install -g devmoji
+bun install -g yarn
 
-sudo pacman -S --noconfirm asciinema
-yay -Sy --noconfirm --needed asciinema-agg-bin
+source "$(dirname "${BASH_SOURCE[0]}")/../utils/clone.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../utils/symlink.sh"
 
-curl -sSL https://usegitai.com/install.sh | bash
+clone focusd ~/Code/focusd
+cargo clean --manifest-path ~/Code/focusd/Cargo.toml
+cargo build --release --manifest-path ~/Code/focusd/Cargo.toml
+cp ./target/release/focusd ~/.cargo/bin/focusd
+cargo build --no-default-features --features dev-build --manifest-path ~/Code/focusd/Cargo.toml
+create_symlink ~/Code/focusd/target/debug/focusd ~/.cargo/bin/focusd-dev

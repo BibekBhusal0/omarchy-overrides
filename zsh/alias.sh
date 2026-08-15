@@ -6,17 +6,20 @@ if command -v eza &> /dev/null; then
   alias lta="lt -a"
 fi
 
-alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+alias lofi='cliamp --shuffle --auto-play ~/Music/lofimusic/'
 
 # FZF
 common_config="--height 40% --layout reverse --tmux"
-alias nvimff="ff --bind 'enter:become(nvim {-1})' $common_config "
+alias ff="fzf --preview 'bat --style=numbers --color=always {}' $common_config"
+alias nvimff="ff --bind 'enter:become(nvim {})'"
+alias eff="nvimff"
 alias gcb="git branch | fzf $common_config --preview 'git show --color=always {-1}' --bind 'enter:become(git checkout {-1})'"
 alias cheat="curl cheat.sh/:list | fzf $common_config --bind 'enter:become(curl cheat.sh/{-1} | less)'"
 alias manman="man -k . | fzf $common_config --bind 'enter:become(man {1})'"
 
 # Tmux
 alias mux="tmuxinator"
+alias t="tmux new-session -A -s main"
 
 # Rickrolling
 alias rick-roll="curl ascii.live/rick"
@@ -24,10 +27,11 @@ alias hack="rick-roll"
 alias start-hacking="rick-roll"
 
 # misc
-alias a="asciinema"
 alias eixt="exit"
 alias exp="nautilus"
 alias obd="xdg-open obsidian://daily"
+alias clip="wl-copy"
+alias cppwd="pwd | clip"
 
 ## Open file directly in it's editor super super handy (but gives error in bash)
 if [ -n "$ZSH_VERSION" ]; then
@@ -88,22 +92,7 @@ pull () {
   done
 }
 
-clone() {
-  local url="$1"
-  shift
-  url="${url#/}"
-  url="${url%/}"
-
-  if [[ "$url" =~ ^https?:// ]]; then
-    git clone "$url" "$@"
-  elif [[ "$url" =~ ^[a-zA-Z0-9_-]+/[a-zA-Z0-9._-]+$ ]]; then
-    git clone "https://github.com/$url" "$@"
-  elif [[ "$url" =~ / ]]; then
-    git clone "https://$url" "$@"
-  else
-    git clone "https://github.com/bibekbhusal0/$url" "$@"
-  fi
-}
+source "$SCRIPT_DIR/../utils/clone.sh"
 
 gce () {
   emojified_text=$(devmoji --text "$1" | sed 's/"/\\"/g')

@@ -2,5 +2,4 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-"$SCRIPT_DIR/apps.sh"
-omarchy-webapp-remove-all
+"$SCRIPT_DIR/git.sh"

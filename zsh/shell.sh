@@ -1,4 +1,1 @@
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.git-ai/bin:$PATH"
-
-eval "$(starship init zsh)"
+export PATH="$HOME/.local/my-bins:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.git-ai/bin:$HOME/.cache/.bun/bin:$PATH"

@@ -1,15 +1,8 @@
 #!/bin/bash
-configDir="$HOME/.config/waybar/"
-backupDir="$HOME/.config/waybar.backup"
 scriptDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-newConfigDir="$scriptDir/waybar"
 
-if [ -d "$backupDir" ]; then
-    rm -rf "$backupDir"
-fi
-
-mv "$configDir" "$backupDir"
-cp -R "$newConfigDir" "$configDir"
+source "$scriptDir/../utils/symlink.sh"
+create_symlink "$scriptDir/../files_to_copy/waybar" "$HOME/.config/waybar"
 
 # Restart waybar
 omarchy-restart-waybar

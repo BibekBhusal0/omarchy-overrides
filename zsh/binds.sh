@@ -1,11 +1,28 @@
-fzf-command-widget() {
-  local cmd=$(print -rl -- ${(k)commands} | fzf --tmux)
-  if [[ -n $cmd ]]; then
-    LBUFFER="$cmd"
-    RBUFFER=""
+fzf-tab-command-widget() {
+  if [[ "$LBUFFER" == *[[:space:]]* ]]; then
+    zle fzf-completion
+  else
+    local cmd=$(print -rl -- ${(k)commands} ${(k)aliases} ${(k)functions} | grep -v '^_' | sort -u | fzf \
+      --height=40% --layout=reverse --margin=1 --prompt="" \
+      --query="$LBUFFER")
+    if [[ -n "$cmd" ]]; then
+      LBUFFER="$cmd"
+      RBUFFER=""
+    fi
+    zle reset-prompt
   fi
-  zle reset-prompt
 }
 
-zle -N fzf-command-widget
-bindkey '^F' fzf-command-widget
+zle -N fzf-tab-command-widget
+bindkey '^I' fzf-tab-command-widget
+
+run_tmux_session_create() {
+  if [[ -n "$TMUX" ]]; then
+    tmux display-popup -E -w 80% -h 80% "tmux-session-create"
+  else
+    tmux-session-create
+  fi
+}
+
+zle -N run_tmux_session_create
+bindkey '^[t' run_tmux_session_create

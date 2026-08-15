@@ -1,7 +1,6 @@
 #!/bin/bash
 
 scriptDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-filePath="$scriptDir/files_to_copy/obsidian-elephant.lua"
 
 iconDir="$HOME/.config/elephant/icons"
 mkdir -p "$iconDir"
@@ -14,6 +13,7 @@ curl -sL -o "$iconDir/obsidian-add.svg" "https://raw.githubusercontent.com/saoud
 THEME_COLOR="#BAA4E6"
 sed -i "s/fill=\"[^\"]*\"/fill=\"$THEME_COLOR\"/g" "$iconDir"/*.svg
 
-cp "$filePath" "$HOME"/.config/elephant/menus/obsidian.lua
-systemctl --user restart elephant
+source "$scriptDir/../utils/symlink.sh"
+create_symlink "$scriptDir/../files_to_copy/obsidian-elephant.lua" "$HOME"/.config/elephant/menus/obsidian.lua
+create_symlink "$scriptDir/../files_to_copy/readest-elephant.lua" "$HOME"/.config/elephant/menus/readest.lua
 omarchy-restart-walker
