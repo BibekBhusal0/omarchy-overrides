@@ -9,4 +9,4 @@ if [ ! -d "$HOME/Music/lofimusic" ]; then
 fi
 
 
-omarchy-tui-install "Lofi Music" "cliamp --shuffle --auto-play ~/Music/lofimusic/" tile "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu1U7EHisLuM3va3QRXNBmnSiSHFc1QnidSYaeoiv9qz-LZkn6KYlysHQ&s=10"
+omarchy-tui-install "Lofi Music" "cliamp --shuffle --auto-play $HOME/Music/lofimusic/" tile "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu1U7EHisLuM3va3QRXNBmnSiSHFc1QnidSYaeoiv9qz-LZkn6KYlysHQ&s=10"
