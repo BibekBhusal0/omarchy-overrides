@@ -7,6 +7,7 @@ if command -v eza &> /dev/null; then
 fi
 
 alias lofi='cliamp --shuffle --auto-play ~/Music/lofimusic/'
+alias cy='opencode --yolo'
 
 # FZF
 common_config="--height 40% --layout reverse --tmux"
