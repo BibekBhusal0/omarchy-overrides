@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Start the cliamp lofi daemon on a random track. Kills any existing daemon first,
+# then detaches so the terminal stays usable.
+set -euo pipefail
+
+MUSIC_DIR="${CLIAMP_MUSIC_DIR:-$HOME/Music/lofimusic}"
+M3U="${CLIAMP_M3U:-/tmp/cliamp-lofimusic.m3u}"
+
+# ^anchor so this matches only the daemon, not this script or a TUI.
+if pgrep -f '^cliamp --daemon' >/dev/null; then
+	pkill -f '^cliamp --daemon'
+	sleep 1
+fi
+
+# Shuffle into an M3U so the first (selected) track differs each boot.
+find "$MUSIC_DIR" -type f -iname '*.mp3' | shuf > "$M3U"
+
+nohup cliamp --daemon --shuffle "$M3U" >/dev/null 2>&1 &
+disown
+
+echo "cliamp daemon started"

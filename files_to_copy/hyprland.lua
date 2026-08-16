@@ -165,5 +165,5 @@ hl.env("XCURSOR_SIZE", "24")
 -- Exec once
 hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprctl hyprsunset temperature 3800")
-	hl.exec_cmd("cliamp --daemon --shuffle " .. os.getenv("HOME") .. "/Music/lofimusic/")
+	hl.exec_cmd("cliamp-daemon")
 end)
