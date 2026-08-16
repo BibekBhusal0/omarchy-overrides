@@ -8,8 +8,9 @@ set -euo pipefail
 HOOK_DIR="$HOME/.config/omarchy/hooks/pre-refresh-pacman.d"
 HOOK="$HOOK_DIR/ignore-spotify"
 
-mkdir -p "$HOOK_DIR"
-cat > "$HOOK" <<'EOF'
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../utils/write-to-file.sh"
+write_to_file "$HOOK" "$(cat <<'EOF'
 #!/bin/bash
 
 CONF=/etc/pacman.conf
@@ -18,6 +19,7 @@ LINE="IgnorePkg = spotify"
 grep -qxF "$LINE" "$CONF" && exit 0
 sudo sed -i "/^\[options\]/a $LINE" "$CONF"
 EOF
+)" true
 chmod +x "$HOOK"
 
 if ! grep -qxF 'IgnorePkg = spotify' /etc/pacman.conf; then
