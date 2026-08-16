@@ -38,8 +38,6 @@ if [[ ! -f "$HOME/.config/spotify/prefs" ]]; then
   exit 0
 fi
 
-curl -fsSL https://raw.githubusercontent.com/spicetify/marketplace/main/resources/install.sh | sh
-
 THEME_DIR="$HOME/.config/spicetify/Themes/Ziro"
 if [[ ! -f "$THEME_DIR/color.ini" || ! -f "$THEME_DIR/user.css" ]]; then
   mkdir -p "$THEME_DIR"
