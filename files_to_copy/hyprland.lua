@@ -93,7 +93,7 @@ bind(modKey("ALT + O"), "omarchy-shell shell summon bibek.obsidian-search", "Obs
 
 bind(modKey("bracketleft"), "omarchy-shell media previous", "Previous Media")
 bind(modKey("bracketright"), "omarchy-shell media next", "Next Media")
-bind(modKey("CTRL + M"), "omarchy-shell shell toggle bibek.media", "Media Menu")
+bind(modKey("ALT + M"), "omarchy-shell shell toggle bibek.media", "Media Menu")
 bind(modKey("SHIFT + ESCAPE"), "systemctl suspend", "Suspend")
 
 -- My custom web apps
