@@ -1,6 +1,9 @@
 omarchy-plugin-disable omarchy.menu # This only disables one on bar
 omarchy-plugin-disable omarchy.weather
 omarchy-plugin-disable omarchy.media
+omarchy-plugin-disable omarchy.agents
+omarchy-plugin-disable omarchy.nightlight
+omarchy-plugin-disable omarchy.dev-gallery
 omarchy-plugin-enable omarchy.tailscale
 
 source "$(dirname "${BASH_SOURCE[0]}")/../utils/clone.sh"
