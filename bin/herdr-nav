@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Seamless ctrl+h/j/k/l navigation between Neovim splits and Herdr panes.
+# When the focused pane is running (n)vim, forward the chord into it so
+#
+# Usage: herdr-nav <left|down|up|right>
+
+set -euo pipefail
+
+dir="${1:?usage: herdr-nav <left|down|up|right>}"
+herdr_bin="${HERDR_BIN_PATH:-herdr}"
+
+case "$dir" in
+  left) key="ctrl+h" ;;
+  down) key="ctrl+j" ;;
+  up) key="ctrl+k" ;;
+  right) key="ctrl+l" ;;
+  *) echo "herdr-nav: unknown direction: $dir" >&2; exit 2 ;;
+esac
+
+pane_id=$("$herdr_bin" pane current --current 2>/dev/null | sed -n 's/.*"pane_id"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -1)
+
+if [ -n "$pane_id" ] && "$herdr_bin" pane process-info --current 2>/dev/null |
+  grep -qE '"name"[[:space:]]*:[[:space:]]*"(g?(view|l?n?vim?x?|fzf)(diff)?)"'; then
+  exec "$herdr_bin" pane send-keys "$pane_id" "$key"
+fi
+
+exec "$herdr_bin" pane focus --direction "$dir" --current

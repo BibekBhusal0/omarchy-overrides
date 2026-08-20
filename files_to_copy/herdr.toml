@@ -54,6 +54,26 @@ close_workspace = "prefix+shift+ctrl+x"
 previous_workspace = ["prefix+shift+p", "alt+up", "prefix+("]
 next_workspace = ["prefix+shift+n", "alt+down", "prefix+)"]
 
+[[keys.command]]
+key = "ctrl+h"
+type = "shell"
+command = "herdr-nav left"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "shell"
+command = "herdr-nav down"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "shell"
+command = "herdr-nav up"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "shell"
+command = "herdr-nav right"
+
 [ui]
 accent = "blue"
 sidebar_collapsed_mode = "hidden"
