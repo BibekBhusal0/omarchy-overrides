@@ -6,7 +6,6 @@ omarchy-pkg-aur-add \
   helium-browser-bin \
   hypruler-bin \
   vesktop-bin \
-  losslesscut-bin \
   yazi
 
 omarchy-install-dev-env node
