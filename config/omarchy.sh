@@ -12,8 +12,14 @@ source "$(dirname "${BASH_SOURCE[0]}")/../utils/symlink.sh"
 # Adding my own plugins
 clone omarchy-shell-plugin ~/Code/omarchy-shell-plugin/
 mkdir -p ~/.config/omarchy/plugins
-rm -rf ~/.config/omarchy/plugins/focusd ~/.config/omarchy/plugins/obsidian-search ~/.config/omarchy/plugins/readest ~/.config/omarchy/plugins/media
+rm -rf \
+  ~/.config/omarchy/plugins/focusd \
+  ~/.config/omarchy/plugins/obsidian-search \
+  ~/.config/omarchy/plugins/readest \
+  ~/.config/omarchy/plugins/media \
+  ~/.config/omarchy/plugins/ytdl
 cp -r ~/Code/omarchy-shell-plugin/focusd ~/.config/omarchy/plugins/focusd
+cp -r ~/Code/omarchy-shell-plugin/ytdl ~/.config/omarchy/plugins/ytdl
 cp -r ~/Code/omarchy-shell-plugin/obsidian-search ~/.config/omarchy/plugins/obsidian-search
 cp -r ~/Code/omarchy-shell-plugin/readest ~/.config/omarchy/plugins/readest
 cp -r ~/Code/omarchy-shell-plugin/media ~/.config/omarchy/plugins/media
@@ -25,6 +31,7 @@ create_symlink ~/Code/random/omarchy-refined-menu/plugin ~/.config/omarchy/plugi
 
 omarchy-shell shell rescanPlugins
 omarchy plugin validate ~/.config/omarchy/plugins/focusd
+omarchy plugin validate ~/.config/omarchy/plugins/ytdl
 omarchy plugin validate ~/.config/omarchy/plugins/obsidian-search
 omarchy plugin validate ~/.config/omarchy/plugins/readest
 omarchy plugin validate ~/.config/omarchy/plugins/media
@@ -33,6 +40,7 @@ omarchy plugin validate ~/.config/omarchy/plugins/menu
 
 omarchy plugin enable bibek.media --section left
 omarchy plugin enable bibek.focusd --section left
+omarchy plugin enable bibek.ytdl --section right
 omarchy plugin enable bibek.obsidian-search
 omarchy plugin enable bibek.readest
 omarchy plugin enable markbusai.opencode-usage --section right
