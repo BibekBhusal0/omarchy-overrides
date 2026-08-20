@@ -13,6 +13,7 @@ write_to_file "$HOME/.config/hypr/hyprland.lua" "require(\"hypr.own_config\")"
 echo ""
 
 # TOML files
+create_symlink "$SCRIPT_DIR/../files_to_copy/hyprsunset.conf" "$HOME/.config/hypr/hyprsunset.conf"
 create_symlink "$SCRIPT_DIR/../files_to_copy/starship.toml" "$HOME/.config/starship.toml"
 create_symlink "$SCRIPT_DIR/../files_to_copy/yazi.toml" "$HOME/.config/yazi/yazi.toml"
 
