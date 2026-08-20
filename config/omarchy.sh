@@ -1,13 +1,13 @@
 source "$(dirname "${BASH_SOURCE[0]}")/../utils/clone.sh"
 source "$(dirname "${BASH_SOURCE[0]}")/../utils/symlink.sh"
 
-clone omarchy-shell-plugin ~/Code/omarchy-shell-plugin/
+clone omarchy-shell-plugins ~/Code/omarchy-shell-plugins/
 mkdir -p ~/.config/omarchy/plugins
 
 install_my_plugin() {
   local name="$1"
   rm -rf ~/.config/omarchy/plugins/$name
-  cp -r ~/Code/omarchy-shell-plugin/$name ~/.config/omarchy/plugins/$name
+  cp -r ~/Code/omarchy-shell-plugins/$name ~/.config/omarchy/plugins/$name
 }
 
 install_my_plugin media
