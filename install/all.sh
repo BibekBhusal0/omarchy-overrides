@@ -4,6 +4,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 "$SCRIPT_DIR/cursor-theme.sh"
 "$SCRIPT_DIR/flatpak.sh"
+"$SCRIPT_DIR/herdr.sh"
 "$SCRIPT_DIR/lofi-music.sh"
 "$SCRIPT_DIR/spicetify.sh"
 "$SCRIPT_DIR/my-bins.sh"
