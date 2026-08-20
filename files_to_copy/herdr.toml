@@ -31,32 +31,28 @@ focus_pane_down = "ctrl+alt+down"
 focus_pane_up = "ctrl+alt+up"
 focus_pane_right = "ctrl+alt+right"
 
-resize_mode = ["prefix+ctrl+left", "prefix+ctrl+down", "prefix+ctrl+up", "prefix+ctrl+right"]
-
-resize_pane_left = "ctrl+alt+shift+left"
-resize_pane_down = "ctrl+alt+shift+down"
-resize_pane_up = "ctrl+alt+shift+up"
-resize_pane_right = "ctrl+alt+shift+right"
+resize_mode = ["prefix+{"]
+resize_pane_left = ["prefix+shift+h" ,"ctrl+alt+shift+left" ]
+resize_pane_down = ["prefix+shift+j", "ctrl+alt+shift+down" ]
+resize_pane_up = ["prefix+shift+k", "ctrl+alt+shift+up" ]
+resize_pane_right = ["prefix+shift+l", "ctrl+alt+shift+right" ]
 
 rename_pane = "prefix+shift+o"
 
 # Windows -> tabs
 new_tab = "prefix+c"
 rename_tab = "prefix+r"
-close_tab = "prefix+k"
+close_tab = "prefix+shift+x"
 switch_tab = ["prefix+1..9", "alt+1..9"]
 previous_tab = ["prefix+p", "alt+left"]
 next_tab = ["prefix+n", "alt+right"]
 
-move_tab_previous = "alt+shift+left"
-move_tab_next = "alt+shift+right"
-
 # Sessions -> workspaces
 new_workspace = "prefix+shift+c"
 rename_workspace = "prefix+shift+r"
-close_workspace = "prefix+shift+k"
-previous_workspace = ["prefix+shift+p", "alt+up"]
-next_workspace = ["prefix+shift+n", "alt+down"]
+close_workspace = "prefix+shift+ctrl+x"
+previous_workspace = ["prefix+shift+p", "alt+up", "prefix+("]
+next_workspace = ["prefix+shift+n", "alt+down", "prefix+)"]
 
 [ui]
 accent = "blue"
