@@ -28,7 +28,13 @@ bind(modKey("SHIFT + R"), "hypruler", "Ruler")
 -- Launch all apps i use
 bind(modKey("SLASH"), "start", "Launch All Apps I Use")
 bind(modKey("SHIFT + SLASH"), "uwsm-app -- bitwarden.desktop", "Passwords")
+
+-- Summoning Shell
 bind(modKey("ALT + R"), "omarchy-shell shell summon bibek.readest", "Readest search")
+bind(modKey("ALT + O"), "omarchy-shell shell summon bibek.obsidian-search", "Obsidian Search")
+bind(modKey("ALT + M"), "omarchy-shell shell toggle bibek.media", "Media Menu")
+bind(modKey("ALT + Y"), "omarchy-shell shell toggle bibek.ytdl", "Download youtube videos")
+bind(modKey("ALT + P"), "omarchy-shell shell summon bibek.focusd", "Pomodoro popup")
 
 local animations_state_file = os.getenv("HOME") .. "/.config/hypr/animations.state"
 
@@ -83,7 +89,6 @@ bind(
 )
 -- -- :TODO: Migrate to obsidian CLI
 bind(modKey("SHIFT + O"), 'obsidian "obsidian://daily"', "Obsidian Daily")
-bind(modKey("ALT + O"), "omarchy-shell shell summon bibek.obsidian-search", "Obsidian Search")
 -- -- :FIX: Will not work aftetr quattro
 -- bind(
 -- 	modKey("CTRL + SHIFT + O"),
@@ -93,7 +98,6 @@ bind(modKey("ALT + O"), "omarchy-shell shell summon bibek.obsidian-search", "Obs
 
 bind(modKey("bracketleft"), "omarchy-shell media previous", "Previous Media")
 bind(modKey("bracketright"), "omarchy-shell media next", "Next Media")
-bind(modKey("ALT + M"), "omarchy-shell shell toggle bibek.media", "Media Menu")
 bind(modKey("SHIFT + ESCAPE"), "systemctl suspend", "Suspend")
 
 -- My custom web apps
@@ -111,7 +115,6 @@ bind(modKey("SHIFT + D"), 'omarchy-launch-webapp "https://duck.ai/"', "Duck.ai")
 
 -- Pomodoro (focusd)
 bind(modKey("P"), "focusd toggle", "Pomodoro toggle")
-bind(modKey("ALT + P"), "omarchy-shell shell summon bibek.focusd", "Pomodoro popup")
 bind(modKey("SHIFT + P"), hl.dsp.window.pseudo(), "Pseudo window")
 
 -- Vim style Navigation
