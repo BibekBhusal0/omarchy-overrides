@@ -16,7 +16,6 @@ install_my_plugin ytdl
 install_my_plugin obsidian-search
 install_my_plugin readest
 
-clone markbus-ai/omarchy-opencode-usage ~/.config/omarchy/plugins/opencode --depth=1
 clone Praveensenpai/omarchy-refined-menu ~/Code/random/omarchy-refined-menu --depth=1
 create_symlink ~/Code/random/omarchy-refined-menu/plugin ~/.config/omarchy/plugins/menu
 
