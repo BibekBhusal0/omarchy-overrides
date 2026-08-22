@@ -105,7 +105,8 @@ create_or_switch_workspace() {
         name="${name:-$(basename "$dir" | tr . _)}"
         # Re-applying would spawn a duplicate workspace; switch instead.
         if [ -z "$(herdr_workspace_id "$name")" ]; then
-            "$HERDR_SPREADER" apply --file "$layout" || return 1
+            # Run from the project dir so panes land there even without `root`.
+            (cd "$dir" && "$HERDR_SPREADER" apply --file "$layout") || return 1
         fi
     else
         name=$(basename "$dir" | tr . _)
