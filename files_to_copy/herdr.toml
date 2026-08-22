@@ -56,6 +56,9 @@ close_workspace = "prefix+shift+ctrl+x"
 previous_workspace = ["prefix+shift+p", "alt+up", "prefix+("]
 next_workspace = ["prefix+shift+n", "alt+down", "prefix+)"]
 
+settings = "prefix+shift+s"
+goto = ["prefix+g", "prefix+f"]
+
 [[keys.command]]
 key = "ctrl+h"
 type = "shell"
@@ -75,6 +78,22 @@ command = "herdr-nav up"
 key = "ctrl+l"
 type = "shell"
 command = "herdr-nav right"
+
+[[keys.command]]
+key = "prefix+s"
+type = "popup"
+command = "herdr-session-search"
+description = "find session"
+width = "80%"
+height = "80%"
+
+[[keys.command]]
+key = "prefix+t"
+type = "popup"
+command = "herdr-session-create"
+description = "new session from project"
+width = "80%"
+height = "80%"
 
 [[keys.command]]
 key = "prefix+e"

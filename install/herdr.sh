@@ -7,6 +7,15 @@ source "$SCRIPT_DIR/../utils/symlink.sh"
 
 create_symlink "$SCRIPT_DIR/../files_to_copy/herdr.toml" "$HOME/.config/herdr/config.toml"
 
-if ! herdr plugin list 2>/dev/null | grep -q "herdr-nvim"; then
-  herdr plugin install ChmaraX/herdr-nvim --yes
+install_plugin() {
+  local name="${1##*/}"
+  if ! herdr plugin list 2>/dev/null | grep -q "$name"; then
+    herdr plugin install "$1" --yes
+  fi
+}
+
+install_plugin ChmaraX/herdr-nvim
+
+if ! command -v herdr-spreader >/dev/null 2>&1; then
+  cargo install --git https://github.com/yuk1ty/herdr-spreader
 fi

@@ -1,0 +1,56 @@
+#!/bin/bash
+
+source "$(dirname "$0")/../utils/herdr.sh"
+
+list_entries() {
+  local dirs active
+  dirs=$(zoxide query -l 2>/dev/null)
+  active=$(herdr_list_workspaces)
+
+  declare -A active_map
+  while IFS= read -r row; do
+    [ -n "$row" ] && active_map["${row%%$'\t'*}"]=1
+  done <<< "$active"
+
+  echo "$active" | while IFS= read -r row; do
+    [ -n "$row" ] && printf "\033[36m%s\033[0m\t%s\tactive\n" "${row%%$'\t'*}" "${row#*$'\t'}"
+  done
+
+  echo "$dirs" | while IFS= read -r d; do
+    [ -n "$d" ] || continue
+    layout=$(herdr_layout_file "$d")
+    if [ -n "$layout" ]; then
+      name=$(herdr_layout_name "$layout")
+      display="${name:-${d##*/}}"
+      [ -n "$display" ] && [ "${active_map[$display]:-}" ] && continue
+      printf "\033[32m%s\033[0m\t%s\tproject\n" "$display" "$d"
+    fi
+  done
+
+  echo "$dirs" | while IFS= read -r d; do
+    [ -n "$d" ] || continue
+    if [ -z "$(herdr_layout_file "$d")" ]; then
+      session_name="${d##*/}"
+      session_name="${session_name//./_}"
+      [ -n "$session_name" ] && [ "${active_map[$session_name]:-}" ] && continue
+      printf "%s\t%s\tdir\n" "$d" "$d"
+    fi
+  done
+}
+
+if [ -n "$1" ]; then
+  create_or_switch_workspace "$1"
+  exit $?
+fi
+
+selected=$(
+  list_entries | fzf --reverse --ansi --delimiter='\t' --with-nth=1
+)
+kind=$(echo "$selected" | cut -f3)
+target=$(echo "$selected" | cut -f2)
+
+if [ "$kind" = "active" ]; then
+  herdr workspace focus "$target"
+elif [ -n "$target" ]; then
+  create_or_switch_workspace "$target"
+fi

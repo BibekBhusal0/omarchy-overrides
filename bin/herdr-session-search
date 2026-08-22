@@ -1,0 +1,54 @@
+#!/bin/bash
+
+source "$(dirname "$0")/../utils/herdr.sh"
+self="$(readlink -f "$0")"
+
+list_entries() {
+  local active
+  active=$(herdr_list_workspaces)
+  declare -A active_map
+  while IFS= read -r row; do
+    [ -n "$row" ] && active_map["${row%%$'\t'*}"]=1
+  done <<< "$active"
+  echo "$active" | while IFS= read -r row; do
+    [ -n "$row" ] && printf "\033[36m%s\033[0m\t%s\tactive\n" "${row%%$'\t'*}" "${row#*$'\t'}"
+  done
+
+  zoxide query -l 2>/dev/null | while IFS= read -r d; do
+    [ -n "$d" ] || continue
+    layout=$(herdr_layout_file "$d")
+    if [ -n "$layout" ]; then
+      name=$(herdr_layout_name "$layout")
+      display="${name:-$(basename "$d")}"
+      [ -n "$display" ] && [ "${active_map[$display]:-}" ] && continue
+      printf "\033[32m%s\033[0m\t%s\tproject\n" "$display" "$d"
+    fi
+  done
+}
+
+if [ "${1:-}" = "--list" ]; then
+  list_entries
+  exit 0
+fi
+# Only ever closes real workspace ids (fzf passes column 2).
+if [ "${1:-}" = "--close" ]; then
+  if herdr_list_workspaces | awk -F '\t' -v id="$2" '$2==id{found=1} END{exit !found}'; then
+    herdr workspace close "$2"
+  fi
+  exit 0
+fi
+
+selected=$(list_entries | fzf --reverse --ansi --header "Search/Create (Ctrl-d: Close)" \
+  --delimiter='\t' --with-nth=1 \
+  --bind="ctrl-d:execute-silent($self --close {2})+reload($self --list)+clear-query"
+)
+
+if [ -n "$selected" ]; then
+  kind=$(echo "$selected" | cut -f3)
+  target=$(echo "$selected" | cut -f2)
+  if [ "$kind" = "active" ]; then
+    herdr workspace focus "$target"
+  else
+    create_or_switch_workspace "$target"
+  fi
+fi
