@@ -39,7 +39,7 @@ resize_pane_down = ["prefix+shift+j", "ctrl+alt+shift+down" ]
 resize_pane_up = ["prefix+shift+k", "ctrl+alt+shift+up" ]
 resize_pane_right = ["prefix+shift+l", "ctrl+alt+shift+right" ]
 
-rename_pane = "prefix+shift+o"
+rename_pane = "prefix+alt+o"
 
 # Windows -> tabs
 new_tab = "prefix+c"
@@ -103,9 +103,15 @@ description = "nvim sidebar"
 
 [[keys.command]]
 key = "prefix+o"
-type = "plugin_action"
-command = "chmarax.herdr-nvim.pick-file"
-description = "open file from agent output"
+type = "shell"
+command = """pane=$(herdr tab create --label "󰚩 AI" --focus | jq -r '.result.root_pane.pane_id') && herdr pane run "$pane" opencode"""
+description = "open opencode"
+
+[[keys.command]]
+key = "prefix+shift+o"
+type = "shell"
+command = """pane=$(herdr tab create --label "󰚩 AI"  --focus | jq -r '.result.root_pane.pane_id') && herdr pane run "$pane" opencode --yolo"""
+description = "open opencode --yolo"
 
 [ui]
 accent = "blue"
