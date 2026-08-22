@@ -13,6 +13,12 @@ if (( ${+commands[fzf]} ));then
   eval "$(fzf --zsh)"
 fi
 
+if [[ -n "${HERDR_ENV:-}" ]]; then
+  for _f in ${HOME}/.config/herdr/plugins/github/herdr-automatic-rename-*/shell/hook.zsh(N); do
+    source $_f; break
+  done
+fi
+
 # Some settings requied for zsh autosuggestions to work
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=10000
