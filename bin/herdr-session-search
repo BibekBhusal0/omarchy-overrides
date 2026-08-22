@@ -10,8 +10,14 @@ list_entries() {
   while IFS= read -r row; do
     [ -n "$row" ] && active_map["${row%%$'\t'*}"]=1
   done <<< "$active"
+  current=$(herdr_current_workspace_id)
   echo "$active" | while IFS= read -r row; do
-    [ -n "$row" ] && printf "\033[36m%s\033[0m\t%s\tactive\n" "${row%%$'\t'*}" "${row#*$'\t'}"
+    [ -n "$row" ] || continue
+    label=${row%%$'\t'*}
+    id=${row#*$'\t'}
+    marker=""
+    [ "$id" = "$current" ] && marker="* "
+    printf "\033[36m%s%s\033[0m\t%s\tactive\n" "$marker" "$label" "$id"
   done
 
   zoxide query -l 2>/dev/null | while IFS= read -r d; do

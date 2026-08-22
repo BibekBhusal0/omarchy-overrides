@@ -6,6 +6,10 @@ in_herdr() {
     [ -n "${HERDR_ENV:-}" ]
 }
 
+herdr_current_workspace_id() {
+    printf '%s\n' "${HERDR_ACTIVE_WORKSPACE_ID:-${HERDR_WORKSPACE_ID:-}}"
+}
+
 # Print the workspace id for a given label (empty if not found).
 herdr_workspace_id() {
     local label=$1
