@@ -12,38 +12,29 @@ herdr_current_workspace_id() {
 
 # Print the workspace id for a given label (empty if not found).
 herdr_workspace_id() {
-    local label=$1
-    herdr workspace list 2>/dev/null | python3 -c '
-import json, sys
-try:
-    data = json.load(sys.stdin)
-except Exception:
-    sys.exit(0)
-for w in data.get("result", {}).get("workspaces", []):
-    if w.get("label") == sys.argv[1]:
-        print(w["workspace_id"])
-        break
-' "$label"
+    local json re
+    json=$(herdr workspace list 2>/dev/null) || return 0
+    re='"label":"([^"]*)"[^}]*"workspace_id":"([^"]+)"'
+    while [[ $json =~ $re ]]; do
+        if [ "${BASH_REMATCH[1]}" = "$1" ]; then
+            printf '%s\n' "${BASH_REMATCH[2]}"
+            return 0
+        fi
+        json=${json#*"${BASH_REMATCH[0]}"}
+    done
 }
 
 # Print the focused pane id of a workspace (falls back to its first pane).
 herdr_focused_pane() {
-    local workspace_id=$1
-    herdr pane list --workspace "$workspace_id" 2>/dev/null | python3 -c '
-import json, sys
-try:
-    data = json.load(sys.stdin)
-except Exception:
-    sys.exit(0)
-panes = data.get("result", {}).get("panes", [])
-for p in panes:
-    if p.get("focused"):
-        print(p["pane_id"])
-        break
-else:
-    if panes:
-        print(panes[0]["pane_id"])
-'
+    local json re
+    json=$(herdr pane list --workspace "$1" 2>/dev/null) || return 0
+    re='"focused":true[^}]*"pane_id":"([^"]+)"'
+    if [[ $json =~ $re ]]; then
+        printf '%s\n' "${BASH_REMATCH[1]}"
+        return 0
+    fi
+    re='"pane_id":"([^"]+)"'
+    [[ $json =~ $re ]] && printf '%s\n' "${BASH_REMATCH[1]}"
 }
 
 # Capture recent output of a workspace's focused pane (tmux capture-pane equivalent).
@@ -55,16 +46,13 @@ herdr_capture_workspace() {
 
 # Print "label<TAB>id" for every open workspace.
 herdr_list_workspaces() {
-    herdr workspace list 2>/dev/null | python3 -c '
-import json, sys
-try:
-    data = json.load(sys.stdin)
-except Exception:
-    sys.exit(0)
-for w in data.get("result", {}).get("workspaces", []):
-    label = w.get("label", "")
-    print(label + "\t" + w["workspace_id"])
-'
+    local json re
+    json=$(herdr workspace list 2>/dev/null) || return 0
+    re='"label":"([^"]*)"[^}]*"workspace_id":"([^"]+)"'
+    while [[ $json =~ $re ]]; do
+        printf '%s\t%s\n' "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}"
+        json=${json#*"${BASH_REMATCH[0]}"}
+    done
 }
 
 # Find a herdr.yml/herdr.yaml in a directory; prints its path or nothing.
