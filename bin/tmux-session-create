@@ -15,22 +15,48 @@ fi
 dirs=$(zoxide query -l 2>/dev/null)
 active=$(tmux list-sessions -F "#S" 2>/dev/null)
 
-declare -A active_map
+declare -A active_map dupe_map
 while IFS= read -r s; do
   active_map["$s"]=1
 done <<< "$active"
+
+# Project rows; same-named projects also show their (~-collapsed) path.
+projects=$(tmux_list_projects)
+while IFS= read -r n; do
+  [ -n "$n" ] && dupe_map["$n"]=1
+done <<< "$(printf '%s\n' "$projects" | cut -f1 | sort | uniq -d)"
+
+# Dirs of open sessions whose name is a dupe: their project row is already
+# covered by the active row, so it must not appear twice.
+declare -A open_dir_map
+if [ "${#dupe_map[@]}" -gt 0 ]; then
+  while IFS= read -r s; do
+    [ -n "$s" ] || continue
+    [ "${dupe_map[$s]:-}" ] || continue
+    while IFS= read -r cwd; do
+      [ -n "$cwd" ] && open_dir_map["$cwd"]=1
+    done <<< "$(tmux_session_cwds "$s")"
+  done <<< "$active"
+fi
 
 selected=$(
   {
     echo "$active" | while IFS= read -r s; do
       [ -n "$s" ] && printf "\033[36m%s\033[0m\t%s\n" "$s" "$s"
     done
-    echo "$dirs" | while IFS= read -r d; do
-      if [ -f "$d/.tmuxinator.yml" ]; then
-        name=$(grep -m1 '^name:' "$d/.tmuxinator.yml" 2>/dev/null | sed 's/^name:[[:space:]]*//')
-        display="${name:-${d##*/}}"
-        [ "${active_map[$display]}" ] && continue
-        printf "\033[32m%s\033[0m\t%s\n" "$display" "$d"
+    printf '%s\n' "$projects" | while IFS= read -r row; do
+      [ -n "$row" ] || continue
+      name=${row%%$'\t'*}
+      d=${row#*$'\t'}
+      # Dupes are always shown (an open session with the same name would
+      # otherwise hide the other project entirely) — except the one that IS open.
+      [ "${open_dir_map[$d]:-}" ] && continue
+      if [ "${dupe_map[$name]}" ]; then
+        printf "\033[32m%s\033[0m  %s\t%s\n" "$name" "$(tmux_display_path "$d")" "$d"
+      elif [ "${active_map[$name]}" ]; then
+        continue
+      else
+        printf "\033[32m%s\033[0m\t%s\n" "$name" "$d"
       fi
     done
     echo "$dirs" | while IFS= read -r d; do
@@ -38,7 +64,7 @@ selected=$(
         session_name="${d##*/}"
         session_name="${session_name//./_}"
         [ "${active_map[$session_name]}" ] && continue
-        printf "%s\t%s\n" "$d" "$d"
+        printf "%s\t%s\n" "${d/#$HOME/\~}" "$d"
       fi
     done
   } | fzf --reverse --ansi --delimiter='\t' --with-nth=1 \

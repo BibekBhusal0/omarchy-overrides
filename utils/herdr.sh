@@ -81,6 +81,30 @@ herdr_layout_name() {
       sed 's/^"\(.*\)"$/\1/; s/^'"'"'\(.*\)'"'"'$/\1/'
 }
 
+# Print "name<TAB>dir" for every zoxide-known directory containing a layout.
+herdr_list_projects() {
+    local d layout name
+    zoxide query -l 2>/dev/null | while IFS= read -r d; do
+        [ -n "$d" ] || continue
+        layout=$(herdr_layout_file "$d")
+        [ -n "$layout" ] || continue
+        name=$(herdr_layout_name "$layout")
+        printf '%s\t%s\n' "${name:-${d##*/}}" "$d"
+    done
+}
+
+# Print the root pane's cwd of a workspace (its creation directory).
+herdr_workspace_cwds() {
+    herdr pane list --workspace "$1" 2>/dev/null |
+      grep -o '"cwd":"[^"]*"' | sed 's/"cwd":"//; s/"$//' | head -1
+}
+
+# Collapse $HOME to ~ for display purposes.
+herdr_display_path() {
+    local p=${1/#$HOME/\~}
+    printf '%s\n' "$p"
+}
+
 switch_to_workspace() {
     local target=$1 id
     id=$(herdr_workspace_id "$target")
@@ -105,8 +129,9 @@ create_or_switch_workspace() {
         name="${name:-$(basename "$dir" | tr . _)}"
         # Re-applying would spawn a duplicate workspace; switch instead.
         if [ -z "$(herdr_workspace_id "$name")" ]; then
-            # Run from the project dir so panes land there even without `root`.
-            (cd "$dir" && "$HERDR_SPREADER" apply --file "$layout") || return 1
+            # cd into the project and drop HERDR_PANE_ID so spreader's default
+            # root becomes the project dir even without `root:` in the layout.
+            (cd "$dir" && env -u HERDR_PANE_ID "$HERDR_SPREADER" apply --file "$layout") || return 1
         fi
     else
         name=$(basename "$dir" | tr . _)
