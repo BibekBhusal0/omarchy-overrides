@@ -15,7 +15,7 @@ omarchy-install-dev-env python
 omarchy-install-terminal ghostty
 omarchy-default-terminal ghostty
 
-bun install -g devmoji yarn omniroute
+bun install -g yarn omniroute
 
 opencode_config="$HOME/.config/opencode/opencode.json"
 mkdir -p "$HOME/.config/opencode"
