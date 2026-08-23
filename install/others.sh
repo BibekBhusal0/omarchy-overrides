@@ -6,6 +6,7 @@ omarchy-pkg-aur-add \
   helium-browser-bin \
   hypruler-bin \
   vesktop-bin \
+  omniroute-bin \
   yazi
 
 omarchy-install-dev-env node
@@ -14,8 +15,14 @@ omarchy-install-dev-env python
 omarchy-install-terminal ghostty
 omarchy-default-terminal ghostty
 
-bun install -g devmoji
-bun install -g yarn
+bun install -g devmoji yarn omniroute
+
+opencode_config="$HOME/.config/opencode/opencode.json"
+mkdir -p "$HOME/.config/opencode"
+[ -f "$opencode_config" ] || echo '{}' > "$opencode_config"
+jq '
+  .plugin = ((.plugin // []) + ["opencode-omniroute-auth"] | unique)
+' "$opencode_config" > "$opencode_config.tmp" && mv "$opencode_config.tmp" "$opencode_config"
 
 source "$(dirname "${BASH_SOURCE[0]}")/../utils/clone.sh"
 source "$(dirname "${BASH_SOURCE[0]}")/../utils/symlink.sh"
