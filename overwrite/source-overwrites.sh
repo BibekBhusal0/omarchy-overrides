@@ -31,7 +31,6 @@ write_to_file "$HOME/.config/uwsm/env" "export PATH=$HOME/.cargo/bin:$HOME/.loca
 # Setup tmux overrides
 echo "Setting up tmux overrides..."
 write_to_file "$HOME/.config/tmux/tmux.conf" "source $SCRIPT_DIR/tmux.conf"
-tmux source $HOME/.config/tmux/tmux.conf
 
 write_to_file "$HOME/.XCompose" "include \"$SCRIPT_DIR/.XCompose\""
 write_to_file "$HOME/.config/ghostty/config" "config-file= ?\"$SCRIPT_DIR/ghostty.config\""
