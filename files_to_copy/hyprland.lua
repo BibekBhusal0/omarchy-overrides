@@ -30,11 +30,11 @@ bind(modKey("SLASH"), "start", "Launch All Apps I Use")
 bind(modKey("SHIFT + SLASH"), "uwsm-app -- bitwarden.desktop", "Passwords")
 
 -- Summoning Shell
-bind(modKey("ALT + R"), "omarchy-shell shell summon bibek.readest", "Readest search")
-bind(modKey("ALT + O"), "omarchy-shell shell summon bibek.obsidian-search", "Obsidian Search")
+bind(modKey("ALT + R"), "omarchy-shell shell toggle bibek.readest", "Readest search")
+bind(modKey("ALT + O"), "omarchy-shell shell toggle bibek.obsidian-search", "Obsidian Search")
 bind(modKey("ALT + M"), "omarchy-shell shell toggle bibek.media", "Media Menu")
 bind(modKey("ALT + Y"), "omarchy-shell shell toggle bibek.ytdl", "Download youtube videos")
-bind(modKey("ALT + P"), "omarchy-shell shell summon bibek.focusd", "Pomodoro popup")
+bind(modKey("ALT + P"), "omarchy-shell shell toggle bibek.focusd", "Pomodoro popup")
 
 local animations_state_file = os.getenv("HOME") .. "/.config/hypr/animations.state"
 
