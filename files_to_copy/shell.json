@@ -93,6 +93,13 @@
     }
   ],
   "version": 1,
-  "disabledPlugins": ["omarchy.dev-gallery", "omarchy.media", "omarchy.menu"],
-  "cloneSourceRestores": ["bibek.media", "paisen.menu"]
+  "disabledPlugins": [
+    "omarchy.dev-gallery",
+    "omarchy.media",
+    "omarchy.menu"
+  ],
+  "cloneSourceRestores": [
+    "bibek.media",
+    "paisen.menu"
+  ]
 }
