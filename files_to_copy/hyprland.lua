@@ -33,7 +33,8 @@ bind(modKey("SHIFT + SLASH"), "uwsm-app -- bitwarden.desktop", "Passwords")
 bind(modKey("ALT + R"), "omarchy-shell shell toggle bibek.readest", "Readest search")
 bind(modKey("ALT + O"), "omarchy-shell shell toggle bibek.obsidian-search", "Obsidian Search")
 bind(modKey("ALT + M"), "omarchy-shell shell toggle bibek.media", "Media Menu")
-bind(modKey("ALT + Y"), "omarchy-shell shell toggle bibek.ytdl", "Download youtube videos")
+bind(modKey("CTRL + Y"), "omarchy-shell shell toggle bibek.ytdl", "Download youtube videos")
+bind(modKey("ALT + Y"), "omarchy shell ytdl autoDownload", "Auto Download youtube videos")
 bind(modKey("ALT + P"), "omarchy-shell shell toggle bibek.focusd", "Pomodoro popup")
 
 local animations_state_file = os.getenv("HOME") .. "/.config/hypr/animations.state"

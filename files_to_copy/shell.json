@@ -42,7 +42,13 @@
         {
           "id": "bibek.ytdl",
           "cookiesBrowser": "zen",
-          "defaultQuality": "1080p"
+          "extraArgs": "",
+          "defaultQuality": "1080p",
+          "defaultDownloadType": "video",
+          "downloadTranscripts": false,
+          "playlistInSeparateFolder": true,
+          "enableHistory": true,
+          "downloadLocation": "~/Downloads/youtube"
         },
         {
           "id": "omarchy.tray"
@@ -84,12 +90,6 @@
     },
     {
       "id": "paisen.menu"
-    },
-    {
-      "id": "bibek.ytdl",
-      "cookiesBrowser": "zen",
-      "extraArgs": "",
-      "defaultQuality": "1080p"
     }
   ],
   "version": 1,
