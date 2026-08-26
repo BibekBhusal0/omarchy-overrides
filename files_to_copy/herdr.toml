@@ -13,6 +13,8 @@ new_cwd = "follow"
 [keys]
 prefix = "alt+space"
 
+toggle_sidebar = [ "prefix+b" , "alt+z"]
+
 # Config and help
 reload_config = "prefix+q"
 help = "prefix+?"
