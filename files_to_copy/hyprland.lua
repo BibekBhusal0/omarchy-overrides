@@ -67,11 +67,7 @@ local function toggle_animations()
 end
 bind(modKey("ALT + A"), toggle_animations, "Toggle Animation")
 
-bind(
-	modKey("ALT + RETURN"),
-	[[uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)" bash -c "tmux new-session -A -s main"]],
-	"Tmux"
-)
+bind(modKey("ALT + RETURN"), [[uwsm-app -- xdg-terminal-exec bash -c "herdr"]], "Tmux")
 
 -- Lunching apps
 bind(modKey("B"), "omarchy-launch-browser", "Browser")
