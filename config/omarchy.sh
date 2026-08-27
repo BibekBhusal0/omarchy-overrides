@@ -15,6 +15,7 @@ install_my_plugin focusd
 install_my_plugin ytdl
 install_my_plugin obsidian-search
 install_my_plugin readest
+install_my_plugin lock
 
 clone Praveensenpai/omarchy-refined-menu ~/Code/random/omarchy-refined-menu --depth=1
 clone ESHAYAT102/confetti-omarchy-plugin ~/.config/omarchy/plugins/confetti  --depth=1

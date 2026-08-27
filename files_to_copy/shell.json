@@ -83,6 +83,9 @@
   },
   "plugins": [
     {
+      "id": "bibek.lock"
+    },
+    {
       "id": "bibek.obsidian-search"
     },
     {
@@ -99,10 +102,12 @@
   "disabledPlugins": [
     "omarchy.dev-gallery",
     "omarchy.media",
-    "omarchy.menu"
+    "omarchy.menu",
+    "omarchy.lock"
   ],
   "cloneSourceRestores": [
     "bibek.media",
-    "paisen.menu"
+    "paisen.menu",
+    "bibek.lock"
   ]
 }
