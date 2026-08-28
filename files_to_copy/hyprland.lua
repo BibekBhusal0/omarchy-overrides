@@ -37,6 +37,8 @@ bind(modKey("CTRL + Y"), "omarchy-shell shell toggle bibek.ytdl", "Download yout
 bind(modKey("ALT + Y"), "omarchy shell ytdl autoDownload", "Auto Download youtube videos")
 bind(modKey("ALT + P"), "omarchy-shell shell toggle bibek.focusd", "Pomodoro popup")
 bind(modKey("SHIFT + E"), "omarchy-shell esh.confetti fire", "Confetti  🎉")
+bind(modKey("SUPER_L"), "omarchy-shell shell toggle io.github.younesdahdouh.super-apps", "Apps")
+bind(modKey("ALT + SPACE"), "omarchy-shell shell toggle io.github.younesdahdouh.super-apps", "Apps")
 
 local animations_state_file = os.getenv("HOME") .. "/.config/hypr/animations.state"
 

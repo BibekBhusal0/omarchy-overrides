@@ -18,6 +18,7 @@ install_my_plugin readest
 install_my_plugin lock
 
 clone Praveensenpai/omarchy-refined-menu ~/Code/random/omarchy-refined-menu --depth=1
+clone younesdahdouh/omarchy-super-apps ~/.config/omarchy/plugins/apps-luncher --depth=1
 clone ESHAYAT102/confetti-omarchy-plugin ~/.config/omarchy/plugins/confetti  --depth=1
 create_symlink ~/Code/random/omarchy-refined-menu/plugin ~/.config/omarchy/plugins/menu
 
