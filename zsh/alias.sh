@@ -6,7 +6,6 @@ if command -v eza &> /dev/null; then
   alias lta="lt -a"
 fi
 
-alias lofi='cliamp --shuffle --auto-play ~/Music/lofimusic/'
 alias cy='opencode --yolo'
 
 # FZF
