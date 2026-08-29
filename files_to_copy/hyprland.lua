@@ -172,3 +172,82 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("cliamp-daemon")
 	hl.exec_cmd("setsid uwsm-app -- omniroute")
 end)
+
+-- Even number workspaces for second monitor and odd for main
+local function sorted_monitors()
+	local monitors = hl.get_monitors()
+	table.sort(monitors, function(a, b)
+		return (a.id or 0) < (b.id or 0)
+	end)
+	return monitors
+end
+
+local function get_main_monitor()
+	local monitors = sorted_monitors()
+	return monitors[1]
+end
+
+local function get_secondary_monitor(main)
+	if not main then return nil end
+	for _, m in ipairs(sorted_monitors()) do
+		if m.name ~= main.name then return m end
+	end
+	return nil
+end
+
+local function target_monitor(id, main, secondary)
+	if id % 2 == 1 then return main.name end
+	return secondary and secondary.name or main.name
+end
+
+local function apply_workspace_rules()
+	local monitors = hl.get_monitors()
+	if #monitors == 0 then return end
+	local main = get_main_monitor()
+	if not main then return end
+	local secondary = get_secondary_monitor(main)
+
+	for i = 1, 10 do
+		hl.workspace_rule({ workspace = tostring(i), monitor = target_monitor(i, main, secondary) })
+	end
+
+	-- Reconnect does not auto-migrate existing workspaces;
+	-- explicitly move misplaced numeric workspaces.
+	if secondary then
+		for _, ws in ipairs(hl.get_workspaces()) do
+			local id = tonumber(ws.name)
+			if id then
+				local expected = target_monitor(id, main, secondary)
+				if ws.monitor and ws.monitor.name ~= expected then
+					hl.dispatch(hl.dsp.workspace.move({ workspace = ws.name, monitor = expected }))
+				end
+			end
+		end
+	end
+end
+
+-- Assign monitor for any numeric workspace created after startup.
+hl.on("workspace.created", function(ws)
+	local name = ws and ws.name or nil
+	if not name then return end
+	local id = tonumber(name)
+	if not id then return end
+	local main = get_main_monitor()
+	if not main then return end
+	local secondary = get_secondary_monitor(main)
+	local expected = target_monitor(id, main, secondary)
+	hl.workspace_rule({ workspace = name, monitor = expected })
+	-- If created on wrong monitor, correct placement.
+	-- Defer one tick to ensure workspace exists in Hyprland state.
+	hl.timer(function()
+		local cur = hl.get_workspace(name)
+		if cur and cur.monitor and cur.monitor.name ~= expected then
+			hl.dispatch(hl.dsp.workspace.move({ workspace = name, monitor = expected }))
+		end
+	end, { timeout = 50, type = "oneshot" })
+end)
+
+hl.on("monitor.added", apply_workspace_rules)
+hl.on("monitor.removed", apply_workspace_rules)
+hl.on("hyprland.start", apply_workspace_rules)
+apply_workspace_rules()
