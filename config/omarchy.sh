@@ -26,7 +26,7 @@ clone janhesters/omarchy-focus ~/.config/omarchy/plugins/focus  --depth=1
 create_symlink ~/.config/omarchy/plugins/focus/focus ~/.local/bin/focus
 create_symlink ~/Code/random/omarchy-refined-menu/plugin ~/.config/omarchy/plugins/menu
 
-write_to_file "~/.config/omarchy/focus-sites" "youtube.com
+write_to_file "$HOME/.config/omarchy/focus-sites" "youtube.com
 www.youtube.com
 reddit.com
 www.reddit.com"
