@@ -9,8 +9,6 @@ omarchy-pkg-aur-add \
   omniroute-bin \
   yazi
 
-omarchy-pkg-add readest flatpak
-
 omarchy-install-dev-env node
 omarchy-install-dev-env bun
 omarchy-install-dev-env python
