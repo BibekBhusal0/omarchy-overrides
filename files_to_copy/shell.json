@@ -92,7 +92,8 @@
       "id": "bibek.obsidian-search"
     },
     {
-      "id": "bibek.readest"
+      "id": "bibek.readest",
+      "libraryPath": "~/.var/app/com.bilingify.readest/data/com.bilingify.readest/Readest/Books"
     },
     {
       "id": "paisen.menu"

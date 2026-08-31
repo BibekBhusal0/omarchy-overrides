@@ -1,4 +1,4 @@
 #!/bin/bash
 
 omarchy-pkg-add flatpak
-flatpak install flathub com.bilingify.readest
+flatpak install --noninteractive flathub com.bilingify.readest
