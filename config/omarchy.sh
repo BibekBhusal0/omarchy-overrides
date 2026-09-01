@@ -21,8 +21,9 @@ install_my_plugin lock
 
 clone Praveensenpai/omarchy-refined-menu ~/Code/random/omarchy-refined-menu --depth=1
 clone younesdahdouh/omarchy-super-apps ~/.config/omarchy/plugins/apps-luncher --depth=1
-clone ESHAYAT102/confetti-omarchy-plugin ~/.config/omarchy/plugins/confetti  --depth=1
+clone ESHAYAT102/confetti-omarchy-plugin ~/.config/omarchy/plugins/confetti --depth=1
 clone janhesters/omarchy-focus ~/.config/omarchy/plugins/focus  --depth=1
+clone idr4n/omarchy-clipboard-plus ~/.config/omarchy/plugins/clipboard-plus --depth=1
 create_symlink ~/.config/omarchy/plugins/focus/focus ~/.local/bin/focus
 create_symlink ~/Code/random/omarchy-refined-menu/plugin ~/.config/omarchy/plugins/menu
 

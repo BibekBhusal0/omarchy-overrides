@@ -39,6 +39,7 @@ bind(modKey("ALT + P"), "omarchy-shell shell toggle bibek.focusd", "Pomodoro pop
 bind(modKey("SHIFT + E"), "omarchy-shell esh.confetti fire", "Confetti  🎉")
 bind(modKey("SUPER_L"), "omarchy-shell shell toggle io.github.younesdahdouh.super-apps", "Apps")
 bind(modKey("ALT + SPACE"), "omarchy-shell shell toggle io.github.younesdahdouh.super-apps", "Apps")
+bind(modKey("CTRL + V"), "omarchy-shell shell toggle io.github.idr4n.clipboard-plus", "Apps")
 
 local animations_state_file = os.getenv("HOME") .. "/.config/hypr/animations.state"
 
@@ -188,23 +189,33 @@ local function get_main_monitor()
 end
 
 local function get_secondary_monitor(main)
-	if not main then return nil end
+	if not main then
+		return nil
+	end
 	for _, m in ipairs(sorted_monitors()) do
-		if m.name ~= main.name then return m end
+		if m.name ~= main.name then
+			return m
+		end
 	end
 	return nil
 end
 
 local function target_monitor(id, main, secondary)
-	if id % 2 == 1 then return main.name end
+	if id % 2 == 1 then
+		return main.name
+	end
 	return secondary and secondary.name or main.name
 end
 
 local function apply_workspace_rules()
 	local monitors = hl.get_monitors()
-	if #monitors == 0 then return end
+	if #monitors == 0 then
+		return
+	end
 	local main = get_main_monitor()
-	if not main then return end
+	if not main then
+		return
+	end
 	local secondary = get_secondary_monitor(main)
 
 	for i = 1, 10 do
@@ -229,11 +240,17 @@ end
 -- Assign monitor for any numeric workspace created after startup.
 hl.on("workspace.created", function(ws)
 	local name = ws and ws.name or nil
-	if not name then return end
+	if not name then
+		return
+	end
 	local id = tonumber(name)
-	if not id then return end
+	if not id then
+		return
+	end
 	local main = get_main_monitor()
-	if not main then return end
+	if not main then
+		return
+	end
 	local secondary = get_secondary_monitor(main)
 	local expected = target_monitor(id, main, secondary)
 	hl.workspace_rule({ workspace = name, monitor = expected })
