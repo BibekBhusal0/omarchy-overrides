@@ -28,6 +28,10 @@ emojify() {
     if [[ -n "$emoji" ]]; then
       local prefix="${text%%: *}: "
       local rest="${text#*: }"
+      if [[ "$rest" == "$emoji "* || "$rest" == "$emoji" ]]; then
+        echo "$text"
+        return
+      fi
       echo "${prefix}${emoji} ${rest}"
       return
     fi
