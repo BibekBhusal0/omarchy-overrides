@@ -39,7 +39,7 @@ bind(modKey("ALT + P"), "omarchy-shell shell toggle bibek.focusd", "Pomodoro pop
 bind(modKey("SHIFT + E"), "omarchy-shell esh.confetti fire", "Confetti  🎉")
 bind(modKey("SUPER_L"), "omarchy-shell shell toggle io.github.younesdahdouh.super-apps", "Apps")
 bind(modKey("ALT + SPACE"), "omarchy-shell shell toggle io.github.younesdahdouh.super-apps", "Apps")
-bind(modKey("CTRL + V"), "omarchy-shell shell toggle io.github.idr4n.clipboard-plus", "Apps")
+bind(modKey("CTRL + V"), "omarchy-shell shell toggle io.github.idr4n.clipboard-plus", "Clipboard History")
 
 local animations_state_file = os.getenv("HOME") .. "/.config/hypr/animations.state"
 
