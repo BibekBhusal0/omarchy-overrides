@@ -102,7 +102,7 @@
       "id": "esh.confetti"
     },
     {
-      "id": "io.github.younesdahdouh.super-apps"
+      "id": "super-apps"
     },
     {
       "id": "io.github.idr4n.clipboard-plus"
@@ -113,7 +113,8 @@
     "omarchy.dev-gallery",
     "omarchy.media",
     "omarchy.menu",
-    "omarchy.lock"
+    "omarchy.lock",
+    "omarchy.clipboard"
   ],
   "cloneSourceRestores": [
     "bibek.media",
