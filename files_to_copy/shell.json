@@ -113,8 +113,7 @@
     "omarchy.dev-gallery",
     "omarchy.media",
     "omarchy.menu",
-    "omarchy.lock",
-    "omarchy.clipboard"
+    "omarchy.lock"
   ],
   "cloneSourceRestores": [
     "bibek.media",
