@@ -15,29 +15,25 @@ fi
 dirs=$(zoxide query -l 2>/dev/null)
 active=$(tmux list-sessions -F "#S" 2>/dev/null)
 
-declare -A active_map dupe_map
+# Dirs backing every open session (canonicalized). Hiding is
+# directory-based so same-named projects each get their own row until
+# their own directory is open.
+declare -A open_dir_map
 while IFS= read -r s; do
-  active_map["$s"]=1
+  [ -n "$s" ] || continue
+  while IFS= read -r cwd; do
+    [ -n "$cwd" ] || continue
+    canon=$(tmux_canonical_path "$cwd")
+    open_dir_map["$canon"]=1
+  done <<< "$(tmux_session_cwds "$s")"
 done <<< "$active"
 
 # Project rows; same-named projects also show their (~-collapsed) path.
 projects=$(tmux_list_projects)
+declare -A dupe_map
 while IFS= read -r n; do
   [ -n "$n" ] && dupe_map["$n"]=1
 done <<< "$(printf '%s\n' "$projects" | cut -f1 | sort | uniq -d)"
-
-# Dirs of open sessions whose name is a dupe: their project row is already
-# covered by the active row, so it must not appear twice.
-declare -A open_dir_map
-if [ "${#dupe_map[@]}" -gt 0 ]; then
-  while IFS= read -r s; do
-    [ -n "$s" ] || continue
-    [ "${dupe_map[$s]:-}" ] || continue
-    while IFS= read -r cwd; do
-      [ -n "$cwd" ] && open_dir_map["$cwd"]=1
-    done <<< "$(tmux_session_cwds "$s")"
-  done <<< "$active"
-fi
 
 selected=$(
   {
@@ -48,22 +44,20 @@ selected=$(
       [ -n "$row" ] || continue
       name=${row%%$'\t'*}
       d=${row#*$'\t'}
-      # Dupes are always shown (an open session with the same name would
-      # otherwise hide the other project entirely) — except the one that IS open.
-      [ "${open_dir_map[$d]:-}" ] && continue
-      if [ "${dupe_map[$name]}" ]; then
+      canon=$(tmux_canonical_path "$d")
+      # Directory-based: hide only the project whose own directory is open.
+      [ "${open_dir_map[$canon]:-}" ] && continue
+      if [ "${dupe_map[$name]:-}" ]; then
         printf "\033[32m%s\033[0m  %s\t%s\n" "$name" "$(tmux_display_path "$d")" "$d"
-      elif [ "${active_map[$name]}" ]; then
-        continue
       else
         printf "\033[32m%s\033[0m\t%s\n" "$name" "$d"
       fi
     done
     echo "$dirs" | while IFS= read -r d; do
+      [ -n "$d" ] || continue
       if [ ! -f "$d/.tmuxinator.yml" ]; then
-        session_name="${d##*/}"
-        session_name="${session_name//./_}"
-        [ "${active_map[$session_name]}" ] && continue
+        canon=$(tmux_canonical_path "$d")
+        [ "${open_dir_map[$canon]:-}" ] && continue
         printf "%s\t%s\n" "${d/#$HOME/\~}" "$d"
       fi
     done

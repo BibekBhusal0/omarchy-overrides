@@ -3,13 +3,31 @@
 source "$(dirname "$0")/../utils/herdr.sh"
 
 list_entries() {
-  local dirs active projects dupes
+  local dirs active projects
   dirs=$(zoxide query -l 2>/dev/null)
   active=$(herdr_list_workspaces)
 
-  declare -A active_map dupe_map
+  # Labels shared by several open workspaces, and dirs backing every open
+  # workspace (canonicalized). Hiding is directory-based so same-named
+  # projects each get their own row until their own directory is open.
+  declare -A active_dupe_map open_dir_map ws_dir_map
+  while IFS= read -r n; do
+    [ -n "$n" ] && active_dupe_map["$n"]=1
+  done <<< "$(printf '%s\n' "$active" | cut -f1 | sort | uniq -d)"
+
   while IFS= read -r row; do
-    [ -n "$row" ] && active_map["${row%%$'\t'*}"]=1
+    [ -n "$row" ] || continue
+    id=${row#*$'\t'}
+    first=1
+    while IFS= read -r cwd; do
+      [ -n "$cwd" ] || continue
+      canon=$(herdr_canonical_path "$cwd")
+      open_dir_map["$canon"]=1
+      if [ "$first" -eq 1 ]; then
+        ws_dir_map["$id"]=$cwd
+        first=0
+      fi
+    done <<< "$(herdr_workspace_cwds "$id")"
   done <<< "$active"
 
   current=$(herdr_current_workspace_id)
@@ -19,39 +37,29 @@ list_entries() {
     id=${row#*$'\t'}
     marker=""
     [ "$id" = "$current" ] && marker="* "
-    printf "\033[36m%s%s\033[0m\t%s\tactive\n" "$marker" "$label" "$id"
+    if [ "${active_dupe_map[$label]:-}" ] && [ -n "${ws_dir_map[$id]:-}" ]; then
+      printf "\033[36m%s%s\033[0m  %s\t%s\tactive\n" "$marker" "$label" "$(herdr_display_path "${ws_dir_map[$id]}")" "$id"
+    else
+      printf "\033[36m%s%s\033[0m\t%s\tactive\n" "$marker" "$label" "$id"
+    fi
   done
 
   # Project rows; same-named projects also show their (~-collapsed) path.
   projects=$(herdr_list_projects)
+  declare -A proj_dupe_map
   while IFS= read -r n; do
-    [ -n "$n" ] && dupe_map["$n"]=1
+    [ -n "$n" ] && proj_dupe_map["$n"]=1
   done <<< "$(printf '%s\n' "$projects" | cut -f1 | sort | uniq -d)"
-
-  # Dirs of open workspaces whose label is a dupe name: their project row is
-  # already covered by the active row, so it must not appear twice.
-  declare -A open_dir_map
-  if [ "${#dupe_map[@]}" -gt 0 ]; then
-    while IFS= read -r row; do
-      [ -n "$row" ] || continue
-      [ "${dupe_map[${row%%$'\t'*}]:-}" ] || continue
-      while IFS= read -r cwd; do
-        [ -n "$cwd" ] && open_dir_map["$cwd"]=1
-      done <<< "$(herdr_workspace_cwds "${row#*$'\t'}")"
-    done <<< "$active"
-  fi
 
   printf '%s\n' "$projects" | while IFS= read -r row; do
     [ -n "$row" ] || continue
     name=${row%%$'\t'*}
     d=${row#*$'\t'}
-    # Dupes are always shown (an open workspace with the same label would
-    # otherwise hide the other project entirely) — except the one that IS open.
-    [ "${open_dir_map[$d]:-}" ] && continue
-    if [ "${dupe_map[$name]:-}" ]; then
+    canon=$(herdr_canonical_path "$d")
+    # Directory-based: hide only the project whose own directory is open.
+    [ "${open_dir_map[$canon]:-}" ] && continue
+    if [ "${proj_dupe_map[$name]:-}" ] || [ "${active_dupe_map[$name]:-}" ]; then
       printf "\033[32m%s\033[0m  %s\t%s\tproject\n" "$name" "$(herdr_display_path "$d")" "$d"
-    elif [ "${active_map[$name]:-}" ]; then
-      continue
     else
       printf "\033[32m%s\033[0m\t%s\tproject\n" "$name" "$d"
     fi
@@ -60,9 +68,8 @@ list_entries() {
   echo "$dirs" | while IFS= read -r d; do
     [ -n "$d" ] || continue
     if [ -z "$(herdr_layout_file "$d")" ]; then
-      session_name="${d##*/}"
-      session_name="${session_name//./_}"
-      [ -n "$session_name" ] && [ "${active_map[$session_name]:-}" ] && continue
+      canon=$(herdr_canonical_path "$d")
+      [ "${open_dir_map[$canon]:-}" ] && continue
       printf "%s\t%s\tdir\n" "$(herdr_display_path "$d")" "$d"
     fi
   done
