@@ -89,7 +89,8 @@
       "id": "bibek.lock"
     },
     {
-      "id": "bibek.obsidian-search"
+      "id": "bibek.obsidian-search",
+      "showDailyNotes": false
     },
     {
       "id": "bibek.readest",
