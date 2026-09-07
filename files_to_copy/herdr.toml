@@ -58,6 +58,10 @@ close_workspace = "prefix+shift+ctrl+x"
 previous_workspace = ["prefix+shift+p", "alt+up", "prefix+("]
 next_workspace = ["prefix+shift+n", "alt+down", "prefix+)"]
 
+# Agents
+next_agent = "prefix+a"
+previous_agent = "prefix+shift+a"
+
 settings = "prefix+shift+s"
 goto = ["prefix+g", "prefix+f"]
 
