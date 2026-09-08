@@ -7,6 +7,7 @@ flyline set-style --default-theme dark
 flyline set-cursor --backend terminal
 flyline mouse --mode smart --change-shape
 flyline editor --show-inline-history true --select-with-mouse --auto-close-chars
+flyline editor --show-inline-history-metadata false
 flyline suggestions --auto-suggest true --use-flycomp --git-ref-mtime --sort-order mtime --num-suggestion-rows 12
 flyline suggestions set-fuzzy-mode all
 flyline key bind Ctrl+r 'always=runBashCommand(__fzf_history__)'
