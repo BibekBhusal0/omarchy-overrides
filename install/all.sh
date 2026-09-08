@@ -16,6 +16,7 @@ omarchy-launch-terminal bash -c "
   bash '$SCRIPT_DIR/zsh.sh'
   bash '$SCRIPT_DIR/tmux.sh'
   bash '$SCRIPT_DIR/tui.sh'
+  bash '$SCRIPT_DIR/flyline.sh'
   bash '$SCRIPT_DIR/spicetify.sh'
   bash '$SCRIPT_DIR/zen-browser.sh'
   bash '$SCRIPT_DIR/others.sh'

@@ -21,9 +21,7 @@ create_symlink "$SCRIPT_DIR/../files_to_copy/yazi.toml" "$HOME/.config/yazi/yazi
 echo "Setting up zsh overrides..."
 write_to_file "$HOME/.zshrc" "source $SCRIPT_DIR/../zsh/rc.sh"
 
-write_to_file "$HOME/.bashrc" "source $SCRIPT_DIR/bashrc
-source $SCRIPT_DIR/../zsh/shell.sh
-source $SCRIPT_DIR/../zsh/alias.sh"
+write_to_file "$HOME/.bashrc" "source $SCRIPT_DIR/../bash/rc.sh"
 
 # env for uwsm
 write_to_file "$HOME/.config/uwsm/env" "export PATH=$HOME/.cargo/bin:$HOME/.local/bin:\$PATH"
