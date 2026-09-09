@@ -11,6 +11,7 @@ IGNORED_PROGRAMS=(ls eza ll la cd z zoxide cat bat
  )
 PROGRAM_ALIASES=(
   zsh="terminal"
+  bash="terminal"
   opencode="AI"
 )
 ICONS_ENABLED=1
