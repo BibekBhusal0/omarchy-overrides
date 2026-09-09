@@ -4,7 +4,7 @@ create_symlink() {
   local src="$1"
   local dest="$2"
 
-  if [ -L "$dest" ] && [ "$(readlink -f "$dest")" == "$(readlink -f "$src")" ]; then
+  if [ -L "$dest" ] && [ "$(readlink -m "$dest")" == "$(readlink -m "$src")" ]; then
     echo "Symlink already correct: $dest"
     return
   fi

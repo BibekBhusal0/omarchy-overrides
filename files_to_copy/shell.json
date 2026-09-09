@@ -101,17 +101,20 @@
     },
     {
       "id": "io.github.idr4n.clipboard-plus"
+    },
+    {
+      "id": "bibek.menu"
     }
   ],
   "version": 1,
   "disabledPlugins": [
     "omarchy.dev-gallery",
     "omarchy.media",
+    "omarchy.menu",
     "omarchy.lock"
   ],
   "cloneSourceRestores": [
     "bibek.media",
-    "paisen.menu",
     "bibek.lock"
   ]
 }

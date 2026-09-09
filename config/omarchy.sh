@@ -8,8 +8,8 @@ mkdir -p ~/.config/omarchy/plugins
 
 install_my_plugin() {
   local name="$1"
-  local dest="$HOME/.config/omarchy/plugins/$name"
-  create_symlink ~/Code/omarchy-shell-plugins/$name "$dest"
+  create_symlink ~/Code/omarchy-shell-plugins/$name "$HOME/.config/omarchy/plugins/$name"
+  create_symlink ~/Code/omarchy-shell-plugins/$name/config.json "$HOME/.config/omarchy/$name.json"
 }
 
 install_my_plugin media
@@ -18,6 +18,7 @@ install_my_plugin ytdl
 install_my_plugin obsidian-search
 install_my_plugin readest
 install_my_plugin lock
+install_my_plugin menu
 
 EXTERNAL_DIR="$HOME/Code/other-omarchy-plugins"
 mkdir -p "$EXTERNAL_DIR"
@@ -32,8 +33,6 @@ install_external_plugin() {
   create_symlink "$src" "$HOME/.config/omarchy/plugins/$name"
 }
 
-install_external_plugin Praveensenpai/omarchy-refined-menu plugin
-install_external_plugin younesdahdouh/omarchy-super-apps
 install_external_plugin ESHAYAT102/confetti-omarchy-plugin
 install_external_plugin janhesters/omarchy-focus
 install_external_plugin idr4n/omarchy-clipboard-plus
