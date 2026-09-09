@@ -1,4 +1,13 @@
 # Overwriting some behaviours for default alias
+omarchy() {
+  if [[ "${1:-}" == "plugin" && "${2:-}" == "update" ]]; then
+    shift 2
+    omarchy-plugin-update "$@"
+  else
+    command omarchy "$@"
+  fi
+}
+
 if command -v eza &> /dev/null; then
   alias ls="eza --group-directories-first --icons=auto --no-quotes"
   alias lsa="ls -a"

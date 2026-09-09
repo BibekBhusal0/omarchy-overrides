@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+EXTERNAL_DIR="$HOME/Code/other-omarchy-plugins"
+OWN_REPO="$HOME/Code/omarchy-shell-plugins"
+PLUGINS_DIR="$HOME/.config/omarchy/plugins"
+UPDATED_ANY=0
+ONLY=""
+
+update_repo() {
+  local dir="$1"
+  local name
+  name="$(basename "$dir")"
+  if [[ ! -d "$dir/.git" ]]; then
+    echo "Skipping $name: not a git checkout."
+    return 0
+  fi
+  if ! git -C "$dir" fetch --quiet origin; then
+    echo "Fetch failed for $name, skipping."
+    return 0
+  fi
+  if ! git -C "$dir" rev-parse --quiet --verify "@{u}" >/dev/null; then
+    echo "Skipping $name: no upstream branch."
+    return 0
+  fi
+  if [[ $(git -C "$dir" rev-parse HEAD) == $(git -C "$dir" rev-parse "@{u}") ]]; then
+    echo "$name is up to date."
+    return 0
+  fi
+  if git -C "$dir" merge --ff-only "@{u}" >/dev/null 2>&1; then
+    echo "Updated $name."
+    UPDATED_ANY=1
+  else
+    echo "Cannot fast-forward $name; you have local changes in $dir" >&2
+  fi
+}
+
+resolve_source() {
+  local id="$1"
+  local target
+  target="$(readlink -f "$PLUGINS_DIR/$id" 2>/dev/null)"
+  if [[ -z "$target" || ! -e "$target" ]]; then
+    echo "No plugin source named '$id'." >&2
+    return 1
+  fi
+  if [[ "$target" == "$OWN_REPO"* ]]; then
+    printf '%s' "$OWN_REPO"
+  elif [[ "$target" == "$EXTERNAL_DIR"/* ]]; then
+    target="${target#$EXTERNAL_DIR/}"
+    printf '%s' "$EXTERNAL_DIR/${target%%/*}"
+  else
+    echo "Plugin '$id' is not managed here: $target" >&2
+    return 1
+  fi
+}
+
+while (( $# > 0 )); do
+  case "$1" in
+  --yes | -y) shift ;;
+  -h | --help)
+    echo "Usage: omarchy-plugin-update [id] [--yes]"
+    echo "Updates plugin sources (own repo plus each repo in ~/Code/other-omarchy-plugins)."
+    exit 0
+    ;;
+  -*) echo "Unknown option: $1" >&2; exit 1 ;;
+  *)
+    [[ -z "$ONLY" ]] || { echo "Unexpected argument: $1" >&2; exit 1; }
+    ONLY="$1"
+    shift
+    ;;
+  esac
+done
+
+if [[ -n "$ONLY" ]]; then
+  src="$(resolve_source "$ONLY")" || exit 1
+  update_repo "$src"
+else
+  update_repo "$OWN_REPO"
+  shopt -s nullglob
+  for dir in "$EXTERNAL_DIR"/*/; do
+    update_repo "${dir%/}"
+  done
+fi
+
+if [[ "$UPDATED_ANY" == "1" ]]; then
+  omarchy-restart-shell
+else
+  echo "Nothing to update."
+fi
