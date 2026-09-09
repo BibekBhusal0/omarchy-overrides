@@ -97,13 +97,7 @@
       "libraryPath": "~/.var/app/com.bilingify.readest/data/com.bilingify.readest/Readest/Books"
     },
     {
-      "id": "paisen.menu"
-    },
-    {
       "id": "esh.confetti"
-    },
-    {
-      "id": "super-apps"
     },
     {
       "id": "io.github.idr4n.clipboard-plus"
@@ -113,7 +107,6 @@
   "disabledPlugins": [
     "omarchy.dev-gallery",
     "omarchy.media",
-    "omarchy.menu",
     "omarchy.lock"
   ],
   "cloneSourceRestores": [
