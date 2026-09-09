@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+PLUGINS_DIR="$HOME/.config/omarchy/plugins"
+
+shopt -s nullglob
+removed=0
+for entry in "$PLUGINS_DIR"/*; do
+  if [[ ! -L "$entry" ]]; then
+    echo "Removing non-symlink plugin: $entry"
+    rm -rf "$entry"
+    removed=1
+  fi
+done
+
+if [[ "$removed" == "1" ]]; then
+  omarchy-restart-shell
+else
+  echo "All plugins are symlinks, nothing to clean."
+fi

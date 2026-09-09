@@ -8,8 +8,8 @@ mkdir -p ~/.config/omarchy/plugins
 
 install_my_plugin() {
   local name="$1"
-  rm -rf ~/.config/omarchy/plugins/$name
-  cp -r ~/Code/omarchy-shell-plugins/$name ~/.config/omarchy/plugins/$name
+  local dest="$HOME/.config/omarchy/plugins/$name"
+  create_symlink ~/Code/omarchy-shell-plugins/$name "$dest"
 }
 
 install_my_plugin media
@@ -19,13 +19,25 @@ install_my_plugin obsidian-search
 install_my_plugin readest
 install_my_plugin lock
 
-clone Praveensenpai/omarchy-refined-menu ~/Code/random/omarchy-refined-menu --depth=1
-clone younesdahdouh/omarchy-super-apps ~/.config/omarchy/plugins/apps-luncher --depth=1
-clone ESHAYAT102/confetti-omarchy-plugin ~/.config/omarchy/plugins/confetti --depth=1
-clone janhesters/omarchy-focus ~/.config/omarchy/plugins/focus  --depth=1
-clone idr4n/omarchy-clipboard-plus ~/.config/omarchy/plugins/clipboard-plus --depth=1
-create_symlink ~/.config/omarchy/plugins/focus/focus ~/.local/bin/focus
-create_symlink ~/Code/random/omarchy-refined-menu/plugin ~/.config/omarchy/plugins/menu
+EXTERNAL_DIR="$HOME/Code/other-omarchy-plugins"
+mkdir -p "$EXTERNAL_DIR"
+
+install_external_plugin() {
+  local repo="$1"
+  local subdir="${2:-}"
+  local name="${repo##*/}"
+  clone "$repo" "$EXTERNAL_DIR/$name" --depth=1
+  local src="$EXTERNAL_DIR/$name"
+  [[ -n "$subdir" ]] && src="$src/$subdir"
+  create_symlink "$src" "$HOME/.config/omarchy/plugins/$name"
+}
+
+install_external_plugin Praveensenpai/omarchy-refined-menu plugin
+install_external_plugin younesdahdouh/omarchy-super-apps
+install_external_plugin ESHAYAT102/confetti-omarchy-plugin
+install_external_plugin janhesters/omarchy-focus
+install_external_plugin idr4n/omarchy-clipboard-plus
+create_symlink ~/.config/omarchy/plugins/omarchy-focus/focus ~/.local/bin/focus
 
 write_to_file "$HOME/.config/omarchy/focus-sites" "youtube.com
 www.youtube.com
