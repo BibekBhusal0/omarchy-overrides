@@ -43,15 +43,7 @@
       ],
       "right": [
         {
-          "id": "bibek.ytdl",
-          "cookiesBrowser": "zen",
-          "extraArgs": "",
-          "defaultQuality": "1080p",
-          "defaultDownloadType": "video",
-          "downloadTranscripts": false,
-          "playlistInSeparateFolder": true,
-          "enableHistory": true,
-          "downloadLocation": "~/Downloads/youtube"
+          "id": "bibek.ytdl"
         },
         {
           "id": "omarchy.tray"
@@ -89,12 +81,10 @@
       "id": "bibek.lock"
     },
     {
-      "id": "bibek.obsidian-search",
-      "showDailyNotes": false
+      "id": "bibek.obsidian-search"
     },
     {
-      "id": "bibek.readest",
-      "libraryPath": "~/.var/app/com.bilingify.readest/data/com.bilingify.readest/Readest/Books"
+      "id": "bibek.readest"
     },
     {
       "id": "esh.confetti"
