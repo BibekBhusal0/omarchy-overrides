@@ -10,6 +10,7 @@ git config --global alias.c 'commit -m'
 git config --global alias.s 'status'
 git config --global alias.b '!f() { git switch "$1" 2>/dev/null || git switch -c "$1"; }; f'
 git config --global alias.l "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate --date=short"
+git config --global alias.sync "!f() { git add -A && (git diff --cached --quiet || git commit -m \"Auto-sync \$(date '+%Y-%m-%d %H:%M:%S')\") && git pull --rebase && git push; }; f"
 git config --global alias.d 'diff'
 git config --global alias.ds 'diff --staged'
 git config --global alias.unstage 'restore --staged'
