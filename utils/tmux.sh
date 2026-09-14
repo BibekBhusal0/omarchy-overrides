@@ -83,7 +83,7 @@ create_or_switch_session() {
     fi
 
     # Directory-based: reuse the session already backing this directory
-    # (renames included — identity is the start path, not the name).
+    # (renames included; identity is the start path, not the name).
     session_name=$(tmux_session_for_dir "$dir")
     if [ -n "$session_name" ]; then
         switch_to "$session_name"
