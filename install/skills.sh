@@ -18,3 +18,11 @@ for skill_dir in "$SKILLS_DIR"/*/; do
   create_symlink "$skill_dir" "$HOME/.claude/skills/$skill"
   create_symlink "$skill_dir" "$HOME/.codex/skills/$skill"
 done
+
+OPENCODE_JSON="$HOME/.config/opencode/opencode.json"
+mkdir -p "$(dirname "$OPENCODE_JSON")"
+[[ -f "$OPENCODE_JSON" ]] || echo '{}' >"$OPENCODE_JSON"
+jq '.permission.external_directory["~/Code/skills"] = "allow"
+  | .permission.external_directory["~/Code/skills/**"] = "allow"
+  | .permission.external_directory["~/Code/random/opencode"] = "allow"
+  | .permission.external_directory["~/Code/random/opencode/**"] = "allow"' "$OPENCODE_JSON" >"$OPENCODE_JSON.tmp" && mv "$OPENCODE_JSON.tmp" "$OPENCODE_JSON"
