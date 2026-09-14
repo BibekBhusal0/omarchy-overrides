@@ -14,7 +14,8 @@ flyline key bind Ctrl+r 'always=runBashCommand(__fzf_history__)'
 flyline key bind Ctrl+t 'always=runBashCommand(fzf-file-widget)'
 flyline key bind Ctrl+n tabCompletionAvailable=tabCompletionNextSuggestion
 flyline key bind Ctrl+p tabCompletionAvailable=tabCompletionPrevSuggestion
-flyline key bind Ctrl+y tabCompletionAvailable=tabCompletionAcceptEntry
+flyline key bind Ctrl+y tabCompletionAvailable=tabCompletionNextSuggestion+tabCompletionAcceptEntry
+flyline key bind Ctrl+y tabCompletionEntrySelected=tabCompletionAcceptEntry
 flyline key bind Alt+l inlineSuggestionAvailable=inlineSuggestionAccept
 
 flyline set-agent-mode \
