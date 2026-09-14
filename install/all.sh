@@ -10,6 +10,7 @@ bash "$SCRIPT_DIR/webapp.sh"
 # Long-running but AUR-free: launch in parallel terminals
 omarchy-launch-terminal bash "$SCRIPT_DIR/herdr.sh" &>/dev/null &
 omarchy-launch-terminal bash "$SCRIPT_DIR/lofi-music.sh" &>/dev/null &
+omarchy-launch-terminal bash "$SCRIPT_DIR/skills.sh" &>/dev/null &
 
 # AUR scripts: must run sequentially to avoid pacman lock conflicts
 omarchy-launch-terminal bash -c "
