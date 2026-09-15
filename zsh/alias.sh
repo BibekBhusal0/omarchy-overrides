@@ -107,3 +107,27 @@ gce () {
   emojified_text=$(devmoji --text "$1" | sed 's/"/\\"/g')
   git commit -am "$emojified_text"
 }
+
+gitfix() {
+  local root
+  root=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "Not a git repo."; return 1; }
+  cd "$root" || return 1
+
+  echo "Scanning for empty/corrupt objects..."
+  local bad
+  bad=$(find .git/objects -type f -size 0)
+
+  if [ -n "$bad" ]; then
+    echo "Found empty objects, removing:"
+    echo "$bad"
+    echo "$bad" | xargs rm -f
+  else
+    echo "No empty objects found."
+  fi
+
+  echo "Fetching..."
+  git fetch origin
+
+  echo "Running fsck..."
+  git fsck --full
+}
