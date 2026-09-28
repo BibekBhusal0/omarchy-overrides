@@ -19,6 +19,9 @@
           "id": "omarchy.system-update"
         },
         {
+          "id": "bibek.obsidian-daily"
+        },
+        {
           "id": "io.github.janhesters.focus"
         }
       ],
@@ -47,9 +50,6 @@
         },
         {
           "id": "omarchy.tray"
-        },
-        {
-          "id": "bibek.obsidian-daily"
         },
         {
           "id": "omarchy.tailscale"
