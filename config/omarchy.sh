@@ -9,7 +9,10 @@ mkdir -p ~/.config/omarchy/plugins
 install_my_plugin() {
   local name="$1"
   create_symlink ~/Code/omarchy-shell-plugins/$name "$HOME/.config/omarchy/plugins/$name"
-  create_symlink ~/Code/omarchy-shell-plugins/$name/config.json "$HOME/.config/omarchy/$name.json"
+  if [[ -f ~/Code/omarchy-shell-plugins/$name/config.json ]]; then
+    rm -f "$HOME/.config/omarchy/$name.json"
+    cp ~/Code/omarchy-shell-plugins/$name/config.json "$HOME/.config/omarchy/$name.json"
+  fi
 }
 
 install_my_plugin media
