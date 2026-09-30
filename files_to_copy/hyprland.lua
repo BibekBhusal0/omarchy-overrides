@@ -81,13 +81,17 @@ bind(modKey("Z"), "omarchy-launch-or-focus zen-browser", "Zen")
 bind(modKey("N"), "omarchy-launch-tui nvim", "Neovim")
 bind(modKey("SHIFT + N"), "omarchy-launch-tui nvim config", "Neovim Config")
 bind(modKey("D"), "vesktop --toggle", "Discord")
-bind(modKey("Y"), "omarchy-launch-tui yazi $(omarchy-cmd-terminal-cwd)", "Yazi")
 
 -- Obsidian
 bind(
 	modKey("O"),
-	'omarchy-launch-or-focus ^obsidian$ "uwsm-app -- obsidian -disable-gpu --enable-wayland-ime"',
-	"Obsidian"
+	'uwsm-app -- obsidian -disable-gpu --enable-wayland-ime "obsidian://open?vault=vault"',
+	"Obsidian (main vault)"
+)
+bind(
+	modKey("Y"),
+	'uwsm-app -- obsidian -disable-gpu --enable-wayland-ime "obsidian://open?vault=Youtube"',
+	"Obsidian (Youtube vault)"
 )
 -- -- :TODO: Migrate to obsidian CLI
 bind(modKey("SHIFT + O"), 'obsidian "obsidian://daily"', "Obsidian Daily")
