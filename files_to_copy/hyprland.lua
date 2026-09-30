@@ -95,12 +95,6 @@ bind(
 )
 -- -- :TODO: Migrate to obsidian CLI
 bind(modKey("SHIFT + O"), 'obsidian "obsidian://daily"', "Obsidian Daily")
--- -- :FIX: Will not work aftetr quattro
--- bind(
--- 	modKey("CTRL + SHIFT + O"),
--- 	'bash -c \'v=$(walker -d -I -p "Capture something quickly") && [ -n "$v" ] && obsidian "obsidian://quickadd?choice=Capture%20Daily&value-entry=$(printf "%s" "$v" | sed "s/ /%20/g")"\'',
--- 	"Obsidian Capture daily"
--- )
 
 bind(modKey("bracketleft"), "omarchy-shell media previous", "Previous Media")
 bind(modKey("bracketright"), "omarchy-shell media next", "Next Media")
