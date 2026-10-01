@@ -31,16 +31,18 @@ bind(modKey("SHIFT + SLASH"), "uwsm-app -- bitwarden.desktop", "Passwords")
 
 -- Summoning Shell
 bind(modKey("ALT + R"), "omarchy-shell shell toggle bibek.readest", "Readest search")
-bind(modKey("ALT + O"), "omarchy-shell shell toggle bibek.obsidian-search", "Obsidian Search")
 bind(modKey("ALT + M"), "omarchy-shell shell toggle bibek.media", "Media Menu")
 bind(modKey("CTRL + Y"), "omarchy-shell shell toggle bibek.ytdl", "Download youtube videos")
-bind(modKey("ALT + Y"), "omarchy-shell shell toggle bibek.obsidian-search '{\"vaultPath\":\"~/Youtube/Youtube\"}'", "Obsidian Search (Youtube vault)")
 bind(modKey("ALT + P"), "omarchy-shell shell toggle bibek.focusd", "Pomodoro popup")
-bind(modKey("ALT + D"), "omarchy-shell shell toggle bibek.obsidian-daily", "Obsidian Daily")
 bind(modKey("SHIFT + E"), "omarchy-shell esh.confetti fire", "Confetti  🎉")
 bind(modKey("SUPER_L"), "omarchy-shell shell toggle bibek.menu '{\"menu\":\"apps\"}'", "Apps")
 bind(modKey("ALT + SPACE"), "omarchy-shell shell toggle bibek.menu '{\"menu\":\"apps\"}'", "Apps")
 bind(modKey("CTRL + V"), "omarchy-shell shell toggle io.github.idr4n.clipboard-plus", "Clipboard History")
+
+-- Obsidian
+bind(modKey("ALT + O"), "omarchy-shell shell toggle bibek.obsidian-search", "Obsidian Search")
+bind(modKey("ALT + Y"), "omarchy-shell shell toggle bibek.obsidian-search '{\"vaultPath\":\"~/Youtube/Youtube\"}'", "Obsidian Search (Youtube vault)")
+bind(modKey("ALT + D"), "omarchy-shell shell toggle bibek.obsidian-daily", "Obsidian Daily (tasks)")
 
 local animations_state_file = os.getenv("HOME") .. "/.config/hypr/animations.state"
 
