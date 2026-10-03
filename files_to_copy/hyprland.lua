@@ -96,7 +96,7 @@ bind(
 	"Obsidian (Youtube vault)"
 )
 -- -- :TODO: Migrate to obsidian CLI
-bind(modKey("SHIFT + O"), 'obsidian "obsidian://daily"', "Obsidian Daily")
+bind(modKey("SHIFT + O"), 'obsidian "obsidian://daily?vault=vault"', "Obsidian Daily")
 
 bind(modKey("bracketleft"), "omarchy-shell media previous", "Previous Media")
 bind(modKey("bracketright"), "omarchy-shell media next", "Next Media")
