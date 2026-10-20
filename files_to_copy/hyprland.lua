@@ -19,8 +19,12 @@ local function modKey(keys)
 end
 
 -- Bindings similar to windows
-bind(modKey("E"), "uwsm-app -- nautilus --new-window $(omarchy-cmd-terminal-cwd)", "File manager")
+bind(modKey("E"), 'uwsm-app -- strata "$(omarchy-cmd-terminal-cwd)"', "File manager (cwd)")
 bind("CTRL + SHIFT + ESCAPE", "omarchy-launch-tui btop", "Activity")
+
+-- Strata replaced Nautilus as the file manager.
+bind("SUPER + SHIFT + F", "uwsm-app -- strata", "File manager")
+bind("SUPER + ALT + SHIFT + F", 'uwsm-app -- strata "$(omarchy-cmd-terminal-cwd)"', "File manager (cwd)")
 
 -- Ruler to measure screen
 bind(modKey("SHIFT + R"), "hypruler", "Ruler")
