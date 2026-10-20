@@ -19,7 +19,8 @@
           "id": "omarchy.system-update"
         },
         {
-          "id": "bibek.obsidian-daily"
+          "id": "bibek.obsidian-daily",
+          "insertHeading": "To-Dos"
         },
         {
           "id": "io.github.janhesters.focus"
