@@ -62,9 +62,11 @@ install_external_plugin() {
   create_symlink "$src" "$HOME/.config/omarchy/plugins/$name"
 }
 
-install_external_plugin ESHAYAT102/confetti-omarchy-plugin
+install_external_plugin weedwhitesandwine/omafetti
 install_external_plugin janhesters/omarchy-focus
 install_external_plugin idr4n/omarchy-clipboard-plus
+
+write_to_file "$HOME/.local/state/omafetti/settings.json" '{"configured":true,"palette":"classic","style":"corners","density":"normal","shortcut":"","barIcon":false,"barSection":"right"}'
 create_symlink ~/.config/omarchy/plugins/omarchy-focus/focus ~/.local/bin/focus
 
 write_to_file "$HOME/.config/omarchy/focus-sites" "youtube.com
