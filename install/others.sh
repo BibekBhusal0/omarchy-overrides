@@ -6,8 +6,7 @@ omarchy-pkg-aur-add \
   helium-browser-bin \
   hypruler-bin \
   vesktop-bin \
-  omniroute-bin \
-  yazi
+  omniroute-bin
 
 omarchy-install-dev-env node
 omarchy-install-dev-env bun
