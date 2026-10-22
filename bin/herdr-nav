@@ -18,11 +18,22 @@ case "$dir" in
   *) echo "herdr-nav: unknown direction: $dir" >&2; exit 2 ;;
 esac
 
-pane_id=$("$herdr_bin" pane current --current 2>/dev/null | sed -n 's/.*"pane_id"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -1)
+if [ ! -x "$herdr_bin" ]; then
+  herdr_bin="$(command -v herdr || printf 'herdr')"
+fi
 
-if [ -n "$pane_id" ] && "$herdr_bin" pane process-info --current 2>/dev/null |
+pane_id="${HERDR_ACTIVE_PANE_ID:-}"
+if [ -z "$pane_id" ]; then
+  pane_id=$("$herdr_bin" pane current --current 2>/dev/null | sed -n 's/.*"pane_id"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -1)
+fi
+
+if [ -n "$pane_id" ] && "$herdr_bin" pane process-info --pane "$pane_id" 2>/dev/null |
   grep -qE '"name"[[:space:]]*:[[:space:]]*"(g?(view|l?n?vim?x?|fzf)(diff)?)"'; then
   exec "$herdr_bin" pane send-keys "$pane_id" "$key"
+fi
+
+if [ -n "$pane_id" ]; then
+  exec "$herdr_bin" pane focus --direction "$dir" --pane "$pane_id"
 fi
 
 exec "$herdr_bin" pane focus --direction "$dir" --current
