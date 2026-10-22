@@ -28,6 +28,7 @@ bind("SUPER + ALT + SHIFT + F", 'uwsm-app -- strata "$(omarchy-cmd-terminal-cwd)
 
 -- Ruler to measure screen
 bind(modKey("SHIFT + R"), "hypruler", "Ruler")
+bind(modKey("SHIFT + T"), "t3code", "T3 Code")
 
 -- Launch all apps i use
 bind(modKey("SLASH"), "start", "Launch All Apps I Use")
