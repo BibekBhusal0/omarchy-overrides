@@ -7,7 +7,10 @@ omarchy-pkg-aur-add \
   t3code-bin \
   hypruler-bin \
   vesktop-bin \
-  omniroute-bin
+  omniroute-bin \
+  stremio-linux-shell
+
+omarchy-pkg-add readest
 
 omarchy-install-dev-env node
 omarchy-install-dev-env bun

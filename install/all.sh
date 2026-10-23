@@ -21,6 +21,5 @@ omarchy-launch-terminal bash -c "
   bash '$SCRIPT_DIR/spicetify.sh'
   bash '$SCRIPT_DIR/zen-browser.sh'
   bash '$SCRIPT_DIR/others.sh'
-  bash '$SCRIPT_DIR/flatpak.sh'
   bash '$SCRIPT_DIR/strata.sh'
 " &>/dev/null &
