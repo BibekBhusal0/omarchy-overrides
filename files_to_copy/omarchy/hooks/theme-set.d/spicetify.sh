@@ -95,9 +95,6 @@ fi
   printf '}\n'
 } >"$XPUI/colors.css"
 cp "$THEME_DIR/user.css" "$XPUI/user.css"
-# Ziro's CSS hardcodes an equalizer green inside an embedded SVG mask; CSS vars
-# don't work there, so retint it with the current button color.
-sed -i "s/#20BC54/#$button/g" "$XPUI/user.css"
 
 mkdir -p "$(dirname "$STATE_FILE")"
 cp "$THEME_DIR/color.ini" "$STATE_FILE"

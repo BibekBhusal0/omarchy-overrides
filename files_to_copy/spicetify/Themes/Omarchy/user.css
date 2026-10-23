@@ -3,6 +3,17 @@
   --br-2: 8px;
 }
 
+/* background: flatten header gradients (they also animate on hover) */
+.main-home-homeHeader,
+.main-entityHeader-backgroundColor,
+.main-actionBarBackground-background {
+  display: none;
+}
+.main-topBar-overlay,
+.main-topBar-background {
+  background-color: var(--spice-main) !important;
+}
+
 /* player: floating progress bar on the player bar's top edge */
 .main-nowPlayingBar-center .playback-progressbar {
   position: absolute;
@@ -15,7 +26,7 @@
 .playback-bar {
   --bar: var(--spice-text);
 }
-.volume-bar {
+.main-nowPlayingBar-volumeBar {
   --bar: var(--spice-subtext);
   margin-right: 8px;
 }
@@ -25,10 +36,6 @@
 }
 .x-progressBar-progressBarBg {
   background-color: var(--spice-button-disabled);
-}
-.DuvrswZugGajIFNXObAr .progress-bar__slider,
-.epWhU7hHGktzlO_dop6z {
-  background-color: var(--bar) !important;
 }
 .progress-bar__slider {
   display: block;
@@ -41,25 +48,29 @@
   height: 20px;
   width: 20px;
 }
+.main-nowPlayingBar-volumeBar .progress-bar__slider {
+  border-width: 2px !important;
+  border-style: solid !important;
+  border-color: var(--bar) !important;
+  height: 14px;
+  width: 14px;
+}
 
 /* times: one "elapsed / remaining" cluster at the bar's right end; the extra
    controls shift left to reserve that space */
-.player-controls__buttons {
-  margin: 0;
-}
 .main-nowPlayingBar-extraControls {
   margin-right: 75px;
 }
 .playback-bar__progress-time-elapsed,
 .main-playbackBarRemainingTime-container {
   position: absolute;
-  bottom: 33px;
+  bottom: 60px;
   margin: 0;
   line-height: 1;
   color: var(--spice-text);
 }
 .playback-bar__progress-time-elapsed {
-  right: 46px;
+  right: 38px;
 }
 .playback-bar__progress-time-elapsed::after {
   content: ' /';
@@ -68,6 +79,9 @@
   right: 8px;
   width: 44px;
   text-align: right;
+}
+.player-controls__buttons {
+  margin: 0;
 }
 .player-controls__buttons button:not(.main-playPauseButton-button) {
   color: var(--spice-button) !important;
