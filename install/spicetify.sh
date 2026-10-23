@@ -10,6 +10,7 @@ HOOK="$HOOK_DIR/ignore-spotify"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../utils/write-to-file.sh"
+source "$SCRIPT_DIR/../utils/symlink.sh"
 write_to_file "$HOOK" "$(cat <<'EOF'
 #!/bin/bash
 
@@ -38,18 +39,12 @@ if [[ ! -f "$HOME/.config/spotify/prefs" ]]; then
   exit 0
 fi
 
-THEME_DIR="$HOME/.config/spicetify/Themes/Ziro"
-if [[ ! -f "$THEME_DIR/color.ini" || ! -f "$THEME_DIR/user.css" ]]; then
-  mkdir -p "$THEME_DIR"
-  curl -fsSL https://raw.githubusercontent.com/spicetify/spicetify-themes/master/Ziro/color.ini -o "$THEME_DIR/color.ini"
-  curl -fsSL https://raw.githubusercontent.com/spicetify/spicetify-themes/master/Ziro/user.css -o "$THEME_DIR/user.css"
-fi
-spicetify config current_theme Ziro color_scheme green-dark
+# Omarchy theme refresh happens via the theme-set hook; only the CSS lives here.
+create_symlink "$SCRIPT_DIR/../files_to_copy/omarchy/hooks/theme-set.d/spicetify.sh" "$HOME/.config/omarchy/hooks/theme-set.d/spicetify.sh"
+create_symlink "$SCRIPT_DIR/../files_to_copy/spicetify/Themes/Omarchy/user.css" "$HOME/.config/spicetify/Themes/Omarchy/user.css"
+spicetify config current_theme Omarchy color_scheme omarchy
 
-EXT_FILE="$HOME/.config/spicetify/Extensions/adblock.js"
-if [[ ! -f "$EXT_FILE" ]]; then
-  curl -fsSL https://raw.githubusercontent.com/rxri/spicetify-extensions/main/adblock/adblock.js -o "$EXT_FILE"
-fi
+curl -fsSL https://raw.githubusercontent.com/rxri/spicetify-extensions/main/adblock/adblock.js -o "$HOME/.config/spicetify/Extensions/adblock.js"
 EXTENSIONS=(shuffle+.js keyboardShortcut.js adblock.js)
 
 enabled=$(spicetify config extensions | tr '\n' ' ')
@@ -60,7 +55,12 @@ done
 if ! grep -q '^\[Backup\]' "$(spicetify -c)"; then
   spicetify backup
 fi
-spicetify apply
 
-echo "Theme: $(spicetify config current_theme)/$(spicetify config color_scheme)"
-echo "Extensions: $(spicetify config extensions | tr '\n' ' ')"
+# The client reads ~/.config/spotify-flags.conf at every launch; the debug port
+# is what the theme hook reloads the UI over.
+create_symlink "$SCRIPT_DIR/../files_to_copy/spotify-flags.conf" "$HOME/.config/spotify-flags.conf"
+
+spicetify apply
+"$HOME/.config/omarchy/hooks/theme-set.d/spicetify.sh"
+
+echo "Theme: $(spicetify config current_theme 2>/dev/null)/$(spicetify config color_scheme 2>/dev/null)"
