@@ -14,14 +14,14 @@
   background-color: var(--spice-main) !important;
 }
 
-/* player: floating progress bar on the player bar's top edge */
+.main-nowPlayingBar-nowPlayingBar {
+  position: relative;
+}
 .main-nowPlayingBar-center .playback-progressbar {
   position: absolute;
-  left: 0;
-  bottom: 82px;
-}
-.main-nowPlayingBar-nowPlayingBar:not(:only-child) .playback-progressbar:not(.volume-bar__slider-container > .playback-progressbar) {
-  bottom: 108px;
+  left: -7px;
+  right: -7px;
+  bottom: 74px;
 }
 .playback-bar {
   --bar: var(--spice-text);
@@ -64,7 +64,7 @@
 .playback-bar__progress-time-elapsed,
 .main-playbackBarRemainingTime-container {
   position: absolute;
-  bottom: 60px;
+  bottom: 30px;
   margin: 0;
   line-height: 1;
   color: var(--spice-text);
