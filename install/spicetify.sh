@@ -40,8 +40,8 @@ if [[ ! -f "$HOME/.config/spotify/prefs" ]]; then
 fi
 
 # Omarchy theme refresh happens via the theme-set hook; only the CSS lives here.
-create_symlink "$SCRIPT_DIR/../files_to_copy/omarchy/hooks/theme-set.d/spicetify.sh" "$HOME/.config/omarchy/hooks/theme-set.d/spicetify.sh"
-create_symlink "$SCRIPT_DIR/../files_to_copy/spicetify/Themes/Omarchy/user.css" "$HOME/.config/spicetify/Themes/Omarchy/user.css"
+create_symlink "$SCRIPT_DIR/../files_to_copy/spicetify-theme-hook.sh" "$HOME/.config/omarchy/hooks/theme-set.d/spicetify.sh"
+create_symlink "$SCRIPT_DIR/../files_to_copy/spicetify-theme.css" "$HOME/.config/spicetify/Themes/Omarchy/user.css"
 spicetify config current_theme Omarchy color_scheme omarchy
 
 curl -fsSL https://raw.githubusercontent.com/rxri/spicetify-extensions/main/adblock/adblock.js -o "$HOME/.config/spicetify/Extensions/adblock.js"
