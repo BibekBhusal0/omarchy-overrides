@@ -45,13 +45,11 @@ create_symlink "$SCRIPT_DIR/../files_to_copy/spicetify-theme-hook.sh" "$HOME/.co
 create_symlink "$SCRIPT_DIR/../files_to_copy/spicetify-theme.css" "$HOME/.config/spicetify/Themes/Omarchy/user.css"
 spicetify config current_theme Omarchy color_scheme omarchy
 
-# Keybinds extension lives in its own repo, cloned like the other personal repos.
 clone BibekBhusal0/spicetify-keys "$HOME/Code/spicetify-keys"
-ln -sfn "$HOME/Code/spicetify-keys/omarchy-keys.js" "$HOME/.config/spicetify/Extensions/omarchy-keys.js"
 
 curl -fsSL https://raw.githubusercontent.com/rxri/spicetify-extensions/main/adblock/adblock.js -o "$HOME/.config/spicetify/Extensions/adblock.js"
-create_symlink "$SCRIPT_DIR/../files_to_copy/spicetify-keys.js" "$HOME/.config/spicetify/Extensions/omarchy-keys.js"
-EXTENSIONS=(adblock.js fullAppDisplay.js omarchy-keys.js)
+create_symlink "$HOME/Code/spicetify-keys/keymap.js" "$HOME/.config/spicetify/Extensions/keymap.js"
+EXTENSIONS=(adblock.js keymap.js)
 
 enabled=$(spicetify config extensions | tr '\n' ' ')
 for ext in "${EXTENSIONS[@]}"; do
