@@ -11,6 +11,7 @@ HOOK="$HOOK_DIR/ignore-spotify"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../utils/write-to-file.sh"
 source "$SCRIPT_DIR/../utils/symlink.sh"
+source "$SCRIPT_DIR/../utils/clone.sh"
 write_to_file "$HOOK" "$(cat <<'EOF'
 #!/bin/bash
 
@@ -44,8 +45,13 @@ create_symlink "$SCRIPT_DIR/../files_to_copy/spicetify-theme-hook.sh" "$HOME/.co
 create_symlink "$SCRIPT_DIR/../files_to_copy/spicetify-theme.css" "$HOME/.config/spicetify/Themes/Omarchy/user.css"
 spicetify config current_theme Omarchy color_scheme omarchy
 
+# Keybinds extension lives in its own repo, cloned like the other personal repos.
+clone BibekBhusal0/spicetify-keys "$HOME/Code/spicetify-keys"
+ln -sfn "$HOME/Code/spicetify-keys/omarchy-keys.js" "$HOME/.config/spicetify/Extensions/omarchy-keys.js"
+
 curl -fsSL https://raw.githubusercontent.com/rxri/spicetify-extensions/main/adblock/adblock.js -o "$HOME/.config/spicetify/Extensions/adblock.js"
-EXTENSIONS=(shuffle+.js keyboardShortcut.js adblock.js)
+create_symlink "$SCRIPT_DIR/../files_to_copy/spicetify-keys.js" "$HOME/.config/spicetify/Extensions/omarchy-keys.js"
+EXTENSIONS=(adblock.js fullAppDisplay.js omarchy-keys.js)
 
 enabled=$(spicetify config extensions | tr '\n' ' ')
 for ext in "${EXTENSIONS[@]}"; do
