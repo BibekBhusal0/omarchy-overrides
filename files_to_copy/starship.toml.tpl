@@ -1,0 +1,67 @@
+palette = "omarchy_theme"
+add_newline = true
+command_timeout = 200
+
+format = """
+$hostname\
+[](active_bg)$directory\
+${custom.no_git_end}\
+$git_branch\
+$git_status\
+${custom.git_end}
+$character"""
+
+[directory]
+truncation_length = 2
+truncation_symbol = "…/"
+style = "bg:active_bg fg:active_fg"
+format = "[ $path ]($style)"
+repo_root_style = "bold fg:active_fg bg:active_bg"
+repo_root_format = "[ $repo_root]($repo_root_style)[$path ]($style)"
+
+[git_branch]
+symbol = ""
+style = "bg:inactive_bg fg:inactive_fg"
+format = "[ $symbol $branch ]($style)"
+
+[git_status]
+style = "bg:inactive_bg fg:inactive_fg"
+format = "[($all_status$ahead_behind )]($style)"
+ahead      = "⇡${count} "
+diverged   = "⇕⇡${ahead_count}⇣${behind_count} "
+behind     = "⇣${count} "
+conflicted = " "
+up_to_date = " "
+untracked  = "? "
+modified   = " "
+stashed    = ""
+staged     = ""
+renamed    = ""
+deleted    = ""
+
+[custom.git_end]
+description = "End bubble for git"
+command = "exit 0"
+when = "git rev-parse --is-inside-work-tree 2>/dev/null"
+format = "[](inactive_bg)"
+
+[custom.no_git_end]
+description = "Single end bubble for non-git"
+command = "exit 0"
+when = "! git rev-parse --is-inside-work-tree 2>/dev/null"
+format = "[](active_bg)"
+
+[character]
+error_symbol = "[✗](bold red) "
+success_symbol = "[❯](bold active_bg) "
+
+[hostname]
+ssh_only = true
+format = "[](inactive_bg)[@$hostname](bg:inactive_bg fg:active_bg)[](inactive_bg) "
+disabled = false
+
+[palettes.omarchy_theme]
+active_fg = "{{ background }}"
+active_bg = "{{ accent }}"
+inactive_fg = "{{ foreground }}"
+inactive_bg = "{{ muted }}"

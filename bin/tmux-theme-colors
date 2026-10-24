@@ -1,0 +1,13 @@
+#!/bin/bash
+
+command -v tmux >/dev/null 2>&1 || exit 0
+tmux info >/dev/null 2>&1 || exit 0
+
+# omarchy-theme-color echoes its second argument when the theme or key is
+# missing; the || covers the binary being absent on non-omarchy machines
+color() { omarchy-theme-color "$1" "$2" 2>/dev/null || printf '%s' "$2"; }
+
+tmux set -g "@active_bg" "$(color accent '#cba6f7')"
+tmux set -g "@active_fg" "$(color background '#1e1e2e')"
+tmux set -g "@inactive_fg" "$(color foreground '#cdd6f4')"
+tmux set -g "@inactive_bg" "$(color muted '#45475a')"
