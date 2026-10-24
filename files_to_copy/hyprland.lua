@@ -88,6 +88,7 @@ bind(modKey("Z"), "omarchy-launch-or-focus zen-browser", "Zen")
 bind(modKey("N"), "omarchy-launch-tui nvim", "Neovim")
 bind(modKey("SHIFT + N"), "omarchy-launch-tui nvim config", "Neovim Config")
 bind(modKey("D"), "vesktop --toggle", "Discord")
+bind(modKey("SHIFT + S"), "omarchy-launch-or-focus stremio", "Stremio")
 
 -- Obsidian
 bind(
