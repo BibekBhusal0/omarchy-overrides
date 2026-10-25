@@ -30,39 +30,39 @@ fi
 
 omarchy-pkg-aur-add spicetify-cli
 
+clone BibekBhusal0/spicetify-extensions "$HOME/Code/spicetify-extensions"
+
 if [[ -d /opt/spotify ]]; then
   sudo chmod a+wr /opt/spotify
   sudo chmod a+wr -R /opt/spotify/Apps
 fi
 
-if [[ ! -f "$HOME/.config/spotify/prefs" ]]; then
-  echo "Open Spotify, log in, wait ~60s, then run: spicetify backup apply"
-  exit 0
-fi
-
-# Omarchy theme refresh happens via the theme-set hook; only the CSS lives here.
-create_symlink "$SCRIPT_DIR/../files_to_copy/spicetify-theme-hook.sh" "$HOME/.config/omarchy/hooks/theme-set.d/spicetify.sh"
-create_symlink "$SCRIPT_DIR/../files_to_copy/spicetify-theme.css" "$HOME/.config/spicetify/Themes/Omarchy/user.css"
+mkdir -p "$HOME/.config/spicetify/Extensions"
+create_symlink "$HOME/Code/spicetify-extensions/Omarchy" "$HOME/.config/spicetify/Themes/Omarchy"
+create_symlink "$HOME/Code/spicetify-extensions/Omarchy/theme-hook.sh" "$HOME/.config/omarchy/hooks/theme-set.d/spicetify.sh"
 spicetify config current_theme Omarchy color_scheme omarchy
-
-clone BibekBhusal0/spicetify-keys "$HOME/Code/spicetify-keys"
+"$HOME/.config/omarchy/hooks/theme-set.d/spicetify.sh"
 
 curl -fsSL https://raw.githubusercontent.com/rxri/spicetify-extensions/main/adblock/adblock.js -o "$HOME/.config/spicetify/Extensions/adblock.js"
-create_symlink "$HOME/Code/spicetify-keys/keymap.js" "$HOME/.config/spicetify/Extensions/keymap.js"
-EXTENSIONS=(adblock.js keymap.js)
+create_symlink "$HOME/Code/spicetify-extensions/keymap/keymap.js" "$HOME/.config/spicetify/Extensions/keymap.js"
+create_symlink "$HOME/Code/spicetify-extensions/spicy-lyrics/dist/spicy-lyrics.js" "$HOME/.config/spicetify/Extensions/spicy-lyrics.js"
+EXTENSIONS=(adblock.js keymap.js spicy-lyrics.js)
 
 enabled=$(spicetify config extensions | tr '\n' ' ')
 for ext in "${EXTENSIONS[@]}"; do
   case "|$enabled|" in *"|$ext|"*) ;; *) spicetify config extensions "$ext" ;; esac
 done
 
+create_symlink "$SCRIPT_DIR/../files_to_copy/spotify-flags.conf" "$HOME/.config/spotify-flags.conf"
+
+if [[ ! -f "$HOME/.config/spotify/prefs" ]]; then
+  echo "Theme colors are initialized. Open Spotify, log in, wait about 60 seconds, then rerun this installer to apply the theme."
+  exit 0
+fi
+
 if ! grep -q '^\[Backup\]' "$(spicetify -c)"; then
   spicetify backup
 fi
-
-# The client reads ~/.config/spotify-flags.conf at every launch; the debug port
-# is what the theme hook reloads the UI over.
-create_symlink "$SCRIPT_DIR/../files_to_copy/spotify-flags.conf" "$HOME/.config/spotify-flags.conf"
 
 spicetify apply
 "$HOME/.config/omarchy/hooks/theme-set.d/spicetify.sh"
