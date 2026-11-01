@@ -15,6 +15,9 @@ echo ""
 create_symlink "$SCRIPT_DIR/../files_to_copy/hyprsunset.conf" "$HOME/.config/hypr/hyprsunset.conf"
 create_symlink "$SCRIPT_DIR/../files_to_copy/yazi.toml" "$HOME/.config/yazi/yazi.toml"
 
+create_symlink "$SCRIPT_DIR/../files_to_copy/t3code-keybindings.json" "$HOME/.t3/userdata/keybindings.json"
+create_symlink "$SCRIPT_DIR/../files_to_copy/t3code-client-settings.json" "$HOME/.t3/userdata/client-settings.json"
+
 # Setup bashrc/zsh overrides
 echo "Setting up zsh overrides..."
 write_to_file "$HOME/.zshrc" "source $SCRIPT_DIR/../zsh/rc.sh"
