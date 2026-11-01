@@ -29,6 +29,8 @@ bind("SUPER + ALT + SHIFT + F", 'uwsm-app -- strata "$(omarchy-cmd-terminal-cwd)
 -- Ruler to measure screen
 bind(modKey("SHIFT + R"), "hypruler", "Ruler")
 bind(modKey("SHIFT + T"), "t3code", "T3 Code")
+-- Dispatches to the global shortcut T3 Code registers, so it only fires while it runs.
+bind(modKey("SHIFT + CTRL + Print"), hl.dsp.global("com.t3tools.T3Code:capture-window"), "T3 Code snap shot")
 
 -- Launch all apps i use
 bind(modKey("SLASH"), "start", "Launch All Apps I Use")
