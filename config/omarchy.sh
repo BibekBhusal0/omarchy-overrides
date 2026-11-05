@@ -49,6 +49,10 @@ install_my_plugin menu
 install_my_plugin obsidian-daily
 build_obsidian_daily
 
+mkdir -p ~/.config/omarchy/extensions
+rm -f "$HOME/.config/omarchy/extensions/omarchy-menu.jsonc"
+cp "$SCRIPT_DIR/../files_to_copy/omarchy-menu.jsonc" "$HOME/.config/omarchy/extensions/omarchy-menu.jsonc"
+
 EXTERNAL_DIR="$HOME/Code/other-omarchy-plugins"
 mkdir -p "$EXTERNAL_DIR"
 

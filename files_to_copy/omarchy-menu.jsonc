@@ -1,0 +1,8 @@
+{
+  "apps": {
+    "icon": "󰀻",
+    "label": "Apps",
+    "aliases": ["app", "applications"],
+    "provider": "apps"
+  }
+}
