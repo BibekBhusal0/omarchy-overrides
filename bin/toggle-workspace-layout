@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Two-state workspace layout toggle: dwindle <-> scrolling (no floating)
+
+ACTIVE_WORKSPACE=$(hyprctl activeworkspace -j | jq -r '.id')
+[[ $ACTIVE_WORKSPACE =~ ^[0-9]+$ ]] || exit 1
+
+MODES_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/omarchy/workspace-layouts"
+MODE_FILE="$MODES_DIR/$ACTIVE_WORKSPACE.lua"
+
+CURRENT_MODE=$(omarchy-hyprland-workspace-layout-current)
+
+case "$CURRENT_MODE" in
+  scrolling) NEW_MODE=dwindle ;;
+  *) NEW_MODE=scrolling ;;
+esac
+
+APPLY="o.workspace_mode({ workspace = \"$ACTIVE_WORKSPACE\", mode = \"$NEW_MODE\" })"
+
+case $NEW_MODE in
+  dwindle)
+    SET_MESSAGE=$(omarchy-i18n layout.workspaceTiling)
+    UNSAVED_MESSAGE=$(omarchy-i18n layout.workspaceTilingUnsaved)
+    ;;
+  *)
+    SET_MESSAGE=$(omarchy-i18n layout.workspaceScrolling)
+    UNSAVED_MESSAGE=$(omarchy-i18n layout.workspaceScrollingUnsaved)
+    ;;
+esac
+
+notify_layout() {
+  local state="${XDG_STATE_HOME:-$HOME/.local/state}/omarchy/workspace-layout-notification"
+  local last id
+  [[ -r $state ]] && read -r last <"$state"
+  if id=$(omarchy-notification-send -p -r "${last:-0}" -g 󱂬 "$1") && [[ $id =~ ^[0-9]+$ ]]; then
+    mkdir -p "$(dirname "$state")" && printf '%s\n' "$id" >"$state"
+  fi
+}
+
+APPLIED=0
+if hyprctl eval "$APPLY" >/dev/null 2>&1; then
+  APPLIED=1
+fi
+
+if (( ! APPLIED )); then
+  notify_layout "$(omarchy-i18n layout.needsReload)"
+elif [[ $NEW_MODE == "$(omarchy-hyprland-workspace-layout-default)" ]] && rm -f "$MODE_FILE"; then
+  notify_layout "$SET_MESSAGE"
+elif mkdir -p "$MODES_DIR" && printf '%s\n' "$APPLY" >"$MODE_FILE"; then
+  notify_layout "$SET_MESSAGE"
+else
+  notify_layout "$UNSAVED_MESSAGE"
+fi
+
+if (( APPLIED )); then
+  omarchy-shell -q omarchy.workspaces refresh
+fi
