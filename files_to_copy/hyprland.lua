@@ -148,6 +148,13 @@ bind(modKey("ALT + L"), hl.dsp.window.resize({ x = 100, y = 0, relative = true }
 bind(modKey("ALT + K"), hl.dsp.window.resize({ x = 0, y = -100, relative = true }), "Resize window Up")
 bind(modKey("ALT + J"), hl.dsp.window.resize({ x = 0, y = 100, relative = true }), "Resize window Down")
 
+-- 4.5 binds Alt + Space to dictation, which eats the tmux and herdr prefix.
+hl.unbind("ALT + SPACE")
+
+-- 4.5 moved these to new chords; keep the ones i use.
+bind(modKey("CTRL + W"), "omarchy-shell shell toggle omarchy.network", "Network")
+bind(modKey("CTRL + N"), "omarchy-toggle-nightlight", "Toggle nightlight")
+
 -- Configuration
 hl.config({
 	input = {
