@@ -4,7 +4,6 @@ omarchy-pkg-aur-add \
   bitwarden \
   bitwarden-cli \
   helium-browser-bin \
-  t3code-bin \
   hypruler-bin \
   vesktop-bin \
   omniroute-bin \
