@@ -17,7 +17,8 @@ omarchy-pkg-drop \
   docker-compose \
   signal-desktop \
   ufw-docker \
-  lazydocker
+  lazydocker \
+  omarchy-hyprland-titlebars
 
 echo "Omarchy chromium is being uninstalled make sure to change default browser"
 
