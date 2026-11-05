@@ -1,29 +1,12 @@
 {
   "bar": {
-    "centerAnchor": "omarchy.clock",
     "layout": {
       "center": [
-        {
-          "id": "omarchy.indicators"
-        },
         {
           "format": "dddd HH:mm",
           "formatAlt": "d MMMM 'W'ww yyyy",
           "id": "omarchy.clock",
           "verticalFormat": "HH\n—\nmm"
-        },
-        {
-          "id": "omarchy.keyboard-layout"
-        },
-        {
-          "id": "omarchy.system-update"
-        },
-        {
-          "id": "bibek.obsidian-daily",
-          "insertHeading": "To-Dos"
-        },
-        {
-          "id": "io.github.janhesters.focus"
         }
       ],
       "left": [
@@ -47,10 +30,13 @@
       ],
       "right": [
         {
-          "id": "bibek.ytdl"
+          "id": "omarchy.tray"
         },
         {
-          "id": "omarchy.tray"
+          "id": "omarchy.keyboard-layout"
+        },
+        {
+          "id": "bibek.ytdl"
         },
         {
           "id": "omarchy.bluetooth"
@@ -68,7 +54,50 @@
           "id": "omarchy.power",
           "showPercentage": true
         }
-      ]
+      ],
+      "centerBegin": [
+        {
+          "id": "omarchy.indicators"
+        }
+      ],
+      "centerEnd": [
+        {
+          "id": "omarchy.elsewhen",
+          "cities": [
+            {
+              "name": "Kathmandu",
+              "zone": "Asia/Kathmandu"
+            },
+            {
+              "name": "Tokyo",
+              "zone": "Asia/Tokyo"
+            },
+            {
+              "name": "Los Angeles",
+              "zone": "America/Los_Angeles"
+            },
+            {
+              "name": "New York",
+              "zone": "America/New_York"
+            },
+            {
+              "name": "London",
+              "zone": "Europe/London"
+            }
+          ]
+        },
+        {
+          "id": "omarchy.system-update"
+        },
+        {
+          "id": "bibek.obsidian-daily",
+          "insertHeading": "To-Dos"
+        },
+        {
+          "id": "io.github.janhesters.focus"
+        }
+      ],
+      "tray": []
     },
     "position": "top",
     "transparent": false
@@ -100,6 +129,7 @@
   "version": 1,
   "disabledPlugins": [
     "omarchy.dev-gallery",
+    "omarchy.dock",
     "omarchy.media",
     "omarchy.menu",
     "omarchy.lock"
