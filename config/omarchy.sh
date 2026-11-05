@@ -76,4 +76,5 @@ www.reddit.com"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 create_symlink "$SCRIPT_DIR/../files_to_copy/shell.json" "$HOME/.config/omarchy/shell.json"
+create_symlink "$SCRIPT_DIR/../files_to_copy/shell.toml" "$HOME/.config/omarchy/shell.toml"
 omarchy-restart-shell
