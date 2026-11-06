@@ -24,10 +24,12 @@ bind("CTRL + SHIFT + ESCAPE", "omarchy-launch-tui btop", "Activity")
 -- File manager shortcuts
 -- Nautilus is the file manager; change this one line to switch apps.
 local file_manager = "nautilus"
-local file_manager_cwd = file_manager .. ' "$(omarchy-cmd-terminal-cwd)"'
+local file_manager_cwd = file_manager .. ' "$(terminal-cwd)"'
 bind(modKey("E"), file_manager_cwd, "File manager (cwd)")
 bind("SUPER + SHIFT + F", file_manager, "File manager")
 bind("SUPER + ALT + SHIFT + F", file_manager_cwd, "File manager (cwd)")
+
+bind(modKey("RETURN"), [[uwsm-app -- xdg-terminal-exec --dir="$(terminal-cwd)"]], "Terminal")
 
 -- Ruler to measure screen
 bind(modKey("SHIFT + R"), "hypruler", "Ruler")
@@ -85,7 +87,7 @@ bind(modKey("ALT + A"), toggle_animations, "Toggle Animation")
 
 bind(
 	modKey("ALT + RETURN"),
-	[[uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)" bash -c "tmux new-session -A -s main"]],
+	[[uwsm-app -- xdg-terminal-exec --dir="$(terminal-cwd)" bash -c "tmux new-session -A -s main"]],
 	"Tmux"
 )
 

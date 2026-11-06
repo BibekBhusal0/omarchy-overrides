@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# Single, self-contained directory resolver for both File Manager (Nautilus) and Terminals (tmux, herdr, bash).
+
+pid=""
+for arg in "$@"; do
+  if [[ $arg == --pid=* ]]; then
+    pid=${arg#--pid=}
+  elif [[ -z $pid && $arg =~ ^[0-9]+$ ]]; then
+    pid=$arg
+  fi
+done
+
+active=$(hyprctl activewindow -j 2>/dev/null)
+focus_class=$(jq -r '.class // ""' <<<"$active")
+
+dir=""
+if gdbus call --session --dest org.freedesktop.DBus --object-path /org/freedesktop/DBus \
+  --method org.freedesktop.DBus.GetNameOwner org.freedesktop.FileManager1 &>/dev/null; then
+  dir=$(busctl --user --json=short get-property \
+    org.freedesktop.FileManager1 /org/freedesktop/FileManager1 \
+    org.freedesktop.FileManager1 OpenWindowsWithLocations 2>/dev/null |
+    jq -r '.data | to_entries[0].value[0] // empty')
+fi
+
+if [[ $focus_class == "org.gnome.Nautilus" || $focus_class == "nautilus" ]] && [[ $dir == file://* ]]; then
+  dir=${dir#file://}
+  [[ $dir == *%* ]] && dir=$(printf '%b' "${dir//%/\\x}")
+  echo "$dir"
+  exit 0
+fi
+
+if [[ -z $pid ]]; then
+  pid=$(jq -r '.pid // empty' <<<"$active")
+fi
+
+[[ -n $pid ]] || { echo "$HOME"; exit 0; }
+
+get_descendants() {
+  local current="$1"
+  local children
+  children=$(pgrep -P "$current" 2>/dev/null)
+  for c in $children; do
+    echo "$c"
+    get_descendants "$c"
+  done
+}
+
+for p in "$pid" $(get_descendants "$pid"); do
+  comm=$(cat "/proc/$p/comm" 2>/dev/null) || continue
+
+  if [[ $comm == "tmux: client" ]]; then
+    tmux list-clients -F '#{client_pid}	#{pane_current_path}' |
+      awk -F'	' -v p="$p" '$1 == p { print $2; exit }'
+    exit 0
+  fi
+
+  if [[ $comm == herdr ]]; then
+    herdr pane current | jq -r '.result.pane.cwd // empty'
+    exit 0
+  fi
+done
+
+cwd=$(readlink "/proc/$pid/cwd" 2>/dev/null)
+if [[ -d $cwd ]]; then
+  echo "$cwd"
+else
+  echo "$HOME"
+fi
