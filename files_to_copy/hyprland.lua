@@ -26,8 +26,8 @@ bind("CTRL + SHIFT + ESCAPE", "omarchy-launch-tui btop", "Activity")
 local file_manager = "nautilus"
 local file_manager_cwd = file_manager .. ' "$(terminal-cwd)"'
 bind(modKey("E"), file_manager_cwd, "File manager (cwd)")
-bind("SUPER + SHIFT + F", file_manager, "File manager")
-bind("SUPER + ALT + SHIFT + F", file_manager_cwd, "File manager (cwd)")
+bind(modKey("SHIFT + F"), file_manager, "File manager")
+bind(modKey("ALT + SHIFT + F"), file_manager_cwd, "File manager (cwd)")
 
 bind(modKey("RETURN"), [[uwsm-app -- xdg-terminal-exec --dir="$(terminal-cwd)"]], "Terminal")
 
