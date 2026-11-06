@@ -1,11 +1,14 @@
 #!/bin/bash
 
+# Omarchy don't remove some desktop entries so removing them manually
+remove_desktop_entry() {
+  local entry="$HOME/.local/share/applications/$1"
+  [[ -e "$entry" ]] && rm -f "$entry" && echo "Removed: $1"
+}
+
 omarchy-pkg-drop \
   libreoffice-fresh \
-  xournalpp \
   pinta \
-  obs-studio \
-  kdenlive \
   moonlight-qt \
   omarchy-chromium \
   chromium \
@@ -18,10 +21,12 @@ omarchy-pkg-drop \
   signal-desktop \
   ufw-docker \
   lazydocker \
-  omarchy-hyprland-titlebars
+  omarchy-hyprland-titlebars \
+  signed
 
 echo "Omarchy chromium is being uninstalled make sure to change default browser"
 
-rm $HOME/.local/share/applications/Docker.desktop
-rm $HOME/.local/share/applications/typora.desktop
-rm $HOME/.local/share/applications/Alacritty.desktop
+remove_desktop_entry Docker.desktop
+remove_desktop_entry typora.desktop
+remove_desktop_entry Alacritty.desktop
+remove_desktop_entry signed.desktop
