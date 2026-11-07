@@ -30,7 +30,10 @@ bind(modKey("CTRL + J"), file_manager .. " ~/Downloads/", "File manager")
 bind(modKey("SHIFT + F"), file_manager, "File manager")
 bind(modKey("ALT + SHIFT + F"), file_manager_cwd, "File manager (cwd)")
 
-bind(modKey("RETURN"), [[uwsm-app -- xdg-terminal-exec --dir="$(terminal-cwd)"]], "Terminal")
+-- A running Ghostty in single-instance mode ignores --working-directory and
+-- reuses its own cwd, so ask it for a new window over IPC instead.
+local terminal_cwd = [[uwsm-app -- ghostty +new-window --working-directory="$(terminal-cwd)"]]
+bind(modKey("RETURN"), terminal_cwd, "Terminal")
 
 -- Ruler to measure screen
 bind(modKey("SHIFT + R"), "hypruler", "Ruler")
@@ -88,7 +91,7 @@ bind(modKey("ALT + A"), toggle_animations, "Toggle Animation")
 
 bind(
 	modKey("ALT + RETURN"),
-	[[uwsm-app -- xdg-terminal-exec --dir="$(terminal-cwd)" bash -c "tmux new-session -A -s main"]],
+	[[uwsm-app -- ghostty +new-window --working-directory="$(terminal-cwd)" -e bash -c "tmux new-session -A -s main"]],
 	"Tmux"
 )
 

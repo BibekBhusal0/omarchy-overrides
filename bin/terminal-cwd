@@ -1,69 +1,109 @@
 #!/bin/bash
 
-# Single, self-contained directory resolver for both File Manager (Nautilus) and Terminals (tmux, herdr, bash).
+# Prints the directory to open: the folder shown by the focused Nautilus
+# window, or the shell / tmux / herdr directory of the focused terminal.
+# Keybinds run outside the session env, so the Hyprland signature is guessed.
 
 pid=""
+explicit_pid=""
 for arg in "$@"; do
-  if [[ $arg == --pid=* ]]; then
-    pid=${arg#--pid=}
-  elif [[ -z $pid && $arg =~ ^[0-9]+$ ]]; then
-    pid=$arg
-  fi
+  case $arg in
+    --pid=*)
+      pid=${arg#--pid=}
+      explicit_pid=1
+      ;;
+    '' | *[!0-9]*) ;;
+    *) [[ -n $pid ]] || { pid=$arg; explicit_pid=1; } ;;
+  esac
 done
 
-active=$(hyprctl activewindow -j 2>/dev/null)
-focus_class=$(jq -r '.class // ""' <<<"$active")
-
-dir=""
-if gdbus call --session --dest org.freedesktop.DBus --object-path /org/freedesktop/DBus \
-  --method org.freedesktop.DBus.GetNameOwner org.freedesktop.FileManager1 &>/dev/null; then
-  dir=$(busctl --user --json=short get-property \
-    org.freedesktop.FileManager1 /org/freedesktop/FileManager1 \
-    org.freedesktop.FileManager1 OpenWindowsWithLocations 2>/dev/null |
-    jq -r '.data | to_entries[0].value[0] // empty')
+if [[ -z ${HYPRLAND_INSTANCE_SIGNATURE:-} ]]; then
+  for sig in /run/user/"$(id -u)"/hypr/*; do
+    HYPRLAND_INSTANCE_SIGNATURE=${sig##*/}
+    export HYPRLAND_INSTANCE_SIGNATURE
+    break
+  done
 fi
 
-if [[ $focus_class == "org.gnome.Nautilus" || $focus_class == "nautilus" ]] && [[ $dir == file://* ]]; then
-  dir=${dir#file://}
-  [[ $dir == *%* ]] && dir=$(printf '%b' "${dir//%/\\x}")
-  echo "$dir"
+active=$(hyprctl activewindow -j 2>/dev/null)
+class="" title="" active_pid=""
+if [[ -n $active ]]; then
+  IFS=$'\t' read -r class title active_pid < <(
+    jq -r '[.class // "", .title // "", (.pid // "")] | @tsv' <<<"$active"
+  )
+  [[ -n $pid ]] || pid=$active_pid
+fi
+
+# Nautilus only puts the folder name in its window title (the process cwd is
+# always $HOME), so map the title back to a real path.
+if [[ $class == org.gnome.Nautilus || $class == nautilus ]]; then
+  case $title in
+    "" | Home | "~") printf '%s\n' "$HOME"; exit 0 ;;
+  esac
+
+  if [[ $title == /* ]]; then
+    [[ -d $title ]] && { printf '%s\n' "$title"; exit 0; }
+  else
+    [[ $title == "~/"* ]] && title=${title#\~/} || title=${title#/}
+    for dir in "$HOME/Code/$title" "$HOME/$title"; do
+      [[ -d $dir ]] && { printf '%s\n' "$dir"; exit 0; }
+    done
+  fi
+
+  printf '%s\n' "$HOME"
   exit 0
 fi
 
-if [[ -z $pid ]]; then
-  pid=$(jq -r '.pid // empty' <<<"$active")
+# Terminal titles look like "user@host:dir" or "user:dir" and follow the
+# focused window, which the process tree cannot do with a single-instance
+# terminal (all windows share one process).
+if [[ -z $explicit_pid && $title =~ :([^:[:space:]]+)$ ]]; then
+  dir=${BASH_REMATCH[1]}
+  case $dir in
+    "~") dir=$HOME ;;
+    "~/"*) dir=$HOME/${dir#\~/} ;;
+  esac
+
+  if [[ $dir == /* ]]; then
+    [[ -d $dir ]] && { printf '%s\n' "$dir"; exit 0; }
+  else
+    for candidate in "$HOME/Code/$dir" "$HOME/$dir"; do
+      [[ -d $candidate ]] && { printf '%s\n' "$candidate"; exit 0; }
+    done
+  fi
 fi
 
-[[ -n $pid ]] || { echo "$HOME"; exit 0; }
+[[ -n $pid ]] || { printf '%s\n' "$HOME"; exit 0; }
 
-get_descendants() {
-  local current="$1"
-  local children
-  children=$(pgrep -P "$current" 2>/dev/null)
-  for c in $children; do
-    echo "$c"
-    get_descendants "$c"
-  done
-}
+# One pstree call for the whole tree, newest pid first (-T hides threads).
+mapfile -t pids < <(
+  pstree -pT "$pid" 2>/dev/null | grep -o '([0-9]\+)' | tr -d '()' | sort -nr
+)
 
-for p in "$pid" $(get_descendants "$pid"); do
+for p in "${pids[@]}"; do
   comm=$(cat "/proc/$p/comm" 2>/dev/null) || continue
 
   if [[ $comm == "tmux: client" ]]; then
-    tmux list-clients -F '#{client_pid}	#{pane_current_path}' |
-      awk -F'	' -v p="$p" '$1 == p { print $2; exit }'
-    exit 0
+    dir=$(tmux list-clients -F '#{client_pid}	#{pane_current_path}' 2>/dev/null |
+      awk -F'	' -v p="$p" '$1 == p { print $2; exit }')
+    [[ -d ${dir:-} ]] && { printf '%s\n' "$dir"; exit 0; }
   fi
 
   if [[ $comm == herdr ]]; then
-    herdr pane current | jq -r '.result.pane.cwd // empty'
-    exit 0
+    dir=$(herdr pane current 2>/dev/null | jq -r '.result.pane.cwd // empty')
+    [[ -d ${dir:-} ]] && { printf '%s\n' "$dir"; exit 0; }
   fi
 done
 
-cwd=$(readlink "/proc/$pid/cwd" 2>/dev/null)
-if [[ -d $cwd ]]; then
-  echo "$cwd"
-else
-  echo "$HOME"
-fi
+for p in "${pids[@]}"; do
+  comm=$(cat "/proc/$p/comm" 2>/dev/null) || continue
+  case $comm in
+    bash | zsh | fish | sh | dash)
+      dir=$(readlink "/proc/$p/cwd" 2>/dev/null)
+      [[ -d ${dir:-} ]] && { printf '%s\n' "$dir"; exit 0; }
+      ;;
+  esac
+done
+
+dir=$(readlink "/proc/$pid/cwd" 2>/dev/null)
+[[ -d ${dir:-} ]] && printf '%s\n' "$dir" || printf '%s\n' "$HOME"
