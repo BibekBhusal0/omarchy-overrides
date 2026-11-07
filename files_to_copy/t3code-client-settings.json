@@ -1,6 +1,6 @@
 {
   "notificationMode": "off",
-  "inAppNotificationsEnabled": false,
+  "inAppNotificationsEnabled": true,
   "diffColorScheme": "red-green",
   "chatWidth": "comfortable",
   "effortDisplay": "label",
@@ -45,8 +45,8 @@
   "pullRequestMergeMethodOverrides": {},
   "pullRequestLinksOpenInApp": true,
   "planModeEnabled": false,
-  "contextWindowMeterEnabled": false,
-  "composerRichTextEnabled": true,
+  "contextWindowMeterEnabled": true,
+  "composerRichTextEnabled": false,
   "sendShortcut": "enter",
   "followUpBehavior": "queue",
   "proactivePanelsEnabled": false,
@@ -74,7 +74,7 @@
   "snapShotPlaySound": true,
   "snapShotSound": "soft-pop",
   "snapShotFlash": true,
-  "snapShotAnimations": true,
+  "snapShotAnimations": false,
   "wordWrap": true,
   "mathRenderingEnabled": false
 }
