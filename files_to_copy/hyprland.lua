@@ -37,8 +37,13 @@ bind(modKey("RETURN"), terminal_cwd, "Terminal")
 
 -- Ruler to measure screen
 bind(modKey("SHIFT + R"), "hypruler", "Ruler")
-bind(modKey("SHIFT + T"), "t3code", "T3 Code")
--- Dispatches to the global shortcut T3 Code registers, so it only fires while it runs.
+
+-- T3 Code
+local t3_launch = "uwsm-app -- /home/bibek/.local/share/t3code/T3-Code.AppImage"
+bind(modKey("SHIFT + T"), "omarchy-launch-or-focus-class com.t3tools.T3Code '" .. t3_launch .. "'", "T3 Code")
+-- Copilot key
+bind("XF86Assistant", "omarchy-launch-or-focus-class com.t3tools.T3Code '" .. t3_launch .. "'", "T3 Code (copilot key)")
+-- Global shortcut for screenshot (needs to configure settings in t3 code)
 bind(modKey("SHIFT + CTRL + Print"), hl.dsp.global("com.t3tools.T3Code:capture-window"), "T3 Code snap shot")
 
 -- Launch all apps i use
