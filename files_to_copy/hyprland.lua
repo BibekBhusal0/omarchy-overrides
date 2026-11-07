@@ -39,10 +39,10 @@ bind(modKey("RETURN"), terminal_cwd, "Terminal")
 bind(modKey("SHIFT + R"), "hypruler", "Ruler")
 
 -- T3 Code
-local t3_launch = "uwsm-app -- /home/bibek/.local/share/t3code/T3-Code.AppImage"
-bind(modKey("SHIFT + T"), "omarchy-launch-or-focus-class com.t3tools.T3Code '" .. t3_launch .. "'", "T3 Code")
+local t3_launch = "omarchy-launch-or-focus-class com.t3tools.T3Code 'uwsm-app -- /home/bibek/.local/share/t3code/T3-Code.AppImage'"
+bind(modKey("SHIFT + T"), t3_launch, "T3 Code")
 -- Copilot key
-bind("XF86Assistant", "omarchy-launch-or-focus-class com.t3tools.T3Code '" .. t3_launch .. "'", "T3 Code (copilot key)")
+bind("SUPER + SHIFT + code:201",t3_launch, "T3 Code (copilot key)")
 -- Global shortcut for screenshot (needs to configure settings in t3 code)
 bind(modKey("SHIFT + CTRL + Print"), hl.dsp.global("com.t3tools.T3Code:capture-window"), "T3 Code snap shot")
 
