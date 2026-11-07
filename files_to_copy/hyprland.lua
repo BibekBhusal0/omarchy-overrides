@@ -39,10 +39,11 @@ bind(modKey("RETURN"), terminal_cwd, "Terminal")
 bind(modKey("SHIFT + R"), "hypruler", "Ruler")
 
 -- T3 Code
-local t3_launch = "omarchy-launch-or-focus-class com.t3tools.T3Code 'uwsm-app -- /home/bibek/.local/share/t3code/T3-Code.AppImage'"
+local t3_launch =
+	"omarchy-launch-or-focus-class com.t3tools.T3Code 'uwsm-app -- /home/bibek/.local/share/t3code/T3-Code.AppImage'"
 bind(modKey("SHIFT + T"), t3_launch, "T3 Code")
 -- Copilot key
-bind("SUPER + SHIFT + code:201",t3_launch, "T3 Code (copilot key)")
+bind("SUPER + SHIFT + code:201", t3_launch, "T3 Code (copilot key)")
 -- Global shortcut for screenshot (needs to configure settings in t3 code)
 bind(modKey("SHIFT + CTRL + Print"), hl.dsp.global("com.t3tools.T3Code:capture-window"), "T3 Code snap shot")
 
@@ -56,13 +57,17 @@ bind(modKey("ALT + M"), "omarchy-shell shell toggle bibek.media", "Media Menu")
 bind(modKey("CTRL + Y"), "omarchy-shell shell toggle bibek.ytdl", "Download youtube videos")
 bind(modKey("ALT + P"), "omarchy-shell shell toggle bibek.focusd", "Pomodoro popup")
 bind(modKey("SHIFT + E"), "omarchy-shell shell summon io.github.weedwhitesandwine.omafetti", "Confetti  🎉")
-bind(modKey("SUPER_L"), "omarchy-shell shell toggle bibek.menu '{\"menu\":\"apps\"}'", "Apps")
-bind(modKey("ALT + SPACE"), "omarchy-shell shell toggle bibek.menu '{\"menu\":\"apps\"}'", "Apps")
+bind(modKey("SUPER_L"), 'omarchy-shell shell toggle bibek.menu \'{"menu":"apps"}\'', "Apps")
+bind(modKey("ALT + SPACE"), 'omarchy-shell shell toggle bibek.menu \'{"menu":"apps"}\'', "Apps")
 bind(modKey("CTRL + V"), "omarchy-shell shell toggle io.github.idr4n.clipboard-plus", "Clipboard History")
 
 -- Obsidian
 bind(modKey("ALT + O"), "omarchy-shell shell toggle bibek.obsidian-search", "Obsidian Search")
-bind(modKey("ALT + Y"), "omarchy-shell shell toggle bibek.obsidian-search '{\"vaultPath\":\"~/Youtube/Youtube\"}'", "Obsidian Search (Youtube vault)")
+bind(
+	modKey("ALT + Y"),
+	'omarchy-shell shell toggle bibek.obsidian-search \'{"vaultPath":"~/Youtube/Youtube"}\'',
+	"Obsidian Search (Youtube vault)"
+)
 bind(modKey("ALT + D"), "omarchy-shell shell toggle bibek.obsidian-daily", "Obsidian Daily (tasks)")
 
 local animations_state_file = os.getenv("HOME") .. "/.config/hypr/animations.state"
