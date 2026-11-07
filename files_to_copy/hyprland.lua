@@ -39,8 +39,7 @@ bind(modKey("RETURN"), terminal_cwd, "Terminal")
 bind(modKey("SHIFT + R"), "hypruler", "Ruler")
 
 -- T3 Code
-local t3_launch =
-	"omarchy-launch-or-focus-class com.t3tools.T3Code 'uwsm-app -- /home/bibek/.local/share/t3code/T3-Code.AppImage'"
+local t3_launch = "omarchy-launch-or-focus-class com.t3tools.T3Code /home/bibek/.local/share/t3code/T3-Code.AppImage"
 bind(modKey("SHIFT + T"), t3_launch, "T3 Code")
 -- Copilot key
 bind("SUPER + SHIFT + code:201", t3_launch, "T3 Code (copilot key)")
@@ -108,8 +107,8 @@ bind(
 -- Lunching apps
 bind(modKey("B"), "omarchy-launch-browser", "Browser")
 bind(modKey("SHIFT + B"), "omarchy-launch-browser --private", "Browser (private)")
-bind(modKey("M"), "omarchy-launch-or-focus-class Spotify 'uwsm-app -- spotify'", "Music")
-bind(modKey("Z"), "omarchy-launch-or-focus zen-browser", "Zen")
+bind(modKey("M"), "omarchy-launch-or-focus-class Spotify spotify", "Music")
+bind(modKey("Z"), "omarchy-launch-or-focus-class zen zen-browser", "Zen")
 bind(modKey("N"), "omarchy-launch-tui nvim", "Neovim")
 bind(modKey("SHIFT + N"), "omarchy-launch-tui nvim config", "Neovim Config")
 bind(modKey("D"), "vesktop --toggle", "Discord")
