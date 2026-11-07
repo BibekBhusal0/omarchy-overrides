@@ -103,7 +103,7 @@ bind(
 -- Lunching apps
 bind(modKey("B"), "omarchy-launch-browser", "Browser")
 bind(modKey("SHIFT + B"), "omarchy-launch-browser --private", "Browser (private)")
-bind(modKey("M"), "omarchy-launch-or-focus spotify", "Music")
+bind(modKey("M"), "omarchy-launch-or-focus-class Spotify 'uwsm-app -- spotify'", "Music")
 bind(modKey("Z"), "omarchy-launch-or-focus zen-browser", "Zen")
 bind(modKey("N"), "omarchy-launch-tui nvim", "Neovim")
 bind(modKey("SHIFT + N"), "omarchy-launch-tui nvim config", "Neovim Config")
