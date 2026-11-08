@@ -7,8 +7,7 @@ source "$SCRIPT_DIR/../utils/write-to-file.sh"
 source "$SCRIPT_DIR/../utils/symlink.sh"
 
 echo "Setting up Hyprland overrides..."
-create_symlink "$SCRIPT_DIR/../files_to_copy/hyprland.lua" "$HOME/.config/hypr/own_config.lua"
-write_to_file "$HOME/.config/hypr/hyprland.lua" "require(\"hypr.own_config\")"
+create_symlink "$SCRIPT_DIR/../files_to_copy/hypr" "$HOME/.config/hypr"
 
 echo ""
 
