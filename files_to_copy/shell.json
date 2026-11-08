@@ -84,7 +84,9 @@
               "name": "London",
               "zone": "Europe/London"
             }
-          ]
+          ],
+          "hour24": true,
+          "units": "C"
         },
         {
           "id": "omarchy.system-update"
