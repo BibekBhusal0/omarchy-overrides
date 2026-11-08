@@ -106,6 +106,26 @@ bind(modKey "SHIFT + P", hl.dsp.window.pseudo(), "Pseudo window")
 -- 4.5 binds Alt + Space to dictation, which eats the tmux and herdr prefix.
 hl.unbind "ALT + SPACE"
 
--- 4.5 moved these to new chords; keep the ones i use.
+-- Right alt is my compose so this dictatioin keymap was also not applied
+hl.unbind "ALT + ALT_R"
+
+-- Some usable keymaps for dictation
+if
+  o.dictation_installed
+  and type(o.dictation_installed) == "function"
+  and o.dictation_installed()
+then
+  -- I use Super + W to close app so this can be safely overwritten
+  bind(modKey "Q", "Toggle dictation", "omarchy-dictation toggle")
+  o.bind_hold(
+    "CTRL + SPACE",
+    "Start dictation (push-to-talk)",
+    "omarchy-dictation start",
+    "Stop dictation (push-to-talk)",
+    "omarchy-dictation stop"
+  )
+end
+
+-- 4.5 moved some keymaps; I prefer the old ones
 bind(modKey "CTRL + W", "omarchy-shell shell toggle omarchy.network", "Network")
 bind(modKey "CTRL + N", "omarchy-toggle-nightlight", "Toggle nightlight")
