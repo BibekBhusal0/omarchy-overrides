@@ -29,7 +29,7 @@ local t3_launch =
   "omarchy-launch-or-focus-class com.t3tools.T3Code /home/bibek/.local/share/t3code/T3-Code.AppImage"
 bind(modKey "SHIFT + T", t3_launch, "T3 Code")
 -- Copilot key
-bind("SUPER + SHIFT + code:201", t3_launch, "T3 Code (copilot key)")
+bind("SUPER + SHIFT + code:201", t3_launch, "T3 Code")
 -- Global shortcut for screenshot (needs to configure settings in t3 code)
 local t3_capture = hl.dsp.global "com.t3tools.T3Code:capture-window"
 bind(modKey "SHIFT + CTRL + Print", t3_capture, "T3 Code snap shot")
