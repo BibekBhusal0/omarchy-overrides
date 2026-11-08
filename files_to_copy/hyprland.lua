@@ -38,6 +38,9 @@ bind(modKey("RETURN"), terminal_cwd, "Terminal")
 -- Ruler to measure screen
 bind(modKey("SHIFT + R"), "hypruler", "Ruler")
 
+-- Time
+bind(modKey("CTRL + T"), "omarchy-notification-time", "Show time")
+
 -- T3 Code
 local t3_launch = "omarchy-launch-or-focus-class com.t3tools.T3Code /home/bibek/.local/share/t3code/T3-Code.AppImage"
 bind(modKey("SHIFT + T"), t3_launch, "T3 Code")
