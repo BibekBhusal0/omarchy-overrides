@@ -67,6 +67,7 @@ bind(modKey "N", "omarchy-launch-tui nvim", "Neovim")
 bind(modKey "SHIFT + N", "omarchy-launch-tui nvim config", "Neovim Config")
 bind(modKey "D", "vesktop --toggle", "Discord")
 bind(modKey "SHIFT + S", "omarchy-launch-or-focus stremio", "Stremio")
+bind("XF86Calculator", "omacalc", "Calculator")
 
 -- Obsidian
 local function openObsidian(vault)
@@ -102,12 +103,6 @@ bind(modKey "SHIFT + D", 'omarchy-launch-webapp "https://duck.ai/"', "Duck.ai")
 -- Pomodoro (focusd)
 bind(modKey "P", "focusd toggle", "Pomodoro toggle")
 bind(modKey "SHIFT + P", hl.dsp.window.pseudo(), "Pseudo window")
-
--- 4.5 binds Alt + Space to dictation, which eats the tmux and herdr prefix.
-hl.unbind "ALT + SPACE"
-
--- Right alt is my compose so this dictatioin keymap was also not applied
-hl.unbind "ALT + ALT_R"
 
 -- Some usable keymaps for dictation
 if
