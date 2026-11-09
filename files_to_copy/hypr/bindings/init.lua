@@ -1,0 +1,5 @@
+require "bindings.apps"
+require "bindings.others"
+require "bindings.shell"
+require "bindings.vim-keys"
+require "bindings.web-apps"
