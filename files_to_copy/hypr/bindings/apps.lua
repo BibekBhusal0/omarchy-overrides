@@ -57,5 +57,6 @@ bind(modKey "ALT + O", "omarchy-shell shell toggle bibek.obsidian-search", "Obsi
 bind(modKey "ALT + Y", obSearchYoutube, "Obsidian Search (Youtube vault)")
 bind(modKey "ALT + D", "omarchy-shell shell toggle bibek.obsidian-daily", "Obsidian Daily (tasks)")
 
--- Just back to TMUX session
+-- Just back to TMUX/herdr session
 bind(modKey "ALT + RETURN", terminal_cwd .. [[ -e bash -c "tmux new-session -A -s main"]], "Tmux")
+bind(modKey "CTRL + RETURN", terminal_cwd .. [[ -e bash -c "herdr"]], "Herdr")
