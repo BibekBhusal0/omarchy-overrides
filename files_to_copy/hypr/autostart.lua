@@ -1,12 +1,12 @@
-require "default.hypr.startup-cursor"
+-- require "default.hypr.startup-cursor"
 
 -- Omarchy default
 hl.on("hyprland.start", function()
   -- Applications inherit the user's cursor; only the compositor starts blank.
-  if omarchy_startup_cursor_pending then
-    hl.env("XCURSOR_PATH", omarchy_startup_cursor.path)
-    hl.env("XCURSOR_THEME", omarchy_startup_cursor.xcursor)
-  end
+  -- if omarchy_startup_cursor_pending then
+  --   hl.env("XCURSOR_PATH", omarchy_startup_cursor.path)
+  --   hl.env("XCURSOR_THEME", omarchy_startup_cursor.xcursor)
+  -- end
 
   -- Slow app launch fix -- set systemd and D-Bus activation vars before
   -- starting session services.
