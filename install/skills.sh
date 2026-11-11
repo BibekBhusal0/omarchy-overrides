@@ -10,6 +10,15 @@ create_symlink "$SKILLS_DIR/AGENTS.global.md" "$HOME/.config/opencode/AGENTS.md"
 create_symlink "$SKILLS_DIR/AGENTS.global.md" "$HOME/.codex/AGENTS.md"
 create_symlink "$SKILLS_DIR/AGENTS.global.md" "$HOME/.claude/CLAUDE.md"
 
+GEMINI_RULES_DIR="$HOME/.gemini/config/rules"
+
+# T3 gives each Antigravity instance a private GEMINI_HOME; link global rules into existing profiles.
+for profile in "$HOME"/.t3/userdata/providers/antigravity/*/; do
+  [[ -d "$profile" ]] || continue
+  create_symlink "$GEMINI_RULES_DIR" "$profile/config/rules"
+done
+create_symlink "$SKILLS_DIR/AGENTS.global.md" "$GEMINI_RULES_DIR/AGENTS.md"
+
 for skill_dir in "$SKILLS_DIR"/*/; do
   [[ -f "$skill_dir/SKILL.md" ]] || continue
   skill="$(basename "$skill_dir")"
@@ -17,6 +26,8 @@ for skill_dir in "$SKILLS_DIR"/*/; do
   create_symlink "$skill_dir" "$HOME/.agents/skills/$skill"
   create_symlink "$skill_dir" "$HOME/.claude/skills/$skill"
   create_symlink "$skill_dir" "$HOME/.codex/skills/$skill"
+  create_symlink "$skill_dir" "$HOME/.gemini/config/skills/$skill"
+  create_symlink "$skill_dir" "$HOME/.gemini/antigravity-cli/skills/$skill"
 done
 
 OPENCODE_JSON="$HOME/.config/opencode/opencode.json"
