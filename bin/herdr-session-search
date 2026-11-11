@@ -18,16 +18,10 @@ list_entries() {
   while IFS= read -r row; do
     [ -n "$row" ] || continue
     id=${row#*$'\t'}
-    first=1
-    while IFS= read -r cwd; do
-      [ -n "$cwd" ] || continue
-      canon=$(herdr_canonical_path "$cwd")
-      open_dir_map["$canon"]=1
-      if [ "$first" -eq 1 ]; then
-        ws_dir_map["$id"]=$cwd
-        first=0
-      fi
-    done <<< "$(herdr_workspace_cwds "$id")"
+    cwd=$(herdr_workspace_root_cwd "$id")
+    [ -n "$cwd" ] || continue
+    open_dir_map["$(herdr_canonical_path "$cwd")"]=1
+    ws_dir_map["$id"]=$cwd
   done <<< "$active"
 
   current=$(herdr_current_workspace_id)

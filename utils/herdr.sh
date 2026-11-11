@@ -81,10 +81,12 @@ herdr_list_projects() {
     done
 }
 
-# Print all pane cwds of a workspace (one per line, deduplicated).
-herdr_workspace_cwds() {
+# Print the root pane's cwd: the directory the workspace was launched from.
+# Only the root pane is identity. Other panes may have cd'd anywhere, so a
+# shell sitting inside a project does not make that project's workspace open.
+herdr_workspace_root_cwd() {
     herdr pane list --workspace "$1" 2>/dev/null |
-      grep -o '"cwd":"[^"]*"' | sed 's/"cwd":"//; s/"$//' | sort -u
+      grep -o '"cwd":"[^"]*"' | sed 's/"cwd":"//; s/"$//' | head -1
 }
 
 # Canonicalize a path for directory comparison.
@@ -98,22 +100,20 @@ herdr_canonical_path() {
     fi
 }
 
-# Print the workspace id whose panes were launched from the given directory
+# Print the workspace id whose root pane was launched from the given directory
 # (empty if none). Identity is directory-based so workspaces may share labels.
 herdr_workspace_id_for_dir() {
-    local dir canon row id cwd ccanon
+    local dir canon row id cwd
     canon=$(herdr_canonical_path "$1")
     while IFS= read -r row; do
         [ -n "$row" ] || continue
         id=${row#*$'\t'}
-        while IFS= read -r cwd; do
-            [ -n "$cwd" ] || continue
-            ccanon=$(herdr_canonical_path "$cwd")
-            if [ "$ccanon" = "$canon" ]; then
-                printf '%s\n' "$id"
-                return 0
-            fi
-        done <<< "$(herdr_workspace_cwds "$id")"
+        cwd=$(herdr_workspace_root_cwd "$id")
+        [ -n "$cwd" ] || continue
+        if [ "$(herdr_canonical_path "$cwd")" = "$canon" ]; then
+            printf '%s\n' "$id"
+            return 0
+        fi
     done <<< "$(herdr_list_workspaces)"
 }
 
