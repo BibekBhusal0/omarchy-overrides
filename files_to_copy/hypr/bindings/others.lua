@@ -29,4 +29,7 @@ then
     "Stop dictation (push-to-talk)",
     "omarchy-dictation stop"
   )
+  else
+    hl.unbind(modKey("Q"))
+    hl.unbind("CTRL + SPACE")
 end
