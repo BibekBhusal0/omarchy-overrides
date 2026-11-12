@@ -1,0 +1,36 @@
+[zones]
+left_width = 0.07
+right_width = 0.07
+
+[recognition]
+step_distance = 0.02
+
+# Left edge: volume
+[[bindings]]
+zone = "left"
+fingers = 1
+gesture = "slide_up"
+action = "command"
+cmd = "omarchy-audio-output-volume +5"
+
+[[bindings]]
+zone = "left"
+fingers = 1
+gesture = "slide_down"
+action = "command"
+cmd = "omarchy-audio-output-volume -5"
+
+# Right edge: display brightness
+[[bindings]]
+zone = "right"
+fingers = 1
+gesture = "slide_up"
+action = "command"
+cmd = "omarchy-brightness-display +5%"
+
+[[bindings]]
+zone = "right"
+fingers = 1
+gesture = "slide_down"
+action = "command"
+cmd = "omarchy-brightness-display 5%-"

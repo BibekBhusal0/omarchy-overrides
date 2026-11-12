@@ -1,0 +1,2 @@
+# Bezel creates a virtual trackpad through /dev/uinput.
+KERNEL=="uinput", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"

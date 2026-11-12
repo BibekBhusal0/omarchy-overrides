@@ -23,4 +23,5 @@ omarchy-launch-terminal bash -c "
   bash '$SCRIPT_DIR/spicetify.sh'
   bash '$SCRIPT_DIR/zen-browser.sh'
   bash '$SCRIPT_DIR/others.sh'
+  bash '$SCRIPT_DIR/bezel.sh'
 " &>/dev/null &
