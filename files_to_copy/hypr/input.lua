@@ -48,31 +48,5 @@ hl.gesture {
   end,
 }
 
--- Two-finger pinch: spread enters fullscreen, closing leaves it.
--- This build labels spread as "pinchin" and closing as "pinchout".
-local function set_fullscreen(on)
-  local window = hl.get_active_window()
-  if not window then
-    return
-  end
-
-  local is_fullscreen = (window.fullscreen or 0) ~= 0
-  if is_fullscreen ~= on then
-    hl.dispatch(hl.dsp.window.fullscreen { mode = "fullscreen" })
-  end
-end
-
-hl.gesture {
-  fingers = 2,
-  direction = "pinchin",
-  action = function()
-    set_fullscreen(true)
-  end,
-}
-hl.gesture {
-  fingers = 2,
-  direction = "pinchout",
-  action = function()
-    set_fullscreen(false)
-  end,
-}
+-- Finger pinch to zoom
+hl.gesture { fingers = 2, direction = "pinch", action = "cursor_zoom", zoom_level = 1, mode = "live" }
