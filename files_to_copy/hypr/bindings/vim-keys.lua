@@ -23,7 +23,13 @@ end
 ---1. Terminal is fullscreen/maximized
 ---2. Terminal is the only tiled (non-floating) window on the workspace
 ---3. Terminal spans the full monitor width (forward horizontal nav H/L only)
+---4. There is only one monitor available
 local function should_forward_to_terminal(dir)
+  local monitors = hl.get_monitors()
+  if #monitors > 1 then
+    return false
+  end
+
   local win = hl.get_active_window()
   if not is_terminal(win) then
     return false
