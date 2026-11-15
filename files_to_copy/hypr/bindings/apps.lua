@@ -19,7 +19,7 @@ bind("CTRL + SHIFT + ESCAPE", "omarchy-launch-tui btop", "Activity")
 local file_manager = "nautilus"
 local file_manager_cwd = file_manager .. ' "$(terminal-cwd)"'
 bind(modKey "E", file_manager_cwd, "File manager (cwd)")
-bind(modKey "CTRL + J", file_manager .. " ~/Downloads/", "Open downloads")
+bind(modKey "CTRL + SHIFT + J", file_manager .. " ~/Downloads/", "Open downloads")
 bind(modKey "SHIFT + F", file_manager, "File manager")
 
 -- A running Ghostty in single-instance mode ignores --working-directory and
