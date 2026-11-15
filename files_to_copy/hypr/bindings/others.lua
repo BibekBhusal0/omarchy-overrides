@@ -13,6 +13,7 @@ bind(modKey "SHIFT + ESCAPE", "systemctl suspend", "Suspend")
 -- Pomodoro (focusd)
 bind(modKey "P", "focusd toggle", "Pomodoro toggle")
 bind(modKey "SHIFT + P", hl.dsp.window.pseudo(), "Pseudo window")
+bind(modKey "PERIOD", hl.dsp.focus { workspace = "previous_per_monitor" }, "Former workspace")
 
 local function dictation_installed()
   local pipe = io.popen("omarchy-default-dictation 2>/dev/null", "r")
