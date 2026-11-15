@@ -27,7 +27,7 @@ end
 -- Some usable keymaps for dictation
 if dictation_installed then
   -- I use Super + W to close app so this can be safely overwritten
-  bind(modKey "Q",  "omarchy-dictation toggle", "Toggle dictation")
+  bind(modKey "Q", "omarchy-dictation toggle", "Toggle dictation")
   o.bind_hold(
     "CTRL + SPACE",
     "Start dictation (push-to-talk)",

@@ -101,7 +101,7 @@ bind(modKey "ALT + K", resize { x = 0, y = -100, relative = true }, "Resize wind
 bind(modKey "ALT + J", resize { x = 0, y = 100, relative = true }, "Resize window Down")
 
 -- Super + Ctrl + vim keys to move window in direction (l/r/u/d)
-bind(modKey "CTRL + H", o.workspaces.move_window_to_monitor("l"), "Move window left")
-bind(modKey "CTRL + L", o.workspaces.move_window_to_monitor("r"), "Move window right")
-bind(modKey "CTRL + K", o.workspaces.move_window_to_monitor("u"), "Move window up")
-bind(modKey "CTRL + J", o.workspaces.move_window_to_monitor("d"), "Move window down")
+bind(modKey "CTRL + H", o.workspaces.move_window_to_monitor "l", "Move window left")
+bind(modKey "CTRL + L", o.workspaces.move_window_to_monitor "r", "Move window right")
+bind(modKey "CTRL + K", o.workspaces.move_window_to_monitor "u", "Move window up")
+bind(modKey "CTRL + J", o.workspaces.move_window_to_monitor "d", "Move window down")
