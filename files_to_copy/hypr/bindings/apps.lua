@@ -30,7 +30,7 @@ bind(modKey "RETURN", terminal_cwd, "Terminal")
 -- T3 Code
 local t3_launch =
   "omarchy-launch-or-focus-class com.t3tools.T3Code /home/bibek/.local/share/t3code/T3-Code.AppImage"
-bind(modKey "SHIFT + T", t3_launch, "T3 Code")
+bind(modKey "A", t3_launch, "ChatGPT")
 -- Copilot key
 bind("SUPER + SHIFT + code:201", t3_launch, "T3 Code")
 -- Global shortcut for screenshot (needs to configure settings in t3 code)
