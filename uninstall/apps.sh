@@ -22,7 +22,15 @@ omarchy-pkg-drop \
   ufw-docker \
   lazydocker \
   omarchy-hyprland-titlebars \
-  signed
+  signed \
+  fcitx5 \
+  fcitx5-gtk \
+  fcitx5-qt \
+  fcitx5-configtool \
+  fcitx5-chinese-addons \
+  fcitx5-chewing \
+  fcitx5-hangul \
+  fcitx5-mozc
 
 echo "Omarchy chromium is being uninstalled make sure to change default browser"
 
