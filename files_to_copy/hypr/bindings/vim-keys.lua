@@ -90,7 +90,6 @@ end
 
 -- Overwritten keybinds
 bind(modKey "SHIFT + K", "omarchy-menu-keybindings", "Show Keybindings")
-bind(modKey "SHIFT + L", "toggle-workspace-layout", "Toggle workspace layout (dwindle/scrolling)")
 bind(modKey "SHIFT + J", hl.dsp.layout "togglesplit", "Toggle window split")
 
 -- Super + Alt + vim keys to resize window

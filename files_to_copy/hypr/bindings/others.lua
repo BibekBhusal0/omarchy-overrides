@@ -10,6 +10,12 @@ bind(modKey "CTRL + T", "omarchy-notification-time", "Show time")
 -- Fastest way to suspend
 bind(modKey "SHIFT + ESCAPE", "systemctl suspend", "Suspend")
 
+-- Lock
+bind(modKey "SHIFT + L", "omarchy-system-lock", "Lock system")
+
+-- Cycle workspace layout instead of the stock Super + L / Super + Shift + L
+bind(modKey "I", "toggle-workspace-layout", "Toggle workspace layout (dwindle/scrolling)")
+
 -- Pomodoro (focusd)
 bind(modKey "P", "focusd toggle", "Pomodoro toggle")
 bind(modKey "SHIFT + P", hl.dsp.window.pseudo(), "Pseudo window")
