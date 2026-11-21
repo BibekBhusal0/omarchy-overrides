@@ -4,6 +4,9 @@ right_width = 0.07
 
 [recognition]
 step_distance = 0.02
+tap_ms = 300
+double_tap_ms = 500
+tap_distance = 0.04
 
 # Left edge: volume
 [[bindings]]
@@ -34,3 +37,10 @@ fingers = 1
 gesture = "slide_down"
 action = "command"
 cmd = "omarchy-brightness-display 5%-"
+
+[[bindings]]
+zone = "top"
+fingers = 1
+gesture = "double_tap"
+action = "command"
+cmd = "omarchy-shell media playPause"
