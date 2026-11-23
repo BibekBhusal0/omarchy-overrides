@@ -30,7 +30,9 @@ omarchy-pkg-drop \
   fcitx5-chinese-addons \
   fcitx5-chewing \
   fcitx5-hangul \
-  fcitx5-mozc
+  fcitx5-mozc \
+  spotify \
+  spicetify-cli
 
 echo "Omarchy chromium is being uninstalled make sure to change default browser"
 
@@ -38,3 +40,4 @@ remove_desktop_entry Docker.desktop
 remove_desktop_entry typora.desktop
 remove_desktop_entry Alacritty.desktop
 remove_desktop_entry signed.desktop
+remove_desktop_entry spotify.desktop

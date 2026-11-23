@@ -3,7 +3,7 @@ local modKey = require("hypr.utils.key").modKey
 
 bind(modKey "B", "omarchy-launch-browser", "Browser")
 bind(modKey "SHIFT + B", "omarchy-launch-browser --private", "Browser (private)")
-bind(modKey "M", "omarchy-launch-or-focus-class Spotify spotify", "Music")
+bind(modKey "M", "omarchy-launch-or-focus-class ytm-rs ytm-rs", "Music")
 bind(modKey "Z", "omarchy-launch-or-focus-class zen zen-browser", "Zen")
 bind(modKey "N", "omarchy-launch-tui nvim", "Neovim")
 bind(modKey "SHIFT + N", "omarchy-launch-tui nvim config", "Neovim Config")
