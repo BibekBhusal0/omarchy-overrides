@@ -3,6 +3,7 @@ SCRIPT_DIR="$BASH_RC_DIR/../zsh"
 source "$BASH_RC_DIR/../zsh/shell.sh"
 source "$BASH_RC_DIR/../zsh/alias.sh"
 source "$BASH_RC_DIR/flyline.sh"
+source "$BASH_RC_DIR/lxask.sh"
 
 src() { source "${1:-~/.bashrc}"; }
 
