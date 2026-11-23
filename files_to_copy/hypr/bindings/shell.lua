@@ -6,6 +6,7 @@ local confetti = "omarchy-shell shell summon io.github.weedwhitesandwine.omafett
 local clipboard = "omarchy-shell shell toggle io.github.idr4n.clipboard-plus"
 bind(modKey "ALT + R", "omarchy-shell shell toggle bibek.readest", "Readest search")
 bind(modKey "ALT + M", "omarchy-shell shell toggle bibek.media", "Media Menu")
+bind(modKey "CTRL + M", "omarchy-shell shell toggle bibek.media", "Media Menu")
 bind(modKey "CTRL + Y", "omarchy-shell shell toggle bibek.ytdl", "Download youtube videos")
 bind(modKey "ALT + P", "omarchy-shell shell toggle bibek.focusd", "Pomodoro popup")
 bind(modKey "SHIFT + E", confetti, "Confetti  🎉")
