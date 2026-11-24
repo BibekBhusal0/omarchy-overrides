@@ -55,8 +55,15 @@ if pgrep -f '^cliamp --daemon' >/dev/null; then
 fi
 rm -f "$HOME/.config/cliamp/cliamp.sock"
 
-# Build shuffled M3U playlist from all tracks
-find "$MUSIC_DIR" -type f \( -iname '*.mp3' -o -iname '*.m4a' -o -iname '*.flac' -o -iname '*.opus' \) | shuf > "$M3U"
+# cliamp does the only shuffle. It always starts on the first track, so rotate the
+# queue at a random point: tracks before it go to the end, relative order untouched.
+find "$MUSIC_DIR" -type f \( -iname '*.mp3' -o -iname '*.m4a' -o -iname '*.flac' -o -iname '*.opus' \) | sort > "$M3U"
+if [[ -s "$M3U" ]]; then
+  mapfile -t TRACKS < "$M3U"
+  START=$(( RANDOM % ${#TRACKS[@]} ))
+  printf '%s\n' "${TRACKS[@]:START}" "${TRACKS[@]:0:START}" > "$M3U.tmp"
+  mv "$M3U.tmp" "$M3U"
+fi
 
 nohup cliamp --daemon --shuffle "$M3U" >/dev/null 2>&1 &
 disown
