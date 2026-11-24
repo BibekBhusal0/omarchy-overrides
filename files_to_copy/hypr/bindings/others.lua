@@ -21,6 +21,9 @@ bind(modKey "P", "focusd toggle", "Pomodoro toggle")
 bind(modKey "SHIFT + P", hl.dsp.window.pseudo(), "Pseudo window")
 bind(modKey "PERIOD", hl.dsp.focus { workspace = "previous_per_monitor" }, "Former workspace")
 
+-- Toggle cliamp music source between Lofi and YTM downloads
+bind(modKey "ALT + C", "cliamp-daemon toggle", "Toggle cliamp music source (lofi/ytm)")
+
 local function dictation_installed()
   local pipe = io.popen("omarchy-default-dictation 2>/dev/null", "r")
   local backend = pipe and pipe:read "*l"

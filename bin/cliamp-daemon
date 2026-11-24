@@ -1,21 +1,64 @@
 #!/usr/bin/env bash
-# Start the cliamp lofi daemon on a random track. Kills any existing daemon first,
-# then detaches so the terminal stays usable.
+# Start or switch the cliamp daemon between profiles.
+# Usage:
+#   cliamp-daemon          -> Start default (lofi) if not running, or no-op
+#   cliamp-daemon toggle   -> Toggle between lofi and ytm-rs
+#   cliamp-daemon lofi     -> Start/switch to lofi
+#   cliamp-daemon ytm-rs   -> Start/switch to ytm-rs
 set -euo pipefail
 
-MUSIC_DIR="${CLIAMP_MUSIC_DIR:-$HOME/Music/lofimusic}"
-M3U="${CLIAMP_M3U:-/tmp/cliamp-lofimusic.m3u}"
+STATE_FILE="${XDG_RUNTIME_DIR:-/tmp}/cliamp-daemon.state"
+ACTION="${1:-default}"
 
-# ^anchor so this matches only the daemon, not this script or a TUI.
-if pgrep -f '^cliamp --daemon' >/dev/null; then
-	pkill -f '^cliamp --daemon'
-	sleep 1
+CURRENT_PROFILE="lofi"
+if [[ -f "$STATE_FILE" ]]; then
+  CURRENT_PROFILE="$(cat "$STATE_FILE")"
 fi
 
-# Shuffle into an M3U so the first (selected) track differs each boot.
-find "$MUSIC_DIR" -type f -iname '*.mp3' | shuf > "$M3U"
+case "$ACTION" in
+  toggle)
+    if [[ "$CURRENT_PROFILE" == "lofi" ]]; then
+      PROFILE="ytm-rs"
+    else
+      PROFILE="lofi"
+    fi
+    ;;
+  ytm-rs|ytm|youtube)
+    PROFILE="ytm-rs"
+    ;;
+  lofi)
+    PROFILE="lofi"
+    ;;
+  default|*)
+    PROFILE="lofi"
+    ;;
+esac
+
+case "$PROFILE" in
+  ytm-rs)
+    MUSIC_DIR="${YTM_MUSIC_DIR:-$HOME/Music/ytm-rs}"
+    M3U="/tmp/cliamp-ytm-rs.m3u"
+    ;;
+  lofi|*)
+    MUSIC_DIR="${LOFI_MUSIC_DIR:-$HOME/Music/lofimusic}"
+    M3U="/tmp/cliamp-lofimusic.m3u"
+    ;;
+esac
+
+# Record active state
+echo "$PROFILE" > "$STATE_FILE"
+
+# Clean up any existing daemon
+if pgrep -f '^cliamp --daemon' >/dev/null; then
+  pkill -f '^cliamp --daemon'
+  sleep 0.5
+fi
+rm -f "$HOME/.config/cliamp/cliamp.sock"
+
+# Build shuffled M3U playlist from all tracks
+find "$MUSIC_DIR" -type f \( -iname '*.mp3' -o -iname '*.m4a' -o -iname '*.flac' -o -iname '*.opus' \) | shuf > "$M3U"
 
 nohup cliamp --daemon --shuffle "$M3U" >/dev/null 2>&1 &
 disown
 
-echo "cliamp daemon started"
+echo "cliamp daemon running with profile: $PROFILE"
