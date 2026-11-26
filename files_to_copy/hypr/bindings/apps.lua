@@ -15,8 +15,7 @@ bind("XF86Calculator", "omacalc", "Calculator")
 bind("CTRL + SHIFT + ESCAPE", "omarchy-launch-tui btop", "Activity")
 
 -- File manager shortcuts
--- Nautilus is the file manager, will change this soon
-local file_manager = "nautilus"
+local file_manager = "flea"
 local file_manager_cwd = file_manager .. ' "$(terminal-cwd)"'
 bind(modKey "E", file_manager_cwd, "File manager (cwd)")
 bind(modKey "CTRL + SHIFT + J", file_manager .. " ~/Downloads/", "Open downloads")

@@ -1,0 +1,22 @@
+# User key bindings. Flea's built-in table wins on any chord it already binds, so only free chords
+# can be set here: a, A and Alt+P stay built-in until upstream allows overriding them.
+# Plain D is also taken: Shift+D folds onto the bare d row, which arms Trash.
+
+# Agent was A
+[[preset]]
+name = "all"
+mods = "alt"
+key = "A"
+action = "openAgent"
+
+# Delete permanently; Shift+Delete is the built-in
+[[ctrlshift]]
+key = "D"
+action = "deletePermanently"
+
+# Duplicate
+[[preset]]
+name = "all"
+mods = "alt"
+key = "D"
+action = "duplicate"

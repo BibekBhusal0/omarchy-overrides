@@ -32,7 +32,9 @@ omarchy-pkg-drop \
   fcitx5-hangul \
   fcitx5-mozc \
   spotify \
-  spicetify-cli
+  spicetify-cli \
+  nautilus \
+  nautilus-python
 
 echo "Omarchy chromium is being uninstalled make sure to change default browser"
 
