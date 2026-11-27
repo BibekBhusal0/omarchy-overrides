@@ -3,9 +3,10 @@
     "layout": {
       "center": [
         {
+          "id": "samirpokharel.patro-clock",
           "format": "dddd HH:mm",
           "formatAlt": "d MMMM 'W'ww yyyy",
-          "id": "omarchy.clock",
+          "calendarSystem": "gregorian",
           "verticalFormat": "HH\n—\nmm"
         }
       ],
@@ -134,6 +135,7 @@
     "omarchy.dock",
     "omarchy.media",
     "omarchy.menu",
+    "omarchy.clock",
     "omarchy.lock"
   ],
   "cloneSourceRestores": [

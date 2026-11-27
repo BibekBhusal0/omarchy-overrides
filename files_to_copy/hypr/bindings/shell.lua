@@ -4,6 +4,8 @@ local modKey = require("hypr.utils.key").modKey
 -- Summoning Shell
 local confetti = "omarchy-shell shell summon io.github.weedwhitesandwine.omafetti"
 local clipboard = "omarchy-shell shell toggle io.github.idr4n.clipboard-plus"
+local calendar = "omarchy-shell shell toggle samirpokharel.patro-clock"
+bind(modKey "CTRL + SHIFT + D", calendar, "Toggle calendar")
 bind(modKey "ALT + R", "omarchy-shell shell toggle bibek.readest", "Readest search")
 bind(modKey "ALT + M", "omarchy-shell shell toggle bibek.media", "Media Menu")
 bind(modKey "CTRL + M", "omarchy-shell shell toggle bibek.media", "Media Menu")
